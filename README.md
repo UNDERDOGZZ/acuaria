@@ -43,3 +43,7 @@ El vertical slice permite enfocar el acuario, activar `Alimentar`, tocar la supe
 ## HUD del acuario
 
 La vista enfocada muestra nombre, volumen nominal, temperatura, población y estado general mediante campos TextMeshPro independientes. La barra superior cambia entre una fila Wide y dos filas Compact según el ancho disponible, siempre dentro del Safe Area. Una ficha móvil presenta rango recomendado, capacidad provisional, habitantes agrupados y un consejo educativo sin introducir química dinámica. Consultar [18_AquariumDataModel.md](docs/18_AquariumDataModel.md), [19_AquariumHUDAndDetails.md](docs/19_AquariumHUDAndDetails.md), [20_AquariumStatusEvaluation.md](docs/20_AquariumStatusEvaluation.md) y [21_ResponsiveHUDLayout.md](docs/21_ResponsiveHUDLayout.md).
+
+## Calidad del agua
+
+El acuario inicial incorpora una simulación educativa determinista del ciclo del nitrógeno: residuos, amoníaco total simplificado, nitritos, nitratos y dos colonias bacterianas. Funciona mediante ticks discretos y eventos, sin progreso offline, daño a peces ni cambios de agua jugables. Consultar [22_WaterChemistryModel.md](docs/22_WaterChemistryModel.md), [23_NitrogenCycleSimulation.md](docs/23_NitrogenCycleSimulation.md), [24_AquariumSimulationClock.md](docs/24_AquariumSimulationClock.md) y [25_WaterQualityUI.md](docs/25_WaterQualityUI.md).

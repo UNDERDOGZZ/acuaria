@@ -18,6 +18,8 @@ namespace Acuaria.Food
         private int sequence;
 
         public event Action MaximumReached;
+        public event Action<string> FoodExpired;
+        public event Action<string> FoodConsumed;
         public IReadOnlyList<FoodView2D> ActiveFood => activeFood;
         public int ActiveCount => activeFood.Count;
         public int MaximumActiveUnits => maximumActiveUnits;
@@ -73,12 +75,17 @@ namespace Acuaria.Food
         {
             if (food == null || !activeFood.Contains(food) || !food.State.Consume(fishId)) return false;
             activeFood.Remove(food);
+            FoodConsumed?.Invoke(food.State.InstanceId);
             if (sharedAudioSource != null && consumeClip != null) sharedAudioSource.PlayOneShot(consumeClip);
             food.Consume();
             return true;
         }
 
-        public void NotifyExpired(FoodView2D food) => activeFood.Remove(food);
+        public void NotifyExpired(FoodView2D food)
+        {
+            if (food == null || !activeFood.Remove(food)) return;
+            FoodExpired?.Invoke(food.State.InstanceId);
+        }
 
         public Vector2 ClampLocal(Vector2 position) => new(
             Mathf.Clamp(position.x, localBoundsMin.x, localBoundsMax.x),

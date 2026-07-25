@@ -15,12 +15,13 @@ namespace Acuaria.UI.Aquarium
         [SerializeField] private Text inhabitantsLabel;
         [SerializeField] private Text statusLabel;
         [SerializeField] private Text educationLabel;
+        [SerializeField] private Text waterChemistryLabel;
         [SerializeField, Range(0.15f, 0.3f)] private float transitionDuration = 0.2f;
         private Coroutine transition;
         public bool IsOpen { get; private set; }
 
         public void Configure(CanvasGroup group, RectTransform panelRect, Button close, Text title, Text summary,
-            Text inhabitants, Text status, Text education)
+            Text inhabitants, Text status, Text education, Text chemistry = null)
         {
             canvasGroup = group;
             panel = panelRect;
@@ -30,6 +31,7 @@ namespace Acuaria.UI.Aquarium
             inhabitantsLabel = inhabitants;
             statusLabel = status;
             educationLabel = education;
+            waterChemistryLabel = chemistry;
         }
 
         private void Awake()
@@ -54,6 +56,12 @@ namespace Acuaria.UI.Aquarium
             educationLabel.text = model.EducationTip;
             IsOpen = true;
             StartTransition(true);
+        }
+
+        public void SetWaterChemistry(Acuaria.Simulation.Water.WaterChemistryViewModel chemistry)
+        {
+            if (waterChemistryLabel != null)
+                waterChemistryLabel.text = chemistry?.DetailsText ?? "Química del agua no disponible.";
         }
 
         public void Close()

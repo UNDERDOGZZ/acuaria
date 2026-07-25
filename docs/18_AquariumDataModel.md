@@ -15,3 +15,6 @@ El ID de definición describe el tipo de tanque; el ID de instancia identifica e
 ## Limitaciones
 
 El estado no contiene química, suciedad, filtración, salud, historial ni persistencia. La capacidad es únicamente una señal provisional. Una regla futura deberá considerar especie, tamaño adulto, comportamiento, filtración, oxigenación, zona y compatibilidad.
+# Extensión de química
+
+`AquariumRuntimeState` continúa representando presentación general. `WaterChemistryState` es un estado separado, sin GameObjects, y `AquariumStatusEvaluator` dispone de una sobrecarga que permite que una calidad peligrosa eleve la severidad general.

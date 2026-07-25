@@ -6,6 +6,8 @@ La habitación actúa como hogar y navegación espacial. Los acuarios son unidad
 
 La primera versión de Room establece la lectura visual del hogar: ventana y luz nocturna en un lateral, acuario inicial como foco central y decoración secundaria que enmarca la composición. Dos espacios reservados anticipan acuarios futuros, pero no representan desbloqueos funcionales.
 
+La primera simulación educativa convierte el cuidado observable en consecuencias graduales: peces y alimento generan residuos, las bacterias los procesan y la ficha explica la calidad del agua sin castigar peces ni habilitar mantenimiento todavía.
+
 Este documento todavía no define economía, balance ni reglas detalladas. Esas decisiones se tomarán en sprints de gameplay con prototipos medibles y criterios de bienestar animal coherentes.
 
 La primera interacción jugable permite entrar y salir de la vista enfocada del acuario activo; no habilita aún acciones dentro del tanque.

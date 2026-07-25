@@ -1,4 +1,5 @@
 using System;
+using Acuaria.Simulation.Water;
 
 namespace Acuaria.Aquarium
 {
@@ -24,6 +25,22 @@ namespace Acuaria.Aquarium
             if (state.CurrentFishCount == definition.RecommendedFishCapacity && definition.RecommendedFishCapacity > 0)
                 return new AquariumStatusResult(AquariumStatus.Good, "Parámetros estables", 1);
             return new AquariumStatusResult(AquariumStatus.Excellent, "Todo se ve excelente", 0);
+        }
+
+        public static AquariumStatusResult Evaluate(AquariumDefinition definition, AquariumRuntimeState state,
+            WaterQualityResult waterQuality)
+        {
+            var baseline = Evaluate(definition, state);
+            var waterSeverity = waterQuality.Status switch
+            {
+                WaterQualityStatus.Dangerous => 3,
+                WaterQualityStatus.Warning => 2,
+                WaterQualityStatus.Good => 1,
+                _ => 0
+            };
+            if (waterSeverity <= baseline.Severity) return baseline;
+            return new AquariumStatusResult(waterSeverity == 3 ? AquariumStatus.Critical : AquariumStatus.Attention,
+                waterQuality.Explanation, waterSeverity);
         }
     }
 }

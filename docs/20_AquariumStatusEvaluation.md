@@ -16,3 +16,6 @@ Capacidad cero, estado sin inicializar y valores no finitos se manejan sin produ
 La UI traduce los estados como Excelente, Estable, Revisar y Atención urgente. El tono evita alarmas agresivas. La evaluación no representa todavía bienestar real ni una recomendación biológica.
 
 Una versión futura combinará temperatura con química, ciclado, filtración, oxigenación, compatibilidad y bienestar, manteniendo reglas explicables y testeables.
+# Calidad del agua
+
+La evaluación general puede recibir `WaterQualityResult`. Se conserva la mayor severidad entre temperatura/población y química; una condición menos severa nunca oculta otra más importante.

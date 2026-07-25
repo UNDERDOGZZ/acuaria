@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b77d34f5465734d8305de79d6a41db, type: 3}
+  m_Name: StarterAquariumChemistry
+  m_EditorClassIdentifier: Acuaria.Simulation::Acuaria.Simulation.Water.WaterChemistryDefinition
+  chemistryId: starter-chemistry
+  referenceVolumeLiters: 50
+  initialAmmonia: 0
+  initialNitrite: 0
+  initialNitrate: 7
+  initialAmmoniaBacteria: 0.55
+  initialNitriteBacteria: 0.55
+  maximumBacteria: 1
+  ammoniaConversionRate: 0.1
+  nitriteConversionRate: 0.08
+  bacteriaGrowthRate: 0.012
+  bacteriaLossRate: 0.001
+  wastePerFishPerHour: 0.08
+  wastePerExpiredFood: 0.12
+  wastePerConsumedFood: 0.01
+  wasteToAmmoniaRate: 0.18
+  maximumConcentration: 200
+  maximumWaste: 1000
+  simulationIntervalSeconds: 1
+  timeMultiplier: 60
+  maximumTicksPerFrame: 5
+  trendTolerance: 0.001
+  thresholds:
+    ammoniaWarning: 0.1
+    ammoniaDangerous: 0.5
+    nitriteWarning: 0.1
+    nitriteDangerous: 0.5
+    nitrateWarning: 25
+    nitrateDangerous: 50

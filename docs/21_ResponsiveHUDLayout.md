@@ -53,3 +53,5 @@ Detalles conserva el mismo botón y controlador: al abrir cancela FeedingMode, p
 ## Validación y limitaciones
 
 `AquariumHUDController` valida referencias faltantes y campos TMP duplicados una vez, con mensajes que incluyen el nombre del campo. El generador destruye el sistema HUD anterior antes de crear exactamente uno. La principal limitación pendiente es validar físicamente notch/cutouts y densidades en dispositivos iOS/Android reales.
+
+El indicador químico reutiliza `StatusBadge` y `StatusText`; no añade tarjetas permanentes ni altera los mínimos del layout responsive.

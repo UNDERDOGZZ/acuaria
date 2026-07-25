@@ -3,7 +3,9 @@ using Acuaria.Aquarium;
 using Acuaria.Fish;
 using Acuaria.Food;
 using Acuaria.Room;
+using Acuaria.Simulation.Water;
 using Acuaria.UI.Aquarium;
+using Acuaria.UI.WaterChemistry;
 using TMPro;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -19,6 +21,7 @@ namespace Acuaria.Editor
         private const string DefinitionPath = Root + "/Data/Aquariums/StarterAquarium.asset";
         private const string HudPrefabPath = Root + "/Prefabs/UI/Aquarium/AquariumHUD.prefab";
         private const string DetailsPrefabPath = Root + "/Prefabs/UI/Aquarium/AquariumDetailsPanel.prefab";
+        private const string ChemistryDefinitionPath = Root + "/Data/WaterChemistry/StarterAquariumChemistry.asset";
         private static readonly Color PanelColor = new(0.055f, 0.105f, 0.16f, 0.9f);
         private static readonly Color AccentColor = new(0.27f, 0.78f, 0.76f, 1f);
 
@@ -27,6 +30,7 @@ namespace Acuaria.Editor
         {
             EnsureFolders();
             var definition = CreateDefinition();
+            var chemistryDefinition = CreateChemistryDefinition();
             var scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
             var safeArea = FindSceneObject("SafeArea").transform;
             var back = FindSceneObject("BackButton").GetComponent<Button>();
@@ -39,7 +43,8 @@ namespace Acuaria.Editor
             }
 
             var system = new GameObject("AquariumHUDSystem", typeof(RectTransform), typeof(AquariumInhabitantProvider),
-                typeof(AquariumHUDController));
+                typeof(AquariumHUDController), typeof(AquariumSimulationController),
+                typeof(WaterChemistryDebugController));
             system.transform.SetParent(safeArea, false);
             Stretch((RectTransform)system.transform);
             var provider = system.GetComponent<AquariumInhabitantProvider>();
@@ -53,6 +58,10 @@ namespace Acuaria.Editor
             var controller = system.GetComponent<AquariumHUDController>();
             controller.Configure(definition, provider, feeding, details, responsive, compact, back, feed, infoButton,
                 name, volume, temperature, fishCount, status, badge);
+            var simulation = system.GetComponent<AquariumSimulationController>();
+            simulation.Configure(chemistryDefinition, provider, Object.FindAnyObjectByType<AquariumFoodController>(),
+                controller, definition.NominalVolumeLitres);
+            system.GetComponent<WaterChemistryDebugController>().Configure(simulation);
             compact.SetActive(false);
 
             PrefabUtility.SaveAsPrefabAsset(compact, HudPrefabPath);
@@ -91,6 +100,7 @@ namespace Acuaria.Editor
         private static void EnsureFolders()
         {
             Directory.CreateDirectory(Root + "/Data/Aquariums");
+            Directory.CreateDirectory(Root + "/Data/WaterChemistry");
             Directory.CreateDirectory(Root + "/Prefabs/UI/Aquarium");
         }
 
@@ -106,6 +116,23 @@ namespace Acuaria.Editor
                 "Un primer ecosistema para observar y aprender.",
                 "El tamaño del acuario importa: un mayor volumen suele ofrecer más estabilidad, " +
                 "pero cada especie tiene necesidades distintas.", AccentColor);
+            EditorUtility.SetDirty(definition);
+            return definition;
+        }
+
+        private static WaterChemistryDefinition CreateChemistryDefinition()
+        {
+            var definition = AssetDatabase.LoadAssetAtPath<WaterChemistryDefinition>(ChemistryDefinitionPath);
+            if (definition == null)
+            {
+                definition = ScriptableObject.CreateInstance<WaterChemistryDefinition>();
+                AssetDatabase.CreateAsset(definition, ChemistryDefinitionPath);
+            }
+            definition.Configure("starter-chemistry", 50f, new Vector3(0f, 0f, 7f),
+                new Vector2(0.55f, 0.55f), new Vector2(0.1f, 0.08f),
+                new Vector2(0.012f, 0.001f), new Vector3(0.08f, 0.12f, 0.01f),
+                new Vector2(200f, 1000f), new Vector2(1f, 60f), 5, 0.001f,
+                WaterQualityThresholds.Default);
             EditorUtility.SetDirty(definition);
             return definition;
         }
@@ -338,7 +365,7 @@ namespace Acuaria.Editor
             contentRect.anchorMax = new Vector2(1f, 1f);
             contentRect.pivot = new Vector2(0.5f, 1f);
             contentRect.anchoredPosition = Vector2.zero;
-            contentRect.sizeDelta = new Vector2(0f, 760f);
+            contentRect.sizeDelta = new Vector2(0f, 1120f);
             var scroll = viewport.GetComponent<ScrollRect>();
             scroll.viewport = viewportRect;
             scroll.content = contentRect;
@@ -349,12 +376,14 @@ namespace Acuaria.Editor
             var status = TopLabel(content.transform, "Status", "", 26, 520f, 12f, 18f, 140f);
             TopLabel(content.transform, "InhabitantsHeading", "Habitantes", 28, 520f, 168f, 18f, 48f);
             var inhabitants = TopLabel(content.transform, "Inhabitants", "", 24, 520f, 222f, 18f, 190f);
-            TopLabel(content.transform, "EducationHeading", "Consejo educativo", 28, 18f, 432f, 18f, 52f);
-            var education = TopLabel(content.transform, "Education", "", 25, 18f, 492f, 18f, 160f);
+            TopLabel(content.transform, "WaterChemistryHeading", "Calidad del agua", 28, 18f, 432f, 18f, 52f);
+            var chemistry = TopLabel(content.transform, "WaterChemistry", "", 24, 18f, 490f, 18f, 300f);
+            TopLabel(content.transform, "EducationHeading", "Consejo educativo", 28, 18f, 810f, 18f, 52f);
+            var education = TopLabel(content.transform, "Education", "", 25, 18f, 870f, 18f, 160f);
 
             var details = root.GetComponent<AquariumDetailsPanel>();
             details.Configure(root.GetComponent<CanvasGroup>(), (RectTransform)card.transform, close, title,
-                summary, inhabitants, status, education);
+                summary, inhabitants, status, education, chemistry);
             return details;
         }
 

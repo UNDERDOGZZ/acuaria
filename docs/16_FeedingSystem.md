@@ -24,3 +24,6 @@ Cada partícula combina `FoodDefinition`, `FoodRuntimeState`, `FoodView2D` y `Fo
 `Acuaria/Setup Feeding System` reconstruye assets y enlaces. Las pruebas EditMode cubren definición, estados, reclamos, área válida, máximo y consumo.
 
 Abrir `AquariumDetailsPanel` cancela el modo de alimentación y oculta sus instrucciones, sin destruir comida existente. Cerrar detalles no reactiva el modo automáticamente.
+# Integración con química
+
+`AquariumFoodController` emite `FoodExpired` y `FoodConsumed` usando el ID de instancia. La simulación deduplica expiraciones; alimento consumido nunca se procesa como expirado y solo aporta una fracción metabólica mínima configurable.

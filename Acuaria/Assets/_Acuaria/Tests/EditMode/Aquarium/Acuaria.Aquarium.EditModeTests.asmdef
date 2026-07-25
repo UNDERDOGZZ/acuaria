@@ -6,6 +6,7 @@
     "Acuaria.Fish",
     "Acuaria.Food",
     "Acuaria.UI",
+    "Acuaria.Simulation",
     "UnityEngine.UI",
     "Unity.TextMeshPro"
   ],

@@ -28,3 +28,7 @@ Fuera del hito: química, hambre persistente, economía, inventario, progresión
 Completado: definición y runtime de acuario, evaluación provisional por temperatura/capacidad, HUD compacto, ficha desplazable, habitantes agrupados, Safe Area e integración con alimentación.
 
 Continúan pendientes química dinámica, bienestar, mantenimiento, persistencia, economía y múltiples acuarios.
+
+## Sprint 6 — ciclo del nitrógeno
+
+Implementado: química educativa básica, residuos de peces/comida, bacterias beneficiosas, reloj discreto, tendencias, calidad del agua y presentación en Detalles. Permanecen fuera cambios de agua, filtros, daño, persistencia y progreso offline.

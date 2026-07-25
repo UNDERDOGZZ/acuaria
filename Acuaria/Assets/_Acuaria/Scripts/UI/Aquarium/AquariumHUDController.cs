@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Acuaria.Aquarium;
 using Acuaria.Food;
+using Acuaria.Simulation.Water;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +27,7 @@ namespace Acuaria.UI.Aquarium
         [SerializeField] private Image statusBadge;
         private readonly AquariumRuntimeState runtimeState = new();
         private bool focused;
+        private WaterChemistryViewModel waterChemistry;
 
         public bool IsVisible => compactHud != null && compactHud.activeSelf;
         public bool AreDetailsOpen => detailsPanel != null && detailsPanel.IsOpen;
@@ -118,7 +120,16 @@ namespace Acuaria.UI.Aquarium
         {
             if (!focused || detailsPanel == null || !runtimeState.IsInitialized) return;
             feedingUi?.CancelFeedingMode();
+            detailsPanel.SetWaterChemistry(waterChemistry);
             detailsPanel.Show(BuildViewModel());
+        }
+
+        public void SetWaterChemistry(WaterChemistryViewModel chemistry)
+        {
+            waterChemistry = chemistry;
+            if (statusText != null && chemistry != null) statusText.text = $"Agua: {chemistry.QualityLabel}";
+            if (statusBadge != null && chemistry != null) statusBadge.color = WaterQualityColor(chemistry.Quality.Status);
+            if (detailsPanel != null && detailsPanel.IsOpen) detailsPanel.SetWaterChemistry(chemistry);
         }
 
         public void SetTemperature(float value) => runtimeState.SetTemperature(value);
@@ -160,8 +171,11 @@ namespace Acuaria.UI.Aquarium
             volumeText.text = model.VolumeText;
             temperatureText.text = model.TemperatureText;
             fishCountText.text = model.FishCountText;
-            statusText.text = model.StatusLabel;
-            if (statusBadge != null) statusBadge.color = StatusColor(model.Status.Status);
+            if (waterChemistry == null)
+            {
+                statusText.text = model.StatusLabel;
+                if (statusBadge != null) statusBadge.color = StatusColor(model.Status.Status);
+            }
         }
 
         private static void CheckMissing(List<string> issues, Object value, string fieldName)
@@ -183,6 +197,14 @@ namespace Acuaria.UI.Aquarium
             AquariumStatus.Attention => new Color(0.96f, 0.72f, 0.3f),
             AquariumStatus.Critical => new Color(0.92f, 0.48f, 0.42f),
             _ => Color.gray
+        };
+
+        private static Color WaterQualityColor(WaterQualityStatus status) => status switch
+        {
+            WaterQualityStatus.Excellent => new Color(0.3f, 0.86f, 0.63f),
+            WaterQualityStatus.Good => new Color(0.48f, 0.76f, 0.86f),
+            WaterQualityStatus.Warning => new Color(0.96f, 0.72f, 0.3f),
+            _ => new Color(0.92f, 0.48f, 0.42f)
         };
     }
 }
