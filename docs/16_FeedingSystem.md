@@ -22,3 +22,5 @@ Cada partícula combina `FoodDefinition`, `FoodRuntimeState`, `FoodView2D` y `Fo
 ## Configuración y validación
 
 `Acuaria/Setup Feeding System` reconstruye assets y enlaces. Las pruebas EditMode cubren definición, estados, reclamos, área válida, máximo y consumo.
+
+Abrir `AquariumDetailsPanel` cancela el modo de alimentación y oculta sus instrucciones, sin destruir comida existente. Cerrar detalles no reactiva el modo automáticamente.

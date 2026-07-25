@@ -26,3 +26,7 @@ El enfoque separa `AquariumInteractable`, `AquariumFocusTarget`, `RoomViewStateM
 ## Dominio de alimentación
 
 `Acuaria.Food` contiene definición, estado runtime, vista, movimiento, área válida, input y controlador de partículas. `Acuaria.Fish` depende de ese dominio para búsqueda y consumo; `Acuaria.Room` solo coordina la UI durante el enfoque. No hay búsquedas de objetos por frame.
+
+## Dominio Aquarium
+
+`Acuaria.Aquarium` separa authoring (`AquariumDefinition`), mutabilidad (`AquariumRuntimeState`), evaluación pura (`AquariumStatusEvaluator`) y presentación (`AquariumViewModel`). `Acuaria.UI` adapta población y controles Unity; Room únicamente comunica cambios de visibilidad. La UI se invalida mediante eventos y nunca consulta peces por frame.

@@ -9,3 +9,5 @@ Room está construido con piezas independientes y un sprite blanco tintado, por 
 El tanque activo ocupa aproximadamente 46% del ancho de diseño. El agua combina bandas de profundidad, superficie iluminada y reflejos discretos; las siluetas laterales permanecen desaturadas.
 
 Los primeros peces usan geometría plana provisional: azul pequeño y rápido, naranja mediano y tranquilo, y violeta de zona baja. Permanecen detrás del vidrio y el marco.
+
+El HUD utiliza dos bloques superiores azul oscuro translúcido, acento turquesa y badges con texto. La ficha mantiene el tanque visible detrás de un velo suave. La iconografía provisional usa símbolos geométricos acompañados por etiquetas y evita depender únicamente del color.

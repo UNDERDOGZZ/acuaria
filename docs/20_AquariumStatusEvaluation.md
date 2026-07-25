@@ -1,0 +1,18 @@
+# Evaluación del estado del acuario
+
+`AquariumStatusEvaluator` es lógica pura y devuelve estado, mensaje y severidad numérica. Los colores pertenecen al HUD, no al evaluador.
+
+## Reglas provisionales
+
+- `Excellent`: temperatura dentro del rango y población por debajo de capacidad.
+- `Good`: temperatura correcta y población igual a capacidad.
+- `Attention`: desviación térmica de hasta 1,5 °C o un pez sobre capacidad.
+- `Critical`: desviación superior a 1,5 °C o sobrepoblación mayor a un pez.
+
+Capacidad cero, estado sin inicializar y valores no finitos se manejan sin producir NaN ni divisiones.
+
+## Mensajes y límites
+
+La UI traduce los estados como Excelente, Estable, Revisar y Atención urgente. El tono evita alarmas agresivas. La evaluación no representa todavía bienestar real ni una recomendación biológica.
+
+Una versión futura combinará temperatura con química, ciclado, filtración, oxigenación, compatibilidad y bienestar, manteniendo reglas explicables y testeables.

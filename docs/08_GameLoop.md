@@ -18,3 +18,5 @@ Los peces continúan nadando y conservan su estado durante enfoque y regreso.
 5. Cancelar o volver.
 
 La saciedad y el cooldown regulan solo la respuesta inmediata.
+
+La observación enfocada incorpora ahora una capa opcional de comprensión: revisar resumen, abrir detalles, identificar habitantes y leer un consejo educativo. Cerrar la ficha devuelve al estado enfocado sin reactivar automáticamente la alimentación.

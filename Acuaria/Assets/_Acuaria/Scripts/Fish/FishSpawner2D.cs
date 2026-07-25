@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Acuaria.Food;
 using UnityEngine;
@@ -10,9 +11,11 @@ namespace Acuaria.Fish
         [SerializeField] private FishSpawnEntry[] entries;
         [SerializeField] private AquariumFoodController foodController;
         private readonly List<FishMovement2D> spawned = new(3);
+        private readonly List<FishSpeciesDefinition> spawnedSpecies = new(3);
         private bool hasSpawned;
 
         public int SpawnedCount => spawned.Count;
+        public event Action PopulationChanged;
 
         private void Start() => Spawn();
 
@@ -40,6 +43,7 @@ namespace Acuaria.Fish
                     var scale = model.ChooseSpeed(entry.Species.MinimumScale, entry.Species.MaximumScale);
                     pending.Add((instance, entry.Species, state, scale));
                     spawned.Add(instance.GetComponent<FishMovement2D>());
+                    spawnedSpecies.Add(entry.Species);
                 }
             }
 
@@ -49,6 +53,7 @@ namespace Acuaria.Fish
                 var fish = pending[index];
                 fish.view.Initialize(swimArea, fish.species, fish.state, neighbours, fish.scale, foodController);
             }
+            PopulationChanged?.Invoke();
         }
 
         public void Configure(AquariumSwimArea2D area, FishSpawnEntry[] spawnEntries)
@@ -58,5 +63,12 @@ namespace Acuaria.Fish
         }
 
         public void SetFoodController(AquariumFoodController controller) => foodController = controller;
+
+        public void CopySpawnedSpecies(List<FishSpeciesDefinition> destination)
+        {
+            if (destination == null) throw new ArgumentNullException(nameof(destination));
+            destination.Clear();
+            destination.AddRange(spawnedSpecies);
+        }
     }
 }

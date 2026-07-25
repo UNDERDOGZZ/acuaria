@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9233e149cc72349b6a68406c9199fd, type: 3}
+  m_Name: StarterAquarium
+  m_EditorClassIdentifier: Acuaria.Aquarium::Acuaria.Aquarium.AquariumDefinition
+  aquariumId: starter-aquarium
+  displayName: Acuario Inicial
+  nominalVolumeLitres: 50
+  targetTemperatureMin: 24
+  targetTemperatureMax: 26
+  initialTemperature: 25
+  recommendedFishCapacity: 3
+  description: Un primer ecosistema para observar y aprender.
+  educationTip: "El tama\xF1o del acuario importa: un mayor volumen suele ofrecer
+    m\xE1s estabilidad, pero cada especie tiene necesidades distintas."
+  icon: {fileID: 0}
+  themeColor: {r: 0.27, g: 0.78, b: 0.76, a: 1}

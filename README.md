@@ -39,3 +39,7 @@ Los próximos hitos previstos son: interacción y navegación de habitación; mo
 ## Alimentación interactiva
 
 El vertical slice permite enfocar el acuario, activar `Alimentar`, tocar la superficie y observar cómo los peces reclaman y consumen escamas antes de reanudar su nado. Incluye límite de comida activa y feedback educativo. Consultar [16_FeedingSystem.md](docs/16_FeedingSystem.md) y [17_FishBehaviourStates.md](docs/17_FishBehaviourStates.md).
+
+## HUD del acuario
+
+La vista enfocada muestra nombre, volumen nominal, temperatura, población y estado general. Una ficha móvil presenta rango recomendado, capacidad provisional, habitantes agrupados y un consejo educativo sin introducir química dinámica. Consultar [18_AquariumDataModel.md](docs/18_AquariumDataModel.md), [19_AquariumHUDAndDetails.md](docs/19_AquariumHUDAndDetails.md) y [20_AquariumStatusEvaluation.md](docs/20_AquariumStatusEvaluation.md).

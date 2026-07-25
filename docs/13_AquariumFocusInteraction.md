@@ -30,3 +30,5 @@ La selección se basa en referencia a `AquariumFocusTarget` y `SlotId`, no en no
 No existen swipe, navegación entre acuarios enfocados, simulación ni parámetros. Probar cinco ciclos, doble tap, slots vacíos, botón volver, 16:9, 20:9 y tablet; revisar Console y confirmar restauración exacta.
 
 Los tres peces añadidos posteriormente permanecen activos durante enfoque y regreso; su ciclo de vida no depende de la cámara.
+
+El HUD permanece oculto en `RoomOverview`, `FocusingAquarium` y `ReturningToRoom`. Solo se habilita al completar `AquariumFocused`. El regreso cierra inmediatamente la ficha y bloquea su input.

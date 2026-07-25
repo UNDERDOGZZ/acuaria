@@ -1,5 +1,6 @@
 using System.Collections;
 using Acuaria.Food;
+using Acuaria.UI.Aquarium;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ namespace Acuaria.Room
         [SerializeField] private Button backButton;
         [SerializeField] private CanvasGroup transitionVeil;
         [SerializeField] private FeedingUIController feedingUi;
+        [SerializeField] private AquariumHUDController aquariumHud;
         [SerializeField, Range(0.45f, 0.8f)] private float duration = 0.6f;
 
         private readonly RoomViewStateMachine stateMachine = new();
@@ -36,6 +38,7 @@ namespace Acuaria.Room
             overviewSize = roomCamera.orthographicSize;
             focusedUi.SetActive(false);
             feedingUi?.SetAquariumFocused(false);
+            aquariumHud?.SetAquariumFocused(false);
             backButton.onClick.AddListener(ReturnToRoom);
             foreach (var interactable in interactables)
             {
@@ -85,6 +88,7 @@ namespace Acuaria.Room
 
             backButton.interactable = false;
             feedingUi?.SetAquariumFocused(false);
+            aquariumHud?.SetInteractionEnabled(false);
             transition = StartCoroutine(Transition(overviewPosition, overviewSize, false));
         }
 
@@ -118,11 +122,14 @@ namespace Acuaria.Room
                 focusedUi.SetActive(true);
                 backButton.interactable = true;
                 feedingUi?.SetAquariumFocused(true);
+                aquariumHud?.SetAquariumFocused(true);
+                aquariumHud?.SetInteractionEnabled(true);
             }
             else
             {
                 stateMachine.TryCompleteReturn();
                 focusedUi.SetActive(false);
+                aquariumHud?.SetAquariumFocused(false);
                 FocusedTarget = null;
                 SetInteraction(true);
             }

@@ -58,6 +58,8 @@ namespace Acuaria.Food
             if (aquariumFocused) SetFeedingMode(!IsFeedingMode);
         }
 
+        public void CancelFeedingMode() => SetFeedingMode(false);
+
         private void SetFeedingMode(bool active)
         {
             inputController?.SetFeedingMode(active);

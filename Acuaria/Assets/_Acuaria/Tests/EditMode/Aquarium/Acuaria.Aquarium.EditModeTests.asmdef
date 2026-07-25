@@ -1,0 +1,14 @@
+{
+  "name": "Acuaria.Aquarium.EditModeTests",
+  "rootNamespace": "Acuaria.Aquarium.Tests",
+  "references": [
+    "Acuaria.Aquarium",
+    "Acuaria.Fish",
+    "Acuaria.Food",
+    "Acuaria.UI",
+    "UnityEngine.UI"
+  ],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"],
+  "autoReferenced": false
+}

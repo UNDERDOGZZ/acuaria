@@ -17,3 +17,7 @@ El acuario inicial contiene tres peces provisionales con ritmos y niveles de nad
 ## Alimentación básica
 
 El primer gesto de cuidado consiste en enfocar el acuario, activar `Alimentar` y tocar la superficie. Cada toque válido deja una porción visible de escamas. Los peces cercanos reaccionan, reclaman una partícula y vuelven a su nado normal después de comer. El límite simultáneo evita sobrecargar la escena.
+
+## Lectura básica del ecosistema
+
+Al enfocar el tanque, el jugador puede reconocer su nombre, volumen, temperatura, habitantes y una valoración tranquila del estado general. La ficha ampliada introduce el valor educativo del volumen y deja claro que la capacidad actual es provisional, no una regla biológica final.

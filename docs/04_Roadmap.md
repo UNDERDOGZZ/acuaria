@@ -22,3 +22,9 @@ El primer hito de vida visual está completado con tres peces autónomos. Alimen
 Completado: modo mobile, porciones de escamas, límite activo, reclamación exclusiva, búsqueda/consumo, saciedad y cooldown runtime, feedback educativo y pruebas EditMode.
 
 Fuera del hito: química, hambre persistente, economía, inventario, progresión, guardado y arte final.
+
+## Sprint 5 — HUD y ficha del ecosistema
+
+Completado: definición y runtime de acuario, evaluación provisional por temperatura/capacidad, HUD compacto, ficha desplazable, habitantes agrupados, Safe Area e integración con alimentación.
+
+Continúan pendientes química dinámica, bienestar, mantenimiento, persistencia, economía y múltiples acuarios.

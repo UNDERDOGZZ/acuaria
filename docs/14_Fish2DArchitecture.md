@@ -19,3 +19,5 @@ No hay alimentación, salud, edad, reproducción, compatibilidad, química, pers
 ## Integración con alimentación
 
 `FishFeedingBehaviour` está separado de vista y locomoción. Consulta `AquariumFoodController`, reclama una partícula antes de fijar un objetivo prioritario, solicita feedback visual al consumir y libera el reclamo al deshabilitarse.
+
+`FishSpawner2D` conserva además un registro pequeño de las definiciones instanciadas y emite `PopulationChanged`. `AquariumInhabitantProvider` copia ese registro bajo demanda y agrupa por especie; la UI no inspecciona GameObjects en `Update`.

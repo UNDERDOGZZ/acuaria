@@ -8,6 +8,7 @@
     "Acuaria.Room",
     "Acuaria.Fish",
     "Acuaria.Food",
+    "Acuaria.Aquarium",
     "Acuaria.UI",
     "Unity.InputSystem",
     "UnityEngine.UI",
