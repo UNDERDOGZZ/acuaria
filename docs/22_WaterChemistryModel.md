@@ -8,3 +8,4 @@ Todos los valores no finitos se normalizan y se limitan entre cero y máximos co
 # Cambios parciales
 
 `WaterChangeModel` sustituye una fracción de las concentraciones mediante una operación atómica y conserva las poblaciones bacterianas.
+La química alimenta la dimensión de calidad del agua según sensibilidad de cada especie.

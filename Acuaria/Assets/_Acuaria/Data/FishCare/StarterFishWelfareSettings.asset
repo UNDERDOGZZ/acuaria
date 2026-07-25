@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8c734cbf2d89914d947634fe55f19c9, type: 3}
+  m_Name: StarterFishWelfareSettings
+  m_EditorClassIdentifier: Acuaria.Fish::Acuaria.Fish.Welfare.FishWelfareDefinition
+  settingsId: starter-fish-welfare
+  primaryWeights: {x: 1.2, y: 1.1, z: 1.3, w: 1.5}
+  secondaryWeights: {x: 0.9, y: 1.1, z: 0.7}
+  improvementPerHour: 12
+  deteriorationPerHour: 20
+  toleranceHours: 0.05
+  thresholds: {x: 40, y: 70, z: 90}
+  messageCooldown: 5

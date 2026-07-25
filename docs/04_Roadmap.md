@@ -35,3 +35,4 @@ Implementado: química educativa básica, residuos de peces/comida, bacterias be
 # Sprint 7 — mantenimiento básico
 
 Implementados cambio parcial de agua, confirmación y previsualización, animación, cooldown, filtro biológico, suciedad y mantenimiento educativo.
+Sprint 8 añade perfiles ficticios, bienestar ponderado, compatibilidad, stocking y feedback visual sutil.

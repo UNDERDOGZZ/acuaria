@@ -14,3 +14,4 @@ La comida expirada se deduplica por ID. La consumida no expira y aporta solo la 
 # Capacidad del filtro
 
 La conversión recibe un multiplicador biológico determinista derivado de la eficiencia y capacidad del filtro.
+La mejora química puede elevar gradualmente el objetivo de bienestar, sin curación instantánea.

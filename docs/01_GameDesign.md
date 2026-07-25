@@ -26,3 +26,4 @@ Al enfocar el tanque, el jugador puede reconocer su nombre, volumen, temperatura
 # Mantenimiento relajante
 
 El jugador reduce contaminantes mediante cambios parciales y cuida el filtro sin economía ni castigos permanentes. La comparación antes/después refuerza el aprendizaje.
+El bienestar convierte temperatura, espacio, convivencia, alimentación y calidad del agua en recomendaciones comprensibles, sin castigos permanentes.

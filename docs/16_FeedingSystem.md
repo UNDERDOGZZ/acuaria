@@ -27,3 +27,4 @@ Abrir `AquariumDetailsPanel` cancela el modo de alimentación y oculta sus instr
 # Integración con química
 
 `AquariumFoodController` emite `FoodExpired` y `FoodConsumed` usando el ID de instancia. La simulación deduplica expiraciones; alimento consumido nunca se procesa como expirado y solo aporta una fracción metabólica mínima configurable.
+La saciedad es una entrada simplificada del bienestar. Comida expirada no cuenta como consumo.

@@ -21,3 +21,4 @@ El estado no contiene química, suciedad, filtración, salud, historial ni persi
 # Estado de mantenimiento
 
 El acuario conserva estados independientes de química, mantenimiento y filtro. Ninguna clase de dominio contiene referencias a GameObjects o UI.
+Cada pez posee un `FishWelfareState` separado de su estado de movimiento y de la definición de especie.

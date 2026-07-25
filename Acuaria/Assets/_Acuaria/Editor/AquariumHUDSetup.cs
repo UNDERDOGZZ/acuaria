@@ -9,6 +9,8 @@ using Acuaria.Simulation.Filtration;
 using Acuaria.UI.Aquarium;
 using Acuaria.UI.Maintenance;
 using Acuaria.UI.WaterChemistry;
+using Acuaria.Fish.Welfare;
+using Acuaria.UI.FishWelfare;
 using TMPro;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -28,6 +30,7 @@ namespace Acuaria.Editor
         private const string MaintenanceDefinitionPath = Root + "/Data/Maintenance/StarterMaintenance.asset";
         private const string FilterDefinitionPath = Root + "/Data/Filters/StarterInternalFilter.asset";
         private const string MaintenancePrefabPath = Root + "/Prefabs/UI/Maintenance/AquariumMaintenancePanel.prefab";
+        private const string WelfareDefinitionPath = Root + "/Data/FishCare/StarterFishWelfareSettings.asset";
         private static readonly Color PanelColor = new(0.055f, 0.105f, 0.16f, 0.9f);
         private static readonly Color AccentColor = new(0.27f, 0.78f, 0.76f, 1f);
 
@@ -39,6 +42,7 @@ namespace Acuaria.Editor
             var chemistryDefinition = CreateChemistryDefinition();
             var maintenanceDefinition = CreateMaintenanceDefinition();
             var filterDefinition = CreateFilterDefinition();
+            var welfareDefinition = CreateWelfareDefinition();
             var scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
             var safeArea = FindSceneObject("SafeArea").transform;
             var back = FindSceneObject("BackButton").GetComponent<Button>();
@@ -80,6 +84,10 @@ namespace Acuaria.Editor
                 maintenancePanel, visualController, maintenanceButton, back);
             maintenanceDebug.Configure(maintenanceController);
             controller.SetMaintenanceController(maintenanceController);
+            var welfareController=system.AddComponent<FishWelfareController>();
+            var welfareDebug=system.AddComponent<FishWelfareDebugController>();
+            welfareController.Configure(welfareDefinition,spawner,provider,simulation,controller,definition.NominalVolumeLitres);
+            welfareDebug.Configure(welfareController,controller);
             PrefabUtility.SaveAsPrefabAsset(maintenancePanel.gameObject, MaintenancePrefabPath);
             compact.SetActive(false);
 
@@ -124,6 +132,15 @@ namespace Acuaria.Editor
             Directory.CreateDirectory(Root + "/Data/Maintenance");
             Directory.CreateDirectory(Root + "/Data/Filters");
             Directory.CreateDirectory(Root + "/Prefabs/UI/Maintenance");
+            Directory.CreateDirectory(Root + "/Data/FishCare");
+        }
+
+        private static FishWelfareDefinition CreateWelfareDefinition()
+        {
+            var asset=AssetDatabase.LoadAssetAtPath<FishWelfareDefinition>(WelfareDefinitionPath);
+            if(asset==null){asset=ScriptableObject.CreateInstance<FishWelfareDefinition>();AssetDatabase.CreateAsset(asset,WelfareDefinitionPath);}
+            asset.Configure("starter-fish-welfare",new Vector4(1.2f,1.1f,1.3f,1.5f),new Vector3(.9f,1.1f,.7f),
+                new Vector3(12f,20f,.05f),new Vector3(40f,70f,90f),5f);EditorUtility.SetDirty(asset);return asset;
         }
 
         private static AquariumMaintenanceDefinition CreateMaintenanceDefinition()
@@ -404,7 +421,7 @@ namespace Acuaria.Editor
             contentRect.anchorMax = new Vector2(1f, 1f);
             contentRect.pivot = new Vector2(0.5f, 1f);
             contentRect.anchoredPosition = Vector2.zero;
-            contentRect.sizeDelta = new Vector2(0f, 1120f);
+            contentRect.sizeDelta = new Vector2(0f, 1620f);
             var scroll = viewport.GetComponent<ScrollRect>();
             scroll.viewport = viewportRect;
             scroll.content = contentRect;
@@ -417,12 +434,14 @@ namespace Acuaria.Editor
             var inhabitants = TopLabel(content.transform, "Inhabitants", "", 24, 520f, 222f, 18f, 190f);
             TopLabel(content.transform, "WaterChemistryHeading", "Calidad del agua", 28, 18f, 432f, 18f, 52f);
             var chemistry = TopLabel(content.transform, "WaterChemistry", "", 24, 18f, 490f, 18f, 300f);
-            TopLabel(content.transform, "EducationHeading", "Consejo educativo", 28, 18f, 810f, 18f, 52f);
-            var education = TopLabel(content.transform, "Education", "", 25, 18f, 870f, 18f, 160f);
+            TopLabel(content.transform, "FishWelfareHeading", "Bienestar y compatibilidad", 28, 18f, 810f, 18f, 52f);
+            var welfare = TopLabel(content.transform, "FishWelfare", "", 23, 18f, 870f, 18f, 500f);
+            TopLabel(content.transform, "EducationHeading", "Consejo educativo", 28, 18f, 1390f, 18f, 52f);
+            var education = TopLabel(content.transform, "Education", "", 25, 18f, 1450f, 18f, 140f);
 
             var details = root.GetComponent<AquariumDetailsPanel>();
             details.Configure(root.GetComponent<CanvasGroup>(), (RectTransform)card.transform, close, title,
-                summary, inhabitants, status, education, chemistry);
+                summary, inhabitants, status, education, chemistry, welfare);
             return details;
         }
 

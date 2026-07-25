@@ -25,3 +25,4 @@ La química continúa avanzando durante RoomOverview, enfoque, Detalles y Feedin
 # Bucle de mantenimiento
 
 Observar calidad → abrir Mantenimiento → elegir porcentaje → previsualizar → confirmar → observar drenado/llenado → revisar resultado. El filtro añade decisiones entre limpieza mecánica y conservación bacteriana.
+Observar bienestar → revisar causas → alimentar o mantener el agua → observar recuperación gradual.

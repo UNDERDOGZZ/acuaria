@@ -16,12 +16,13 @@ namespace Acuaria.UI.Aquarium
         [SerializeField] private Text statusLabel;
         [SerializeField] private Text educationLabel;
         [SerializeField] private Text waterChemistryLabel;
+        [SerializeField] private Text fishWelfareLabel;
         [SerializeField, Range(0.15f, 0.3f)] private float transitionDuration = 0.2f;
         private Coroutine transition;
         public bool IsOpen { get; private set; }
 
         public void Configure(CanvasGroup group, RectTransform panelRect, Button close, Text title, Text summary,
-            Text inhabitants, Text status, Text education, Text chemistry = null)
+            Text inhabitants, Text status, Text education, Text chemistry = null, Text welfare = null)
         {
             canvasGroup = group;
             panel = panelRect;
@@ -32,7 +33,9 @@ namespace Acuaria.UI.Aquarium
             statusLabel = status;
             educationLabel = education;
             waterChemistryLabel = chemistry;
+            fishWelfareLabel = welfare;
         }
+        public void SetFishWelfare(string value){if(fishWelfareLabel!=null)fishWelfareLabel.text=value??"Bienestar no disponible.";}
 
         private void Awake()
         {

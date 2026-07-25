@@ -22,3 +22,4 @@ La evaluación general puede recibir `WaterQualityResult`. Se conserva la mayor 
 # Mantenimiento y estado
 
 Los cambios de agua publican nuevamente química, calidad y ciclo. La pérdida bacteriana de una limpieza profunda puede empeorar el estado del ciclado.
+El peor nivel relevante entre estado base, agua y bienestar puede dominar el estado general.

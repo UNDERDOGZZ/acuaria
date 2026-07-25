@@ -28,3 +28,4 @@ La ficha incluye una sección desplazable de calidad del agua con NH₃/NH₄, N
 # Acceso a mantenimiento
 
 El HUD enfocado añade `Mantenimiento`. Detalles y Mantenimiento son mutuamente excluyentes y Alimentar se cancela al abrir mantenimiento.
+Detalles incorpora bienestar, necesidades por especie y compatibilidad dentro del contenido desplazable.

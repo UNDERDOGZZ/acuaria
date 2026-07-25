@@ -7,3 +7,4 @@ La simplificación es `nuevo = actual × (1 − fracción)` para amoníaco, nitr
 El flujo pasa por `Preparing`, `Draining`, aplicación atómica única, `Refilling`, `Stabilizing` y `Completed`. Un cooldown real corto evita spam. El reloj químico no se reinicia y las bacterias no cambian durante un cambio normal.
 
 La animación es estética y moderada; no cambia litros nominales ni el área lógica de nado, de modo que los peces no se reinician ni quedan fuera del agua. Las acciones incompatibles quedan bloqueadas hasta terminar.
+Después de un cambio se reevalúa el agua y el bienestar evoluciona gradualmente hacia el nuevo objetivo.

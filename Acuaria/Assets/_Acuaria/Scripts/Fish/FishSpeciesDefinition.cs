@@ -1,4 +1,6 @@
 using UnityEngine;
+using Acuaria.Fish.Care;
+using Acuaria.Fish.Compatibility;
 
 namespace Acuaria.Fish
 {
@@ -17,6 +19,9 @@ namespace Acuaria.Fish
         [SerializeField] private Color prototypeColor = Color.cyan;
         [SerializeField] private SwimmingLevel swimmingLevel = SwimmingLevel.Any;
         [SerializeField] private Sprite prototypeSprite;
+        [SerializeField] private FishCareRequirements care = new();
+        [SerializeField] private FishSocialRequirements social = new();
+        [SerializeField] private FishCompatibilityProfile compatibility = new();
 
         public string SpeciesId => speciesId;
         public string DisplayName => displayName;
@@ -30,10 +35,18 @@ namespace Acuaria.Fish
         public Color PrototypeColor => prototypeColor;
         public SwimmingLevel SwimmingLevel => swimmingLevel;
         public Sprite PrototypeSprite => prototypeSprite;
+        public FishCareRequirements Care => care;
+        public FishSocialRequirements Social => social;
+        public FishCompatibilityProfile Compatibility => compatibility;
         public bool IsValid => !string.IsNullOrWhiteSpace(speciesId) && minimumSpeed > 0f &&
                                maximumSpeed >= minimumSpeed && minimumScale > 0f &&
                                maximumScale >= minimumScale && minimumTargetDuration > 0f &&
                                maximumTargetDuration >= minimumTargetDuration;
+
+        public void ConfigureCare(FishCareRequirements careRequirements,FishSocialRequirements socialRequirements,
+            FishCompatibilityProfile compatibilityProfile)
+        {care=careRequirements??new FishCareRequirements();social=socialRequirements??new FishSocialRequirements();
+         compatibility=compatibilityProfile??new FishCompatibilityProfile();}
 
         public void Configure(string id, string label, Vector2 speed, Vector2 scale, Vector2 targetDuration,
             float preference, Color color, SwimmingLevel level)

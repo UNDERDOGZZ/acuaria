@@ -583,122 +583,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!1 &2554192877008495757
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9163639603318136391}
-  - component: {fileID: 4340944763197993349}
-  - component: {fileID: 7621726364455205990}
-  - component: {fileID: 8260537586225614524}
-  - component: {fileID: 2905705584652389694}
-  m_Layer: 0
-  m_Name: FishPopulation
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9163639603318136391
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2554192877008495757}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.08, z: -0.65}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 262212477790495735}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4340944763197993349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2554192877008495757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fda82d95617ef3946ba0e172f157368a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Acuaria.Fish::Acuaria.Fish.AquariumSwimArea2D
-  size: {x: 7.65, y: 3.55}
-  leftMargin: 0.25
-  rightMargin: 0.25
-  topMargin: 0.2
-  bottomMargin: 0.3
-  showGizmos: 1
---- !u!114 &7621726364455205990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2554192877008495757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dfaa96dd5276b049a44847f30ec01d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Acuaria.Fish::Acuaria.Fish.FishSpawner2D
-  swimArea: {fileID: 4340944763197993349}
-  entries:
-  - species: {fileID: 11400000, guid: 7db0f59376a1f894ba18e85b674174c0, type: 2}
-    quantity: 1
-    prefab: {fileID: 8466895437553514399, guid: 93122697bd8f3784ebfccfa8cf4a72e9, type: 3}
-    baseSeed: 17011
-  - species: {fileID: 11400000, guid: 036e809b336e7694aa1a97cd3e5da52b, type: 2}
-    quantity: 1
-    prefab: {fileID: 8466895437553514399, guid: 93122697bd8f3784ebfccfa8cf4a72e9, type: 3}
-    baseSeed: 29027
-  - species: {fileID: 11400000, guid: ae2fedef7922dcf4198bd6581bf6ed09, type: 2}
-    quantity: 1
-    prefab: {fileID: 8466895437553514399, guid: 93122697bd8f3784ebfccfa8cf4a72e9, type: 3}
-    baseSeed: 43037
-  foodController: {fileID: 8260537586225614524}
---- !u!114 &8260537586225614524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2554192877008495757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93c65ffade2f42843a9b65fedcd52a3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Acuaria.Food::Acuaria.Food.AquariumFoodController
-  definition: {fileID: 11400000, guid: ce3e4cdcc3efafe47a6e3ce2b6d8a2ee, type: 2}
-  foodPrefab: {fileID: 9050284710928846236, guid: 565e1d11414f27f41b159e0bd19b084b, type: 3}
-  maximumActiveUnits: 12
-  localBoundsMin: {x: -3.55, y: -1.45}
-  localBoundsMax: {x: 3.55, y: 1.45}
-  sharedAudioSource: {fileID: 0}
-  dropClip: {fileID: 0}
-  consumeClip: {fileID: 0}
---- !u!114 &2905705584652389694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2554192877008495757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd288b3fae29d8842a72ec43f641569f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Acuaria.Food::Acuaria.Food.AquariumFeedingArea2D
-  size: {x: 7.15, y: 3.2}
-  lateralMargin: 0.25
-  surfaceHeight: 0.9
-  showGizmos: 1
 --- !u!1 &2807965882590568686
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,8 +1038,8 @@ Transform:
   - {fileID: 47313376177398883}
   - {fileID: 1101187573489851494}
   - {fileID: 5695239189928033678}
-  - {fileID: 9163639603318136391}
   - {fileID: 2213893534221647972}
+  - {fileID: 3869949673198292748}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2958147565591820862
@@ -1315,8 +1199,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Acuaria.Food::Acuaria.Food.FeedingInputController
   worldCamera: {fileID: 0}
-  feedingArea: {fileID: 2905705584652389694}
-  foodController: {fileID: 8260537586225614524}
+  feedingArea: {fileID: 0}
+  foodController: {fileID: 0}
 --- !u!1 &6677458518991767662
 GameObject:
   m_ObjectHideFlags: 0
@@ -1685,6 +1569,84 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!1 &7209898160180426635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3869949673198292748}
+  - component: {fileID: 4657274857780262654}
+  - component: {fileID: 6659579985300391896}
+  m_Layer: 0
+  m_Name: FishPopulation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3869949673198292748
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7209898160180426635}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.08, z: -0.65}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 262212477790495735}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4657274857780262654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7209898160180426635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fda82d95617ef3946ba0e172f157368a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Acuaria.Fish::Acuaria.Fish.AquariumSwimArea2D
+  size: {x: 7.65, y: 3.55}
+  leftMargin: 0.25
+  rightMargin: 0.25
+  topMargin: 0.2
+  bottomMargin: 0.3
+  showGizmos: 1
+--- !u!114 &6659579985300391896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7209898160180426635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dfaa96dd5276b049a44847f30ec01d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Acuaria.Fish::Acuaria.Fish.FishSpawner2D
+  swimArea: {fileID: 4657274857780262654}
+  entries:
+  - species: {fileID: 11400000, guid: 7db0f59376a1f894ba18e85b674174c0, type: 2}
+    quantity: 1
+    prefab: {fileID: 8466895437553514399, guid: 93122697bd8f3784ebfccfa8cf4a72e9, type: 3}
+    baseSeed: 17011
+  - species: {fileID: 11400000, guid: 036e809b336e7694aa1a97cd3e5da52b, type: 2}
+    quantity: 1
+    prefab: {fileID: 8466895437553514399, guid: 93122697bd8f3784ebfccfa8cf4a72e9, type: 3}
+    baseSeed: 29027
+  - species: {fileID: 11400000, guid: ae2fedef7922dcf4198bd6581bf6ed09, type: 2}
+    quantity: 1
+    prefab: {fileID: 8466895437553514399, guid: 93122697bd8f3784ebfccfa8cf4a72e9, type: 3}
+    baseSeed: 43037
+  foodController: {fileID: 0}
 --- !u!1 &7660937946056822687
 GameObject:
   m_ObjectHideFlags: 0

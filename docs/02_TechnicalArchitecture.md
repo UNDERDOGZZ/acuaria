@@ -37,3 +37,4 @@ El enfoque separa `AquariumInteractable`, `AquariumFocusTarget`, `RoomViewStateM
 # Extensión de mantenimiento
 
 La configuración vive en ScriptableObjects, el estado y los cálculos en `Acuaria.Simulation`, y la coordinación, input y animación en `Acuaria.UI.Maintenance`.
+El dominio de bienestar vive en `Acuaria.Fish`; la UI solo coordina estados, eventos y adaptación visual.

@@ -1,7 +1,7 @@
 {
   "name": "Acuaria.Aquarium",
   "rootNamespace": "Acuaria.Aquarium",
-  "references": ["Acuaria.Simulation"],
+  "references": ["Acuaria.Simulation", "Acuaria.Fish"],
   "includePlatforms": [],
   "excludePlatforms": [],
   "allowUnsafeCode": false,

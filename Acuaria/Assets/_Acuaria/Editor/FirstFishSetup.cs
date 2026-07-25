@@ -1,5 +1,7 @@
 using System.IO;
 using Acuaria.Fish;
+using Acuaria.Fish.Care;
+using Acuaria.Fish.Compatibility;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -99,6 +101,18 @@ namespace Acuaria.Editor
                 AssetDatabase.CreateAsset(species, path);
             }
             species.Configure(id, label, speed, scale, duration, preference, color, level);
+            var care=new FishCareRequirements();var social=new FishSocialRequirements();var compatibility=new FishCompatibilityProfile();
+            if(id=="blue-dart")
+            {care.Configure(new Vector2(24,27),15,40,4,FishActivityLevel.High,SwimmingLevel.Upper,FishWaterSensitivity.Sensitive,false,true,Vector3.one,2,FishDietType.Omnivore);
+             social.Configure(FishSocialType.Schooling,3,10,false,FishTerritoriality.Peaceful,true,true,false,true,false);}
+            else if(id=="amber-calm")
+            {care.Configure(new Vector2(23,26),25,50,7,FishActivityLevel.Moderate,SwimmingLevel.Middle,FishWaterSensitivity.Moderate,false,true,Vector3.one,1,FishDietType.Omnivore);
+             social.Configure(FishSocialType.Group,2,6,true,FishTerritoriality.Peaceful,true,false,false,true,false);}
+            else
+            {care.Configure(new Vector2(24,26),18,45,5,FishActivityLevel.Low,SwimmingLevel.Lower,FishWaterSensitivity.Hardy,true,false,Vector3.one,1,FishDietType.Omnivore);
+             social.Configure(FishSocialType.Pair,2,4,true,FishTerritoriality.SemiTerritorial,true,false,true,false,false);}
+            compatibility.Configure(new Vector2(2,12),true,true,false,true,true,id=="violet-bottom",false);
+            species.ConfigureCare(care,social,compatibility);
             EditorUtility.SetDirty(species);
             return species;
         }

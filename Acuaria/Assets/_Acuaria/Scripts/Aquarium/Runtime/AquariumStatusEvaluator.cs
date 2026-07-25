@@ -1,5 +1,6 @@
 using System;
 using Acuaria.Simulation.Water;
+using Acuaria.Fish.Welfare;
 
 namespace Acuaria.Aquarium
 {
@@ -41,6 +42,16 @@ namespace Acuaria.Aquarium
             if (waterSeverity <= baseline.Severity) return baseline;
             return new AquariumStatusResult(waterSeverity == 3 ? AquariumStatus.Critical : AquariumStatus.Attention,
                 waterQuality.Explanation, waterSeverity);
+        }
+
+        public static AquariumStatusResult Evaluate(AquariumDefinition definition,AquariumRuntimeState state,
+            WaterQualityResult waterQuality,AquariumWelfareResult welfare)
+        {
+            var baseline=Evaluate(definition,state,waterQuality);
+            var severity=welfare.Status switch{FishWelfareStatus.Poor=>3,FishWelfareStatus.Attention=>2,FishWelfareStatus.Good=>1,_=>0};
+            if(severity<=baseline.Severity)return baseline;
+            return new AquariumStatusResult(severity==3?AquariumStatus.Critical:AquariumStatus.Attention,
+                $"Bienestar de los peces: {welfare.Status}",severity);
         }
     }
 }

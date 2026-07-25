@@ -3,6 +3,7 @@ using Acuaria.Aquarium;
 using Acuaria.Food;
 using Acuaria.Simulation.Water;
 using Acuaria.UI.Maintenance;
+using Acuaria.Fish.Welfare;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,6 +30,7 @@ namespace Acuaria.UI.Aquarium
         private readonly AquariumRuntimeState runtimeState = new();
         private bool focused;
         private WaterChemistryViewModel waterChemistry;
+        private string welfareDetails;
         [SerializeField] private AquariumMaintenanceController maintenance;
 
         public bool IsVisible => compactHud != null && compactHud.activeSelf;
@@ -126,7 +128,15 @@ namespace Acuaria.UI.Aquarium
             if (!focused || detailsPanel == null || !runtimeState.IsInitialized) return;
             feedingUi?.CancelFeedingMode();
             detailsPanel.SetWaterChemistry(waterChemistry);
+            detailsPanel.SetFishWelfare(welfareDetails);
             detailsPanel.Show(BuildViewModel());
+        }
+
+        public void SetFishWelfare(string compact,string details,FishWelfareStatus status)
+        {
+            welfareDetails=details;
+            if(statusText!=null&&waterChemistry!=null)statusText.text=$"Agua: {waterChemistry.QualityLabel} · {compact}";
+            if(detailsPanel!=null&&detailsPanel.IsOpen)detailsPanel.SetFishWelfare(details);
         }
 
         public void SetWaterChemistry(WaterChemistryViewModel chemistry)

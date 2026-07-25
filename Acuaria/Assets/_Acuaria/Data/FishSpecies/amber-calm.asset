@@ -24,3 +24,38 @@ MonoBehaviour:
   prototypeColor: {r: 1, g: 0.55, b: 0.24, a: 1}
   swimmingLevel: 1
   prototypeSprite: {fileID: 0}
+  care:
+    temperatureRange: {x: 23, y: 26}
+    minimumIndividualVolume: 25
+    minimumGroupVolume: 50
+    adultSizeCm: 7
+    activity: 1
+    swimmingZone: 1
+    waterSensitivity: 1
+    needsHidingPlaces: 0
+    needsPlants: 1
+    chemicalSensitivity: {x: 1, y: 1, z: 1}
+    feedingFrequencyPerDay: 1
+    diet: 1
+  social:
+    socialType: 2
+    recommendedMinimum: 2
+    provisionalMaximum: 6
+    toleratesSolitary: 1
+    territoriality: 0
+    coexistsWithSameSpecies: 1
+    needsSchool: 0
+    needsPair: 0
+    toleratesActiveSpecies: 1
+    toleratesTerritorialSpecies: 0
+  compatibility:
+    acceptableCompanionSize: {x: 2, y: 12}
+    peaceful: 1
+    semiTerritorial: 1
+    territorial: 0
+    slow: 1
+    active: 1
+    sameZoneConflict: 0
+    conceptualPredationRisk: 0
+    compatibleSpecies: []
+    incompatibleSpecies: []

@@ -13,9 +13,12 @@ namespace Acuaria.Fish
         private bool hasPriorityTarget;
         private Vector2 priorityTarget;
         private float prioritySpeedMultiplier = 1f;
+        private float welfareSpeedMultiplier = 1f;
 
         public FishRuntimeState State => state;
         public Vector2 Direction => state?.Direction ?? Vector2.right;
+        public FishSpeciesDefinition Species => species;
+        public void SetWelfareSpeedMultiplier(float value) => welfareSpeedMultiplier = Mathf.Clamp(value, 0.5f, 1f);
 
         public void SetPriorityTarget(Vector2 target, float speedMultiplier)
         {
@@ -66,7 +69,7 @@ namespace Acuaria.Fish
             }
 
             var baseSpeed = state.CurrentSpeed;
-            state.CurrentSpeed = baseSpeed * prioritySpeedMultiplier;
+            state.CurrentSpeed = baseSpeed * prioritySpeedMultiplier * welfareSpeedMultiplier;
             model.Step(state, area.LocalBounds, Time.deltaTime);
             state.CurrentSpeed = baseSpeed;
             state.Position = area.ClampLocal(state.Position + correction * Time.deltaTime);

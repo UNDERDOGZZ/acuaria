@@ -31,7 +31,9 @@ namespace Acuaria.Fish
             var desired = delta.normalized;
             desired.y = Mathf.Clamp(desired.y, -0.42f, 0.42f);
             desired.Normalize();
-            state.Direction = Vector2.Lerp(state.Direction, desired, Mathf.Clamp01(deltaTime * 2.8f)).normalized;
+            var blended = Vector2.Lerp(state.Direction, desired, Mathf.Clamp01(deltaTime * 2.8f)).normalized;
+            blended.y = Mathf.Clamp(blended.y, -0.5f, 0.5f);
+            state.Direction = blended;
             state.TimeSinceTargetChange += deltaTime;
             state.Position = bounds.Clamp(state.Position + state.Direction * (state.CurrentSpeed * deltaTime));
             return state.Position;

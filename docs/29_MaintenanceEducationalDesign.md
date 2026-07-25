@@ -5,3 +5,4 @@ Los cambios parciales reducen nitratos y contaminantes sin desmontar el ecosiste
 El filtro biológico aloja bacterias que transforman amoníaco y nitritos. La suciedad puede reducir su rendimiento, pero limpiar agresivamente el material biológico también elimina bacterias beneficiosas. Por eso el juego presenta el enjuague suave como opción conservadora y la limpieza profunda como intervención con coste biológico.
 
 Este sprint simplifica el agua nueva como segura y compatible. Cloro, acondicionador, pH, dureza, oxígeno, plantas y sifonado quedan para sistemas futuros.
+El bienestar ayuda a relacionar el mantenimiento con necesidades concretas de los habitantes.
