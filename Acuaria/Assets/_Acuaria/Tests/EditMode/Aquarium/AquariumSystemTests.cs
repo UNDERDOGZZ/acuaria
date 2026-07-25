@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using Acuaria.Fish;
 using Acuaria.UI.Aquarium;
 using NUnit.Framework;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Acuaria.Aquarium.Tests
 {
@@ -149,7 +151,8 @@ namespace Acuaria.Aquarium.Tests
             var compact = new GameObject("Compact HUD");
             compact.transform.SetParent(root.transform);
             var controller = root.AddComponent<AquariumHUDController>();
-            controller.Configure(null, null, null, null, compact, null, null, null, null, null, null, null);
+            controller.Configure(null, null, null, null, null, compact, null, null, null,
+                null, null, null, null, null, null);
             try
             {
                 controller.SetAquariumFocused(false);
@@ -160,6 +163,56 @@ namespace Acuaria.Aquarium.Tests
                 controller.SetAquariumFocused(false);
                 Assert.That(controller.IsVisible, Is.False);
                 Assert.That(controller.AreDetailsOpen, Is.False);
+            }
+            finally { Object.DestroyImmediate(root); }
+        }
+
+        [Test]
+        public void HudController_DetectsMissingAndDuplicateTextReferences()
+        {
+            var root = new GameObject("HUD Controller");
+            var compact = new GameObject("Compact HUD");
+            compact.transform.SetParent(root.transform);
+            var name = Text(root.transform, "Name");
+            var volume = Text(root.transform, "Volume");
+            var shared = Text(root.transform, "Shared");
+            var status = Text(root.transform, "Status");
+            var back = Button(root.transform, "Back");
+            var feed = Button(root.transform, "Feed");
+            var details = Button(root.transform, "Details");
+            var definition = CreateDefinition();
+            var controller = root.AddComponent<AquariumHUDController>();
+            controller.Configure(definition, null, null, null, null, compact, back, feed, details,
+                name, volume, shared, shared, status, null);
+            var issues = new List<string>();
+            try
+            {
+                controller.CollectReferenceIssues(issues);
+                Assert.That(issues, Has.Some.Contains("TemperatureText"));
+                Assert.That(issues, Has.None.Contains("AquariumNameText"));
+                Assert.That(controller.AquariumNameText, Is.Not.SameAs(controller.VolumeText));
+            }
+            finally
+            {
+                Object.DestroyImmediate(definition);
+                Object.DestroyImmediate(root);
+            }
+        }
+
+        [Test]
+        public void ResponsiveLayout_ChoosesModeSafelyWithoutRedundantChanges()
+        {
+            var root = new GameObject("Responsive", typeof(RectTransform), typeof(AquariumHUDResponsiveLayout));
+            var layout = root.GetComponent<AquariumHUDResponsiveLayout>();
+            try
+            {
+                layout.SetBreakpoint(2100f);
+                Assert.That(layout.CompactBreakpoint, Is.EqualTo(2100f));
+                Assert.That(layout.ChooseMode(2340f), Is.EqualTo(AquariumHUDLayoutMode.Wide));
+                Assert.That(layout.ChooseMode(1920f), Is.EqualTo(AquariumHUDLayoutMode.Compact));
+                Assert.That(layout.ChooseMode(float.NaN), Is.EqualTo(AquariumHUDLayoutMode.Compact));
+                Assert.That(layout.Refresh(), Is.False);
+                Assert.That(layout.Refresh(), Is.False);
             }
             finally { Object.DestroyImmediate(root); }
         }
@@ -178,6 +231,20 @@ namespace Acuaria.Aquarium.Tests
             species.Configure(id, name, new Vector2(0.4f, 0.6f), new Vector2(0.8f, 1f),
                 new Vector2(2f, 4f), 0f, Color.white, level);
             return species;
+        }
+
+        private static TMP_Text Text(Transform parent, string name)
+        {
+            var root = new GameObject(name, typeof(RectTransform), typeof(TextMeshProUGUI));
+            root.transform.SetParent(parent);
+            return root.GetComponent<TMP_Text>();
+        }
+
+        private static Button Button(Transform parent, string name)
+        {
+            var root = new GameObject(name, typeof(RectTransform), typeof(Image), typeof(Button));
+            root.transform.SetParent(parent);
+            return root.GetComponent<Button>();
         }
     }
 }

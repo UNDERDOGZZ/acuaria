@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using Acuaria.Aquarium;
 using Acuaria.Food;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,13 +13,16 @@ namespace Acuaria.UI.Aquarium
         [SerializeField] private AquariumInhabitantProvider inhabitants;
         [SerializeField] private FeedingUIController feedingUi;
         [SerializeField] private AquariumDetailsPanel detailsPanel;
+        [SerializeField] private AquariumHUDResponsiveLayout responsiveLayout;
         [SerializeField] private GameObject compactHud;
+        [SerializeField] private Button backButton;
+        [SerializeField] private Button feedButton;
         [SerializeField] private Button detailsButton;
-        [SerializeField] private Text nameLabel;
-        [SerializeField] private Text volumeLabel;
-        [SerializeField] private Text temperatureLabel;
-        [SerializeField] private Text fishCountLabel;
-        [SerializeField] private Text statusLabel;
+        [SerializeField] private TMP_Text aquariumNameText;
+        [SerializeField] private TMP_Text volumeText;
+        [SerializeField] private TMP_Text temperatureText;
+        [SerializeField] private TMP_Text fishCountText;
+        [SerializeField] private TMP_Text statusText;
         [SerializeField] private Image statusBadge;
         private readonly AquariumRuntimeState runtimeState = new();
         private bool focused;
@@ -25,23 +30,40 @@ namespace Acuaria.UI.Aquarium
         public bool IsVisible => compactHud != null && compactHud.activeSelf;
         public bool AreDetailsOpen => detailsPanel != null && detailsPanel.IsOpen;
         public AquariumRuntimeState RuntimeState => runtimeState;
+        public TMP_Text AquariumNameText => aquariumNameText;
+        public TMP_Text VolumeText => volumeText;
+        public TMP_Text TemperatureText => temperatureText;
+        public TMP_Text FishCountText => fishCountText;
+        public TMP_Text StatusText => statusText;
 
         public void Configure(AquariumDefinition aquariumDefinition, AquariumInhabitantProvider provider,
-            FeedingUIController feeding, AquariumDetailsPanel details, GameObject hud, Button infoButton,
-            Text aquariumName, Text volume, Text temperature, Text fishCount, Text status, Image badge)
+            FeedingUIController feeding, AquariumDetailsPanel details, AquariumHUDResponsiveLayout responsive,
+            GameObject hud, Button back, Button feed, Button infoButton, TMP_Text aquariumName, TMP_Text volume,
+            TMP_Text temperature, TMP_Text fishCount, TMP_Text status, Image badge)
         {
             definition = aquariumDefinition;
             inhabitants = provider;
             feedingUi = feeding;
             detailsPanel = details;
+            responsiveLayout = responsive;
             compactHud = hud;
+            backButton = back;
+            feedButton = feed;
             detailsButton = infoButton;
-            nameLabel = aquariumName;
-            volumeLabel = volume;
-            temperatureLabel = temperature;
-            fishCountLabel = fishCount;
-            statusLabel = status;
+            aquariumNameText = aquariumName;
+            volumeText = volume;
+            temperatureText = temperature;
+            fishCountText = fishCount;
+            statusText = status;
             statusBadge = badge;
+        }
+
+        private void Awake()
+        {
+            var issues = new List<string>(8);
+            CollectReferenceIssues(issues);
+            for (var index = 0; index < issues.Count; index++)
+                Debug.LogError($"AquariumHUD: {issues[index]}", this);
         }
 
         private void OnEnable()
@@ -49,6 +71,7 @@ namespace Acuaria.UI.Aquarium
             detailsButton?.onClick.AddListener(OpenDetails);
             if (inhabitants != null) inhabitants.PopulationChanged += HandlePopulationChanged;
             if (runtimeState.IsInitialized) runtimeState.Changed += Refresh;
+            responsiveLayout?.Refresh();
             SetAquariumFocused(false);
         }
 
@@ -78,7 +101,11 @@ namespace Acuaria.UI.Aquarium
             if (compactHud != null) compactHud.SetActive(isFocused);
             if (detailsButton != null) detailsButton.interactable = isFocused;
             if (!isFocused) detailsPanel?.CloseImmediate();
-            if (isFocused) Refresh();
+            if (isFocused)
+            {
+                responsiveLayout?.Refresh();
+                Refresh();
+            }
         }
 
         public void SetInteractionEnabled(bool enabledState)
@@ -96,6 +123,26 @@ namespace Acuaria.UI.Aquarium
 
         public void SetTemperature(float value) => runtimeState.SetTemperature(value);
 
+        public void CollectReferenceIssues(List<string> issues)
+        {
+            if (issues == null) return;
+            CheckMissing(issues, definition, nameof(definition));
+            CheckMissing(issues, compactHud, nameof(compactHud));
+            CheckMissing(issues, aquariumNameText, nameof(aquariumNameText));
+            CheckMissing(issues, volumeText, nameof(volumeText));
+            CheckMissing(issues, temperatureText, nameof(temperatureText));
+            CheckMissing(issues, fishCountText, nameof(fishCountText));
+            CheckMissing(issues, statusText, nameof(statusText));
+            CheckMissing(issues, detailsButton, nameof(detailsButton));
+            CheckMissing(issues, feedButton, nameof(feedButton));
+            CheckMissing(issues, backButton, nameof(backButton));
+
+            CheckDistinct(issues, aquariumNameText, volumeText, "AquariumNameText", "VolumeText");
+            CheckDistinct(issues, temperatureText, fishCountText, "TemperatureText", "FishCountText");
+            CheckDistinct(issues, statusText, temperatureText, "StatusText", "TemperatureText");
+            CheckDistinct(issues, statusText, fishCountText, "StatusText", "FishCountText");
+        }
+
         private void HandlePopulationChanged()
         {
             if (runtimeState.IsInitialized) runtimeState.SetFishCount(inhabitants.TotalCount);
@@ -109,12 +156,24 @@ namespace Acuaria.UI.Aquarium
         {
             if (!runtimeState.IsInitialized || definition == null) return;
             var model = BuildViewModel();
-            nameLabel.text = model.DisplayName;
-            volumeLabel.text = $"◆ {model.VolumeText}";
-            temperatureLabel.text = $"▲ {model.TemperatureText}";
-            fishCountLabel.text = $"● {model.FishCountText}";
-            statusLabel.text = model.StatusLabel;
+            aquariumNameText.text = model.DisplayName;
+            volumeText.text = model.VolumeText;
+            temperatureText.text = model.TemperatureText;
+            fishCountText.text = model.FishCountText;
+            statusText.text = model.StatusLabel;
             if (statusBadge != null) statusBadge.color = StatusColor(model.Status.Status);
+        }
+
+        private static void CheckMissing(List<string> issues, Object value, string fieldName)
+        {
+            if (value == null) issues.Add($"falta la referencia '{fieldName}'.");
+        }
+
+        private static void CheckDistinct(List<string> issues, TMP_Text first, TMP_Text second,
+            string firstName, string secondName)
+        {
+            if (first != null && first == second)
+                issues.Add($"'{firstName}' y '{secondName}' apuntan al mismo texto.");
         }
 
         private static Color StatusColor(AquariumStatus status) => status switch

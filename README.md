@@ -4,7 +4,7 @@ Acuaria es un juego mobile de simulación, colección y decoración de acuarios.
 
 ## Estado
 
-El proyecto incluye sus cimientos técnicos y la primera composición provisional de la habitación principal. `Room` presenta una habitación 2D frontal, un acuario inicial, tres slots, cámara ortográfica adaptable e iluminación URP 2D. Todavía no incluye peces, interacción, interfaz visible, economía, simulación ni guardado.
+El proyecto incluye sus cimientos técnicos y un vertical slice jugable de la habitación principal. `Room` presenta una habitación 2D frontal, un acuario inicial con tres peces, enfoque interactivo, alimentación y un HUD responsive con ficha de detalles. Química, economía, mantenimiento, inventario y guardado siguen fuera de alcance.
 
 ## Estructura
 
@@ -42,4 +42,4 @@ El vertical slice permite enfocar el acuario, activar `Alimentar`, tocar la supe
 
 ## HUD del acuario
 
-La vista enfocada muestra nombre, volumen nominal, temperatura, población y estado general. Una ficha móvil presenta rango recomendado, capacidad provisional, habitantes agrupados y un consejo educativo sin introducir química dinámica. Consultar [18_AquariumDataModel.md](docs/18_AquariumDataModel.md), [19_AquariumHUDAndDetails.md](docs/19_AquariumHUDAndDetails.md) y [20_AquariumStatusEvaluation.md](docs/20_AquariumStatusEvaluation.md).
+La vista enfocada muestra nombre, volumen nominal, temperatura, población y estado general mediante campos TextMeshPro independientes. La barra superior cambia entre una fila Wide y dos filas Compact según el ancho disponible, siempre dentro del Safe Area. Una ficha móvil presenta rango recomendado, capacidad provisional, habitantes agrupados y un consejo educativo sin introducir química dinámica. Consultar [18_AquariumDataModel.md](docs/18_AquariumDataModel.md), [19_AquariumHUDAndDetails.md](docs/19_AquariumHUDAndDetails.md), [20_AquariumStatusEvaluation.md](docs/20_AquariumStatusEvaluation.md) y [21_ResponsiveHUDLayout.md](docs/21_ResponsiveHUDLayout.md).

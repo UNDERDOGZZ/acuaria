@@ -4,6 +4,7 @@ using Acuaria.Fish;
 using Acuaria.Food;
 using Acuaria.Room;
 using Acuaria.UI.Aquarium;
+using TMPro;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -28,8 +29,14 @@ namespace Acuaria.Editor
             var definition = CreateDefinition();
             var scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
             var safeArea = FindSceneObject("SafeArea").transform;
+            var back = FindSceneObject("BackButton").GetComponent<Button>();
+            var feed = FindSceneObject("FeedButton").GetComponent<Button>();
             var existing = safeArea.Find("AquariumHUDSystem");
-            if (existing != null) Object.DestroyImmediate(existing.gameObject);
+            if (existing != null)
+            {
+                back.transform.SetParent(safeArea, true);
+                Object.DestroyImmediate(existing.gameObject);
+            }
 
             var system = new GameObject("AquariumHUDSystem", typeof(RectTransform), typeof(AquariumInhabitantProvider),
                 typeof(AquariumHUDController));
@@ -39,13 +46,13 @@ namespace Acuaria.Editor
             var spawner = Object.FindAnyObjectByType<FishSpawner2D>();
             provider.Configure(spawner);
 
-            var compact = CreateCompactHud(system.transform, out var infoButton, out var name, out var volume,
-                out var temperature, out var fishCount, out var status, out var badge);
+            var compact = CreateCompactHud(system.transform, back, out var responsive, out var infoButton,
+                out var name, out var volume, out var temperature, out var fishCount, out var status, out var badge);
             var details = CreateDetailsPanel(system.transform);
             var feeding = FindSceneComponent<FeedingUIController>();
             var controller = system.GetComponent<AquariumHUDController>();
-            controller.Configure(definition, provider, feeding, details, compact, infoButton, name, volume,
-                temperature, fishCount, status, badge);
+            controller.Configure(definition, provider, feeding, details, responsive, compact, back, feed, infoButton,
+                name, volume, temperature, fishCount, status, badge);
             compact.SetActive(false);
 
             PrefabUtility.SaveAsPrefabAsset(compact, HudPrefabPath);
@@ -59,6 +66,24 @@ namespace Acuaria.Editor
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             Debug.Log("Aquarium HUD configured.");
+        }
+
+        [MenuItem("Acuaria/Import TMP Essential Resources")]
+        public static void ImportTmpEssentialResources()
+        {
+            const string settingsPath = "Assets/TextMesh Pro/Resources/TMP Settings.asset";
+            if (AssetDatabase.LoadAssetAtPath<TMP_Settings>(settingsPath) != null)
+            {
+                Debug.Log("TextMeshPro essential resources are already available.");
+                return;
+            }
+
+            var packagePath = Path.Combine(EditorApplication.applicationContentsPath, "Resources",
+                "PackageManager", "BuiltInPackages", "com.unity.ugui", "Package Resources",
+                "TMP Essential Resources.unitypackage");
+            AssetDatabase.ImportPackage(packagePath, false);
+            AssetDatabase.Refresh();
+            Debug.Log("TextMeshPro essential resources imported.");
         }
 
         public static void ConfigureFromCommandLine() => Configure();
@@ -85,39 +110,200 @@ namespace Acuaria.Editor
             return definition;
         }
 
-        private static GameObject CreateCompactHud(Transform parent, out Button infoButton, out Text name,
-            out Text volume, out Text temperature, out Text fishCount, out Text status, out Image badge)
+        private static GameObject CreateCompactHud(Transform parent, Button backButton,
+            out AquariumHUDResponsiveLayout responsive, out Button infoButton, out TMP_Text name,
+            out TMP_Text volume, out TMP_Text temperature, out TMP_Text fishCount, out TMP_Text status,
+            out Image badge)
         {
-            var root = new GameObject("AquariumHUD", typeof(RectTransform));
+            var root = new GameObject("AquariumHUD", typeof(RectTransform), typeof(AquariumHUDResponsiveLayout));
             root.transform.SetParent(parent, false);
             Stretch((RectTransform)root.transform);
 
-            var left = Panel(root.transform, "IdentityBlock", new Vector2(0f, 1f), new Vector2(0f, 1f),
-                new Vector2(164f, -24f), new Vector2(450f, 124f));
-            name = Label(left.transform, "Name", "Acuario Inicial", 28, TextAnchor.MiddleLeft,
-                new Vector2(22f, -14f), new Vector2(-22f, -58f));
-            volume = Label(left.transform, "Volume", "◆ 50 L", 25, TextAnchor.MiddleLeft,
-                new Vector2(22f, -66f), new Vector2(-22f, -14f));
+            var topBar = new GameObject("TopBar", typeof(RectTransform), typeof(Image));
+            topBar.transform.SetParent(root.transform, false);
+            var topRect = (RectTransform)topBar.transform;
+            topRect.anchorMin = new Vector2(0f, 1f);
+            topRect.anchorMax = Vector2.one;
+            topRect.pivot = new Vector2(0.5f, 1f);
+            topRect.offsetMin = new Vector2(16f, -128f);
+            topRect.offsetMax = new Vector2(-16f, -16f);
+            topBar.GetComponent<Image>().color = new Color(0.045f, 0.09f, 0.14f, 0.84f);
+            var wideRow = new GameObject("WideRow", typeof(RectTransform));
+            wideRow.transform.SetParent(topBar.transform, false);
+            Stretch((RectTransform)wideRow.transform);
+            var wide = wideRow.AddComponent<HorizontalLayoutGroup>();
+            ConfigureHorizontal(wide, 14f, new RectOffset(16, 16, 12, 12));
+            var compactStack = new GameObject("CompactStack", typeof(RectTransform));
+            compactStack.transform.SetParent(topBar.transform, false);
+            Stretch((RectTransform)compactStack.transform);
+            var compact = compactStack.AddComponent<VerticalLayoutGroup>();
+            compact.padding = new RectOffset(16, 16, 12, 12);
+            compact.spacing = 10f;
+            compact.childAlignment = TextAnchor.MiddleCenter;
+            compact.childControlWidth = true;
+            compact.childControlHeight = false;
+            compact.childForceExpandWidth = true;
+            compact.childForceExpandHeight = false;
+            compactStack.SetActive(false);
 
-            var right = Panel(root.transform, "StatusBlock", Vector2.one, Vector2.one,
-                new Vector2(-24f, -24f), new Vector2(560f, 124f));
-            temperature = Label(right.transform, "Temperature", "▲ 25 °C", 25, TextAnchor.MiddleLeft,
-                new Vector2(22f, -14f), new Vector2(-310f, -58f));
-            fishCount = Label(right.transform, "FishCount", "● 3 peces", 25, TextAnchor.MiddleLeft,
-                new Vector2(22f, -66f), new Vector2(-310f, -14f));
-            var badgeRoot = new GameObject("StatusBadge", typeof(RectTransform), typeof(Image));
-            badgeRoot.transform.SetParent(right.transform, false);
-            var badgeRect = (RectTransform)badgeRoot.transform;
-            badgeRect.anchorMin = new Vector2(0.47f, 0.18f);
-            badgeRect.anchorMax = new Vector2(0.78f, 0.82f);
-            badgeRect.offsetMin = badgeRect.offsetMax = Vector2.zero;
+            var primary = LayoutContainer(compactStack.transform, "CompactPrimaryRow", true);
+            primary.gameObject.AddComponent<LayoutElement>().preferredHeight = 78f;
+            primary.gameObject.SetActive(false);
+
+            var backRect = (RectTransform)backButton.transform;
+            backRect.SetParent(wideRow.transform, false);
+            backRect.localScale = Vector3.one;
+            var backLayout = GetOrAddLayoutElement(backButton.gameObject);
+            backLayout.minWidth = 76f;
+            backLayout.preferredWidth = 76f;
+            backLayout.minHeight = 72f;
+            backLayout.preferredHeight = 72f;
+            backButton.GetComponent<Image>().color = new Color(0.16f, 0.28f, 0.38f, 0.94f);
+
+            var identity = LayoutContainer(wideRow.transform, "AquariumIdentityGroup", false);
+            var identityLayout = identity.gameObject.AddComponent<LayoutElement>();
+            identityLayout.minWidth = 270f;
+            identityLayout.preferredWidth = 370f;
+            identityLayout.minHeight = 78f;
+            var identityVertical = identity.gameObject.AddComponent<VerticalLayoutGroup>();
+            identityVertical.padding = new RectOffset(14, 14, 8, 8);
+            identityVertical.spacing = 2f;
+            identityVertical.childAlignment = TextAnchor.MiddleLeft;
+            identityVertical.childControlWidth = true;
+            identityVertical.childControlHeight = false;
+            identityVertical.childForceExpandWidth = true;
+            identityVertical.childForceExpandHeight = false;
+            name = TmpLabel(identity, "AquariumNameText", "Acuario Inicial", 29f, 24f, 34f,
+                TextAlignmentOptions.MidlineLeft);
+            name.GetComponent<LayoutElement>().preferredHeight = 38f;
+            volume = TmpLabel(identity, "VolumeText", "50 L", 22f, 20f, 25f, TextAlignmentOptions.MidlineLeft);
+            volume.GetComponent<LayoutElement>().preferredHeight = 28f;
+
+            var spacer = new GameObject("FlexibleSpacer", typeof(RectTransform), typeof(LayoutElement));
+            spacer.transform.SetParent(wideRow.transform, false);
+            spacer.GetComponent<LayoutElement>().flexibleWidth = 1f;
+
+            var stats = LayoutContainer(wideRow.transform, "AquariumStatsGroup", true);
+            var statsLayout = stats.gameObject.AddComponent<LayoutElement>();
+            statsLayout.minWidth = 690f;
+            statsLayout.preferredWidth = 760f;
+            statsLayout.minHeight = 78f;
+            statsLayout.flexibleWidth = 0f;
+
+            var temperatureItem = StatItem(stats, "TemperatureItem", 158f);
+            TmpIcon(temperatureItem.transform, "TemperatureIcon", "▲");
+            temperature = TmpLabel(temperatureItem.transform, "TemperatureText", "25 °C", 24f, 21f, 27f,
+                TextAlignmentOptions.Center);
+            var fishItem = StatItem(stats, "FishCountItem", 170f);
+            TmpIcon(fishItem.transform, "FishIcon", "●");
+            fishCount = TmpLabel(fishItem.transform, "FishCountText", "3 peces", 24f, 21f, 27f,
+                TextAlignmentOptions.Center);
+            var badgeRoot = StatItem(stats, "StatusBadge", 166f);
             badge = badgeRoot.GetComponent<Image>();
             badge.color = new Color(0.3f, 0.86f, 0.63f);
-            status = Label(badgeRoot.transform, "Status", "Excelente", 20, TextAnchor.MiddleCenter,
-                new Vector2(10f, 4f), new Vector2(-10f, -4f));
-            infoButton = Button(right.transform, "DetailsButton", "i  Detalles", new Vector2(1f, 0.5f),
-                new Vector2(-18f, 0f), new Vector2(132f, 76f));
+            status = TmpLabel(badgeRoot.transform, "StatusText", "Estable", 22f, 19f, 25f,
+                TextAlignmentOptions.Center);
+            infoButton = TmpButton(stats, "DetailsButton", "i  Detalles", 164f);
+
+            responsive = root.GetComponent<AquariumHUDResponsiveLayout>();
+            responsive.Configure((RectTransform)root.transform, topRect, (RectTransform)wideRow.transform,
+                (RectTransform)compactStack.transform, primary, identity,
+                (RectTransform)spacer.transform, stats, backRect, (RectTransform)infoButton.transform, 2100f);
             return root;
+        }
+
+        private static RectTransform LayoutContainer(Transform parent, string name, bool horizontal)
+        {
+            var root = new GameObject(name, typeof(RectTransform), typeof(Image));
+            root.transform.SetParent(parent, false);
+            root.GetComponent<Image>().color = new Color(0.07f, 0.14f, 0.2f, 0.72f);
+            if (horizontal)
+            {
+                var layout = root.AddComponent<HorizontalLayoutGroup>();
+                ConfigureHorizontal(layout, 10f, new RectOffset(8, 8, 6, 6));
+            }
+            return (RectTransform)root.transform;
+        }
+
+        private static GameObject StatItem(Transform parent, string name, float width)
+        {
+            var root = new GameObject(name, typeof(RectTransform), typeof(Image), typeof(LayoutElement));
+            root.transform.SetParent(parent, false);
+            root.GetComponent<Image>().color = new Color(0.09f, 0.19f, 0.25f, 0.9f);
+            var element = root.GetComponent<LayoutElement>();
+            element.minWidth = width;
+            element.preferredWidth = width;
+            element.minHeight = 64f;
+            element.preferredHeight = 64f;
+            ConfigureHorizontal(root.AddComponent<HorizontalLayoutGroup>(), 5f, new RectOffset(10, 10, 6, 6));
+            return root;
+        }
+
+        private static void ConfigureHorizontal(HorizontalLayoutGroup layout, float spacing, RectOffset padding)
+        {
+            layout.padding = padding;
+            layout.spacing = spacing;
+            layout.childAlignment = TextAnchor.MiddleLeft;
+            layout.childControlWidth = true;
+            layout.childControlHeight = true;
+            layout.childForceExpandWidth = false;
+            layout.childForceExpandHeight = false;
+        }
+
+        private static LayoutElement GetOrAddLayoutElement(GameObject target)
+        {
+            var element = target.GetComponent<LayoutElement>();
+            return element != null ? element : target.AddComponent<LayoutElement>();
+        }
+
+        private static TMP_Text TmpLabel(Transform parent, string name, string value, float size, float minimum,
+            float maximum, TextAlignmentOptions alignment)
+        {
+            var root = new GameObject(name, typeof(RectTransform), typeof(TextMeshProUGUI), typeof(LayoutElement));
+            root.transform.SetParent(parent, false);
+            var text = root.GetComponent<TextMeshProUGUI>();
+            text.text = value;
+            text.font = TMP_Settings.defaultFontAsset;
+            text.fontSize = size;
+            text.fontSizeMin = minimum;
+            text.fontSizeMax = maximum;
+            text.enableAutoSizing = true;
+            text.textWrappingMode = TextWrappingModes.NoWrap;
+            text.overflowMode = TextOverflowModes.Ellipsis;
+            text.alignment = alignment;
+            text.color = new Color(0.92f, 0.96f, 0.96f);
+            var element = root.GetComponent<LayoutElement>();
+            element.minWidth = name.Contains("Icon") ? 26f : 88f;
+            element.preferredWidth = name.Contains("Icon") ? 26f : 110f;
+            element.flexibleWidth = name.Contains("Text") ? 1f : 0f;
+            return text;
+        }
+
+        private static void TmpIcon(Transform parent, string name, string glyph)
+        {
+            var icon = TmpLabel(parent, name, glyph, 22f, 20f, 24f, TextAlignmentOptions.Center);
+            icon.color = AccentColor;
+        }
+
+        private static Button TmpButton(Transform parent, string name, string value, float width)
+        {
+            var root = new GameObject(name, typeof(RectTransform), typeof(Image), typeof(Button),
+                typeof(LayoutElement));
+            root.transform.SetParent(parent, false);
+            root.GetComponent<Image>().color = new Color(0.16f, 0.53f, 0.57f, 1f);
+            var layout = root.GetComponent<LayoutElement>();
+            layout.minWidth = width;
+            layout.preferredWidth = width;
+            layout.minHeight = 64f;
+            layout.preferredHeight = 64f;
+            var label = TmpLabel(root.transform, "DetailsButtonText", value, 22f, 20f, 24f,
+                TextAlignmentOptions.Center);
+            var rect = (RectTransform)label.transform;
+            rect.anchorMin = Vector2.zero;
+            rect.anchorMax = Vector2.one;
+            rect.offsetMin = new Vector2(10f, 6f);
+            rect.offsetMax = new Vector2(-10f, -6f);
+            return root.GetComponent<Button>();
         }
 
         private static AquariumDetailsPanel CreateDetailsPanel(Transform parent)

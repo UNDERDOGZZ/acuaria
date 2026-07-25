@@ -1,8 +1,8 @@
 # HUD y ficha del acuario
 
-## HUD compacto
+## HUD responsive
 
-`AquariumHUDController` muestra dos bloques superiores durante `AquariumFocused`: identidad/volumen y temperatura/población/estado/detalles. Alimentar y Volver continúan en la zona inferior y lateral existente. El tanque conserva el protagonismo visual.
+`AquariumHUDController` escribe identidad, volumen, temperatura, población y estado en cinco `TextMeshProUGUI` distintos. `AquariumHUDResponsiveLayout` presenta una fila en pantallas Wide o dos filas en Compact. Volver forma parte de la barra superior y Alimentar conserva su anclaje inferior derecho. El tanque sigue siendo el protagonista visual.
 
 ## Ficha de detalles
 
@@ -18,7 +18,7 @@
 
 ## Safe Area y layout
 
-Todo cuelga del `SafeArea` existente. El CanvasScaler conserva referencia 1920×1080; anchors opuestos fijan los dos bloques superiores y el panel central limita su tamaño. La herramienta no mueve cámara ni mundo.
+Todo cuelga del `SafeArea` existente. El `CanvasScaler` conserva referencia 1920×1080, modo `Scale With Screen Size`, `Match Width Or Height` y match 0.5. `TopBar` usa stretch horizontal y layouts con tamaños mínimos explícitos; el panel central limita su tamaño. La herramienta no mueve cámara ni mundo. La especificación completa está en [21_ResponsiveHUDLayout.md](21_ResponsiveHUDLayout.md).
 
 ## Accesibilidad y localización futura
 

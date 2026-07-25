@@ -6,7 +6,8 @@
     "Acuaria.Fish",
     "Acuaria.Food",
     "Acuaria.UI",
-    "UnityEngine.UI"
+    "UnityEngine.UI",
+    "Unity.TextMeshPro"
   ],
   "includePlatforms": ["Editor"],
   "optionalUnityReferences": ["TestAssemblies"],

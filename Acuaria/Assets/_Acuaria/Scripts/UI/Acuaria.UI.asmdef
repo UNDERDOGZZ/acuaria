@@ -1,6 +1,6 @@
 {
   "name": "Acuaria.UI",
   "rootNamespace": "Acuaria.UI",
-  "references": ["Acuaria.Core", "Acuaria.Aquarium", "Acuaria.Fish", "Acuaria.Food", "UnityEngine.UI"],
+  "references": ["Acuaria.Core", "Acuaria.Aquarium", "Acuaria.Fish", "Acuaria.Food", "UnityEngine.UI", "Unity.TextMeshPro"],
   "autoReferenced": true
 }
