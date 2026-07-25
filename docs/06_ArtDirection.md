@@ -2,6 +2,6 @@
 
 La identidad visual será acogedora, legible en pantallas pequeñas y centrada en la contemplación. Los acuarios siempre se representan de frente, con siluetas claras y profundidad sugerida dentro de un plano controlado.
 
-La paleta deberá separar con claridad habitación, agua, fauna, vegetación e interfaz. Animación, iluminación y efectos deben transmitir vida serena sin ruido visual.
+La paleta provisional combina azul nocturno, violeta suave, rosa cálido, verde acuático y amarillo tenue. El acuario usa cian apagado como foco principal; la lámpara aporta contraste cálido y la ventana una luz fría secundaria.
 
-Este sprint no fija estilo final, resolución de sprites ni pipeline de producción. Esas decisiones requerirán pruebas en dispositivos objetivo.
+Room está construido con piezas independientes y un sprite blanco tintado, por lo que pared, piso, ventana, muebles, decoración y acuario pueden reemplazarse individualmente. Esta composición valida jerarquía y color, no calidad final, resolución de sprites ni pipeline definitivo.

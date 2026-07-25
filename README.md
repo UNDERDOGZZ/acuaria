@@ -4,7 +4,7 @@ Acuaria es un juego mobile de simulación, colección y decoración de acuarios.
 
 ## Estado
 
-El repositorio contiene únicamente los cimientos técnicos. Este sprint no incluye gameplay, peces, habitación, interfaz, economía, simulación ni guardado.
+El proyecto incluye sus cimientos técnicos y la primera composición provisional de la habitación principal. `Room` presenta una habitación 2D frontal, un acuario inicial, tres slots, cámara ortográfica adaptable e iluminación URP 2D. Todavía no incluye peces, interacción, interfaz visible, economía, simulación ni guardado.
 
 ## Estructura
 
@@ -20,6 +20,7 @@ La arquitectura separa `Core`, `Simulation`, dominios de gameplay y `UI` mediant
 2. En Unity Hub, añadir la carpeta `Acuaria`.
 3. Abrir `Assets/_Acuaria/Scenes/Bootstrap.unity`.
 4. Confirmar que `Bootstrap`, `MainMenu` y `Room` aparecen en Build Profiles en ese orden.
+5. Ejecutar desde Bootstrap para cargar Room, o abrir Room directamente para trabajo visual.
 
 ## Contribuir
 
@@ -27,4 +28,4 @@ Crear cambios pequeños y enfocados, respetar los namespaces y límites de assem
 
 ## Roadmap
 
-Los próximos hitos previstos son: navegación y composición de la habitación; modelo de acuarios; simulación gradual del agua; peces y compatibilidad; progresión; guardado versionado; y pulido mobile. Consultar [04_Roadmap.md](docs/04_Roadmap.md).
+Los próximos hitos previstos son: interacción y navegación de habitación; modelo de acuarios; simulación gradual del agua; peces y compatibilidad; progresión; guardado versionado; y pulido mobile. Consultar [04_Roadmap.md](docs/04_Roadmap.md) y [11_RoomScene.md](docs/11_RoomScene.md).

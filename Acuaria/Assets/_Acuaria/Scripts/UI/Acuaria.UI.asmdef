@@ -1,0 +1,6 @@
+{
+  "name": "Acuaria.UI",
+  "rootNamespace": "Acuaria.UI",
+  "references": ["Acuaria.Core"],
+  "autoReferenced": true
+}

@@ -1,6 +1,9 @@
 ﻿<Solution>
   <Project Path="Acuaria.Audio.csproj" />
+  <Project Path="Acuaria.Room.EditModeTests.csproj" />
+  <Project Path="Acuaria.Room.csproj" />
   <Project Path="Acuaria.Simulation.csproj" />
   <Project Path="Acuaria.Editor.csproj" />
   <Project Path="Acuaria.Core.csproj" />
+  <Project Path="Acuaria.UI.csproj" />
 </Solution>

@@ -68,6 +68,11 @@ namespace Acuaria.Editor
 
         private static void CreateEmptyScene(string path)
         {
+            if (File.Exists(path))
+            {
+                return;
+            }
+
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             EditorSceneManager.SaveScene(scene, path);
         }

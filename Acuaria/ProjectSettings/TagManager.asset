@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags: []
   layers:
   - Default
@@ -41,3 +41,33 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: RoomBackground
+    uniqueID: 670133344
+    locked: 0
+  - name: RoomEnvironment
+    uniqueID: 1617196886
+    locked: 0
+  - name: RoomFurniture
+    uniqueID: 2605144691
+    locked: 0
+  - name: AquariumBack
+    uniqueID: 2470261905
+    locked: 0
+  - name: AquariumContents
+    uniqueID: 174164976
+    locked: 0
+  - name: AquariumFront
+    uniqueID: 3249575902
+    locked: 0
+  - name: RoomForeground
+    uniqueID: 116809056
+    locked: 0
+  - name: Effects
+    uniqueID: 1992367411
+    locked: 0
+  - name: UI
+    uniqueID: 2501931891
+    locked: 0
+  m_RenderingLayers:
+  - Default
+  m_MigratedRenderPipelines: []

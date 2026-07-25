@@ -12,3 +12,10 @@
 - `Docs`: documentación que deba distribuirse dentro del proyecto.
 
 La documentación principal vive en `/docs`. No se crean carpetas por anticipado fuera de esta taxonomía.
+
+Room utiliza únicamente estas extensiones:
+
+- `Art/Prototype/Room`: sprite neutro reutilizable para geometría provisional.
+- `Materials/Room`: reservado para materiales compartidos de Room; actualmente no requiere materiales propios.
+- `Prefabs/Room`: `AquariumRoomDisplay`, `AquariumSlotView`, `RoomLamp` y `DecorativePlant`.
+- `Scripts/Room`: composición, slots y cámara.

@@ -1,7 +1,15 @@
 {
   "name": "Acuaria.Editor",
   "rootNamespace": "Acuaria.Editor",
-  "references": ["Acuaria.Core", "Acuaria.Audio", "Acuaria.Simulation"],
+  "references": [
+    "Acuaria.Core",
+    "Acuaria.Audio",
+    "Acuaria.Simulation",
+    "Acuaria.Room",
+    "Acuaria.UI",
+    "Unity.RenderPipelines.Universal.Runtime",
+    "Unity.RenderPipelines.Universal.2D.Runtime"
+  ],
   "includePlatforms": ["Editor"],
   "autoReferenced": true
 }
