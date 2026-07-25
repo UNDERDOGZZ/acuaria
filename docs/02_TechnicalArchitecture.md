@@ -19,3 +19,7 @@ Los ScriptableObjects almacenan configuración y definiciones authoring. No son 
 `AquariumCarouselRoot` es una estructura espacial sin input, movimiento, snapping ni selección. Un sistema futuro podrá desplazar esa raíz sin modificar los prefabs visuales.
 
 El enfoque separa `AquariumInteractable`, `AquariumFocusTarget`, `RoomViewStateMachine` y `RoomViewController`. Input emite selección; el controlador coordina cámara y UI.
+
+## Dominio Fish
+
+`Acuaria.Fish` separa configuración inmutable (`FishSpeciesDefinition`), estado mutable sin referencias visuales (`FishRuntimeState`), modelo determinista (`FishMovementModel2D`) y adaptadores Unity (`FishMovement2D`, `FishVisual2D`, `FishView`). `FishSpawner2D` compone instancias desde entradas serializadas y `AquariumSwimArea2D` define el espacio válido.

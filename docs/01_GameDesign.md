@@ -11,3 +11,5 @@ Este documento todavía no define economía, balance ni reglas detalladas. Esas 
 La primera interacción jugable permite entrar y salir de la vista enfocada del acuario activo; no habilita aún acciones dentro del tanque.
 
 La composición refinada comunica un acuario activo central y dos posiciones futuras parcialmente visibles. Esta señal es puramente visual y no implica selección ni desbloqueo.
+
+El acuario inicial contiene tres peces provisionales con ritmos y niveles de nado diferentes. Su función actual es aportar vida contemplativa; aún no poseen necesidades, salud, compatibilidad ni progresión.

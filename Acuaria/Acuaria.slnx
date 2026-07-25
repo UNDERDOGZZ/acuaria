@@ -1,4 +1,6 @@
 ﻿<Solution>
+  <Project Path="Acuaria.Fish.csproj" />
+  <Project Path="Acuaria.Fish.EditModeTests.csproj" />
   <Project Path="Acuaria.Room.csproj" />
   <Project Path="Acuaria.Audio.csproj" />
   <Project Path="Acuaria.Room.EditModeTests.csproj" />

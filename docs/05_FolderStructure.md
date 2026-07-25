@@ -19,3 +19,5 @@ Room utiliza únicamente estas extensiones:
 - `Materials/Room`: reservado para materiales compartidos de Room; actualmente no requiere materiales propios.
 - `Prefabs/Room`: `AquariumRoomDisplay`, `AquariumSlotView`, `RoomLamp` y `DecorativePlant`.
 - `Scripts/Room`: composición, slots y cámara.
+
+Fish añade `Data/FishSpecies`, `Prefabs/Fish`, `Scripts/Fish` y `Tests/EditMode/Fish` para separar authoring, representación, runtime y pruebas deterministas.

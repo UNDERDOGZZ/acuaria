@@ -6,6 +6,7 @@
     "Acuaria.Audio",
     "Acuaria.Simulation",
     "Acuaria.Room",
+    "Acuaria.Fish",
     "Acuaria.UI",
     "Unity.InputSystem",
     "UnityEngine.UI",

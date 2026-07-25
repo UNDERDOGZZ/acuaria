@@ -7,3 +7,5 @@ La paleta provisional combina azul nocturno, violeta suave, rosa cálido, verde 
 Room está construido con piezas independientes y un sprite blanco tintado, por lo que pared, piso, ventana, muebles, decoración y acuario pueden reemplazarse individualmente. Esta composición valida jerarquía y color, no calidad final, resolución de sprites ni pipeline definitivo.
 
 El tanque activo ocupa aproximadamente 46% del ancho de diseño. El agua combina bandas de profundidad, superficie iluminada y reflejos discretos; las siluetas laterales permanecen desaturadas.
+
+Los primeros peces usan geometría plana provisional: azul pequeño y rápido, naranja mediano y tranquilo, y violeta de zona baja. Permanecen detrás del vidrio y el marco.

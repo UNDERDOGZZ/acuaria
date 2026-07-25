@@ -7,3 +7,5 @@ Las sesiones deben admitir tanto visitas breves como periodos de decoración tra
 Este bucle es una dirección de diseño, no una implementación. Se validará antes de definir temporizadores, recompensas o economía.
 
 El tramo implementado actualmente es observar Room, seleccionar el tanque activo, entrar en vista enfocada y regresar.
+
+Los peces continúan nadando y conservan su estado durante enfoque y regreso.

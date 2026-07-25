@@ -15,3 +15,5 @@ Cada fase requiere criterios de aceptación, pruebas y revisión de alcance ante
 La selección y enfoque del acuario activo están implementados; swipe y navegación entre acuarios continúan pendientes.
 
 La fase de habitación visual incluye ya el refinamiento de foco, profundidad, agua provisional y preparación estructural para un carrusel futuro.
+
+El primer hito de vida visual está completado con tres peces autónomos. Alimentación, bienestar, química, persistencia y swipe continúan pendientes.

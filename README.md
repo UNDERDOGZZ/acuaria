@@ -32,4 +32,6 @@ Room permite seleccionar el acuario ocupado, enfocarlo suavemente y volver media
 
 Room cuenta ahora con una composición refinada: acuario central dominante, dos slots futuros y una raíz estructural preparada para un carrusel futuro sin interacción.
 
+El acuario inicial contiene tres peces 2D provisionales. Cada uno usa una especie, semilla, nivel de nado, velocidad y fase visual diferentes; alimentación, química, economía y guardado siguen fuera de alcance.
+
 Los próximos hitos previstos son: interacción y navegación de habitación; modelo de acuarios; simulación gradual del agua; peces y compatibilidad; progresión; guardado versionado; y pulido mobile. Consultar [04_Roadmap.md](docs/04_Roadmap.md) y [11_RoomScene.md](docs/11_RoomScene.md).
