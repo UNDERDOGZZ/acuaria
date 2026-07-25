@@ -34,3 +34,6 @@ El enfoque separa `AquariumInteractable`, `AquariumFocusTarget`, `RoomViewStateM
 ## Simulación de agua
 
 `Acuaria.Simulation` contiene configuración, estado mutable sin Unity scene, modelos de residuos/nitrógeno, evaluadores y reloj discreto. `AquariumSimulationController`, en la capa adaptadora UI, consulta habitantes y eventos de comida y publica snapshots. La UI nunca modifica directamente el estado químico.
+# Extensión de mantenimiento
+
+La configuración vive en ScriptableObjects, el estado y los cálculos en `Acuaria.Simulation`, y la coordinación, input y animación en `Acuaria.UI.Maintenance`.

@@ -22,3 +22,6 @@ La saciedad y el cooldown regulan solo la respuesta inmediata.
 La observación enfocada incorpora ahora una capa opcional de comprensión: revisar resumen, abrir detalles, identificar habitantes y leer un consejo educativo. Cerrar la ficha devuelve al estado enfocado sin reactivar automáticamente la alimentación.
 
 La química continúa avanzando durante RoomOverview, enfoque, Detalles y FeedingMode. Alimentar añade una consecuencia gradual observable; todavía no existe una acción jugable para corregir nitratos o cambiar agua.
+# Bucle de mantenimiento
+
+Observar calidad → abrir Mantenimiento → elegir porcentaje → previsualizar → confirmar → observar drenado/llenado → revisar resultado. El filtro añade decisiones entre limpieza mecánica y conservación bacteriana.

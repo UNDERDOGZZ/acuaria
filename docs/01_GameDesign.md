@@ -23,3 +23,6 @@ El primer gesto de cuidado consiste en enfocar el acuario, activar `Alimentar` y
 ## Lectura básica del ecosistema
 
 Al enfocar el tanque, el jugador puede reconocer su nombre, volumen, temperatura, habitantes y una valoración tranquila del estado general. La ficha ampliada introduce el valor educativo del volumen y deja claro que la capacidad actual es provisional, no una regla biológica final.
+# Mantenimiento relajante
+
+El jugador reduce contaminantes mediante cambios parciales y cuida el filtro sin economía ni castigos permanentes. La comparación antes/después refuerza el aprendizaje.

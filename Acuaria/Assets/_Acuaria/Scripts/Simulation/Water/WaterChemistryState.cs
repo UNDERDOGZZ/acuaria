@@ -44,6 +44,18 @@ namespace Acuaria.Simulation.Water
             float nitriteBacteria, float waste, WaterChemistryDefinition definition) =>
             SetValues(ammonia, nitrite, nitrate, ammoniaBacteria, nitriteBacteria, waste, definition);
 
+        public void ApplyMaintenanceValues(float ammonia, float nitrite, float nitrate, float ammoniaBacteria,
+            float nitriteBacteria, float waste, WaterChemistryDefinition definition)
+        {
+            var previousAmmonia = AmmoniaMgPerLiter;
+            var previousNitrite = NitriteMgPerLiter;
+            var previousNitrate = NitrateMgPerLiter;
+            SetValues(ammonia, nitrite, nitrate, ammoniaBacteria, nitriteBacteria, waste, definition);
+            AmmoniaTrend = Trend(previousAmmonia, AmmoniaMgPerLiter, definition.TrendTolerance);
+            NitriteTrend = Trend(previousNitrite, NitriteMgPerLiter, definition.TrendTolerance);
+            NitrateTrend = Trend(previousNitrate, NitrateMgPerLiter, definition.TrendTolerance);
+        }
+
         public void ApplyStep(float ammonia, float nitrite, float nitrate, float ammoniaBacteria,
             float nitriteBacteria, float waste, float simulatedSeconds, float trendTolerance,
             WaterChemistryDefinition definition)

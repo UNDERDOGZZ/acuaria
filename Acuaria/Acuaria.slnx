@@ -1,4 +1,5 @@
 ﻿<Solution>
+  <Project Path="Acuaria.Simulation.csproj" />
   <Project Path="Acuaria.Aquarium.EditModeTests.csproj" />
   <Project Path="Acuaria.Fish.csproj" />
   <Project Path="Acuaria.Aquarium.csproj" />
@@ -6,10 +7,9 @@
   <Project Path="Acuaria.Room.csproj" />
   <Project Path="Acuaria.Food.csproj" />
   <Project Path="Acuaria.Audio.csproj" />
-  <Project Path="Acuaria.Room.EditModeTests.csproj" />
-  <Project Path="Acuaria.Simulation.csproj" />
-  <Project Path="Acuaria.Editor.csproj" />
   <Project Path="Acuaria.UI.csproj" />
+  <Project Path="Acuaria.Room.EditModeTests.csproj" />
+  <Project Path="Acuaria.Editor.csproj" />
   <Project Path="Acuaria.Core.csproj" />
   <Project Path="Acuaria.Feeding.EditModeTests.csproj" />
 </Solution>

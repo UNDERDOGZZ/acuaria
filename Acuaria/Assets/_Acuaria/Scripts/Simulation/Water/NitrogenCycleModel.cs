@@ -6,6 +6,10 @@ namespace Acuaria.Simulation.Water
     {
         public WaterChemistryState Step(WaterChemistryState source, WaterChemistryDefinition definition,
             float simulatedSeconds)
+            => Step(source, definition, simulatedSeconds, 1f);
+
+        public WaterChemistryState Step(WaterChemistryState source, WaterChemistryDefinition definition,
+            float simulatedSeconds, float biologicalEfficiency)
         {
             if (source == null || definition == null) return null;
             var next = source.Snapshot();
@@ -18,13 +22,14 @@ namespace Acuaria.Simulation.Water
             var nitrite = source.NitriteMgPerLiter;
             var nitrate = source.NitrateMgPerLiter;
 
+            var filterFactor = Mathf.Clamp(Safe(biologicalEfficiency), 0f, 2f);
             var ammoniaConverted = Mathf.Min(ammonia,
-                ammonia * source.AmmoniaOxidizingBacteria * definition.AmmoniaConversionRate * hours);
+                ammonia * source.AmmoniaOxidizingBacteria * definition.AmmoniaConversionRate * hours * filterFactor);
             ammonia -= ammoniaConverted;
             nitrite += ammoniaConverted;
 
             var nitriteConverted = Mathf.Min(nitrite,
-                nitrite * source.NitriteOxidizingBacteria * definition.NitriteConversionRate * hours);
+                nitrite * source.NitriteOxidizingBacteria * definition.NitriteConversionRate * hours * filterFactor);
             nitrite -= nitriteConverted;
             nitrate += nitriteConverted;
 
@@ -37,6 +42,7 @@ namespace Acuaria.Simulation.Water
                 source.OrganicWaste - decomposedWaste, simulatedSeconds, definition.TrendTolerance, definition);
             return next;
         }
+        private static float Safe(float value) => float.IsFinite(value) ? value : 0f;
 
         private static float Grow(float bacteria, float resource, float growth, float loss, float hours)
         {

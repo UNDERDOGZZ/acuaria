@@ -17,6 +17,7 @@ namespace Acuaria.Food
         [SerializeField] private AudioClip activateClip;
         private bool aquariumFocused;
         private bool tipShown;
+        private bool interactionEnabled = true;
         private Coroutine feedbackRoutine;
         public bool IsFeedingMode => inputController != null && inputController.IsFeedingMode;
 
@@ -55,10 +56,16 @@ namespace Acuaria.Food
 
         public void ToggleFeedingMode()
         {
-            if (aquariumFocused) SetFeedingMode(!IsFeedingMode);
+            if (aquariumFocused && interactionEnabled) SetFeedingMode(!IsFeedingMode);
         }
 
         public void CancelFeedingMode() => SetFeedingMode(false);
+        public void SetInteractionEnabled(bool value)
+        {
+            interactionEnabled = value;
+            if (!value) SetFeedingMode(false);
+            if (feedButton != null) feedButton.interactable = aquariumFocused && value;
+        }
 
         private void SetFeedingMode(bool active)
         {
@@ -80,6 +87,7 @@ namespace Acuaria.Food
         private void Refresh()
         {
             if (feedButton != null) feedButton.gameObject.SetActive(aquariumFocused);
+            if (feedButton != null) feedButton.interactable = aquariumFocused && interactionEnabled;
             if (!aquariumFocused && instructionRoot != null) instructionRoot.SetActive(false);
             if (feedbackLabel != null && !aquariumFocused) feedbackLabel.gameObject.SetActive(false);
         }

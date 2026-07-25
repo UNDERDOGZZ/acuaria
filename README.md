@@ -47,3 +47,4 @@ La vista enfocada muestra nombre, volumen nominal, temperatura, población y est
 ## Calidad del agua
 
 El acuario inicial incorpora una simulación educativa determinista del ciclo del nitrógeno: residuos, amoníaco total simplificado, nitritos, nitratos y dos colonias bacterianas. Funciona mediante ticks discretos y eventos, sin progreso offline, daño a peces ni cambios de agua jugables. Consultar [22_WaterChemistryModel.md](docs/22_WaterChemistryModel.md), [23_NitrogenCycleSimulation.md](docs/23_NitrogenCycleSimulation.md), [24_AquariumSimulationClock.md](docs/24_AquariumSimulationClock.md) y [25_WaterQualityUI.md](docs/25_WaterQualityUI.md).
+Acuaria incluye mantenimiento básico: cambios parciales de agua con previsualización y un filtro biológico simplificado con suciedad, eficiencia, enjuague suave y limpieza profunda. Consulta `docs/26_WaterChangeSystem.md` a `docs/29_MaintenanceEducationalDesign.md`.

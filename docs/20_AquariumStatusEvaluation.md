@@ -19,3 +19,6 @@ Una versión futura combinará temperatura con química, ciclado, filtración, o
 # Calidad del agua
 
 La evaluación general puede recibir `WaterQualityResult`. Se conserva la mayor severidad entre temperatura/población y química; una condición menos severa nunca oculta otra más importante.
+# Mantenimiento y estado
+
+Los cambios de agua publican nuevamente química, calidad y ciclo. La pérdida bacteriana de una limpieza profunda puede empeorar el estado del ciclado.

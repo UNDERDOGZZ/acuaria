@@ -32,3 +32,6 @@ Continúan pendientes química dinámica, bienestar, mantenimiento, persistencia
 ## Sprint 6 — ciclo del nitrógeno
 
 Implementado: química educativa básica, residuos de peces/comida, bacterias beneficiosas, reloj discreto, tendencias, calidad del agua y presentación en Detalles. Permanecen fuera cambios de agua, filtros, daño, persistencia y progreso offline.
+# Sprint 7 — mantenimiento básico
+
+Implementados cambio parcial de agua, confirmación y previsualización, animación, cooldown, filtro biológico, suciedad y mantenimiento educativo.

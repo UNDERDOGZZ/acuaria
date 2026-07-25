@@ -22,6 +22,7 @@ namespace Acuaria.UI.WaterChemistry
         private WaterChemistryState state;
         private AquariumCycleStatus lastCycle;
         private WaterQualityStatus lastQuality;
+        private float biologicalEfficiency = 1f;
 
         public event Action<WaterChemistryState> ChemistryChanged;
         public event Action<WaterQualityStatus> WaterQualityChanged;
@@ -29,6 +30,7 @@ namespace Acuaria.UI.WaterChemistry
         public event Action<float> WasteAdded;
         public WaterChemistryState Snapshot => state?.Snapshot();
         public WaterChemistryDefinition Definition => definition;
+        public float AquariumVolumeLiters => aquariumVolumeLiters;
 
         public void Configure(WaterChemistryDefinition chemistryDefinition, AquariumInhabitantProvider provider,
             AquariumFoodController food, AquariumHUDController hudController, float volumeLiters)
@@ -76,7 +78,7 @@ namespace Acuaria.UI.WaterChemistry
             var fishWaste = AquariumWasteModel.FishWaste(inhabitants?.TotalCount ?? 0,
                 simulatedSeconds / 3600f, definition);
             AddWaste(fishWaste);
-            state = nitrogenCycle.Step(state, definition, simulatedSeconds);
+            state = nitrogenCycle.Step(state, definition, simulatedSeconds, biologicalEfficiency);
             Publish(false);
         }
 
@@ -104,6 +106,18 @@ namespace Acuaria.UI.WaterChemistry
         {
             if (paused) clock?.Pause();
             else clock?.Resume();
+        }
+
+        public void SetBiologicalEfficiency(float efficiency) =>
+            biologicalEfficiency = float.IsFinite(efficiency) ? Mathf.Clamp(efficiency, 0f, 2f) : 0f;
+
+        public bool ApplyMaintenance(float ammonia, float nitrite, float nitrate, float ammoniaBacteria,
+            float nitriteBacteria, float waste)
+        {
+            if (state == null || definition == null) return false;
+            state.ApplyMaintenanceValues(ammonia, nitrite, nitrate, ammoniaBacteria, nitriteBacteria, waste, definition);
+            Publish(true);
+            return true;
         }
 
         private void HandleFoodExpired(string id)

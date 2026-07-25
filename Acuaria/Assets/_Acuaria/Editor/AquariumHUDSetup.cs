@@ -4,7 +4,10 @@ using Acuaria.Fish;
 using Acuaria.Food;
 using Acuaria.Room;
 using Acuaria.Simulation.Water;
+using Acuaria.Simulation.Maintenance;
+using Acuaria.Simulation.Filtration;
 using Acuaria.UI.Aquarium;
+using Acuaria.UI.Maintenance;
 using Acuaria.UI.WaterChemistry;
 using TMPro;
 using UnityEditor;
@@ -22,6 +25,9 @@ namespace Acuaria.Editor
         private const string HudPrefabPath = Root + "/Prefabs/UI/Aquarium/AquariumHUD.prefab";
         private const string DetailsPrefabPath = Root + "/Prefabs/UI/Aquarium/AquariumDetailsPanel.prefab";
         private const string ChemistryDefinitionPath = Root + "/Data/WaterChemistry/StarterAquariumChemistry.asset";
+        private const string MaintenanceDefinitionPath = Root + "/Data/Maintenance/StarterMaintenance.asset";
+        private const string FilterDefinitionPath = Root + "/Data/Filters/StarterInternalFilter.asset";
+        private const string MaintenancePrefabPath = Root + "/Prefabs/UI/Maintenance/AquariumMaintenancePanel.prefab";
         private static readonly Color PanelColor = new(0.055f, 0.105f, 0.16f, 0.9f);
         private static readonly Color AccentColor = new(0.27f, 0.78f, 0.76f, 1f);
 
@@ -31,6 +37,8 @@ namespace Acuaria.Editor
             EnsureFolders();
             var definition = CreateDefinition();
             var chemistryDefinition = CreateChemistryDefinition();
+            var maintenanceDefinition = CreateMaintenanceDefinition();
+            var filterDefinition = CreateFilterDefinition();
             var scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
             var safeArea = FindSceneObject("SafeArea").transform;
             var back = FindSceneObject("BackButton").GetComponent<Button>();
@@ -62,6 +70,17 @@ namespace Acuaria.Editor
             simulation.Configure(chemistryDefinition, provider, Object.FindAnyObjectByType<AquariumFoodController>(),
                 controller, definition.NominalVolumeLitres);
             system.GetComponent<WaterChemistryDebugController>().Configure(simulation);
+            var maintenanceButton = Button(safeArea, "MaintenanceButton", "Mantenimiento",
+                new Vector2(0f, 0f), new Vector2(28f, 28f), new Vector2(210f, 72f));
+            maintenanceButton.GetComponent<RectTransform>().pivot = Vector2.zero;
+            var maintenancePanel = CreateMaintenancePanel(system.transform, out var visualController);
+            var maintenanceController = system.AddComponent<AquariumMaintenanceController>();
+            var maintenanceDebug = system.AddComponent<MaintenanceDebugController>();
+            maintenanceController.Configure(maintenanceDefinition, filterDefinition, simulation, controller, feeding,
+                maintenancePanel, visualController, maintenanceButton, back);
+            maintenanceDebug.Configure(maintenanceController);
+            controller.SetMaintenanceController(maintenanceController);
+            PrefabUtility.SaveAsPrefabAsset(maintenancePanel.gameObject, MaintenancePrefabPath);
             compact.SetActive(false);
 
             PrefabUtility.SaveAsPrefabAsset(compact, HudPrefabPath);
@@ -102,6 +121,26 @@ namespace Acuaria.Editor
             Directory.CreateDirectory(Root + "/Data/Aquariums");
             Directory.CreateDirectory(Root + "/Data/WaterChemistry");
             Directory.CreateDirectory(Root + "/Prefabs/UI/Aquarium");
+            Directory.CreateDirectory(Root + "/Data/Maintenance");
+            Directory.CreateDirectory(Root + "/Data/Filters");
+            Directory.CreateDirectory(Root + "/Prefabs/UI/Maintenance");
+        }
+
+        private static AquariumMaintenanceDefinition CreateMaintenanceDefinition()
+        {
+            var asset=AssetDatabase.LoadAssetAtPath<AquariumMaintenanceDefinition>(MaintenanceDefinitionPath);
+            if(asset==null){asset=ScriptableObject.CreateInstance<AquariumMaintenanceDefinition>();AssetDatabase.CreateAsset(asset,MaintenanceDefinitionPath);}
+            asset.Configure("starter-maintenance",new[]{10,25,40,50},25,4f,0.8f,new Vector3(1.2f,1.2f,0.8f),new Vector2(25f,20f));
+            EditorUtility.SetDirty(asset);return asset;
+        }
+
+        private static FilterDefinition CreateFilterDefinition()
+        {
+            var asset=AssetDatabase.LoadAssetAtPath<FilterDefinition>(FilterDefinitionPath);
+            if(asset==null){asset=ScriptableObject.CreateInstance<FilterDefinition>();AssetDatabase.CreateAsset(asset,FilterDefinitionPath);}
+            asset.Configure("starter-internal-filter","Filtro interno inicial",new Vector2(30f,70f),0.85f,0.35f,0.002f,0.7f,168f,0.08f,
+                FilterType.Internal,"Enjuaga suavemente el material biológico. Una limpieza profunda elimina bacterias beneficiosas.");
+            EditorUtility.SetDirty(asset);return asset;
         }
 
         private static AquariumDefinition CreateDefinition()
@@ -385,6 +424,41 @@ namespace Acuaria.Editor
             details.Configure(root.GetComponent<CanvasGroup>(), (RectTransform)card.transform, close, title,
                 summary, inhabitants, status, education, chemistry);
             return details;
+        }
+
+        private static AquariumMaintenancePanel CreateMaintenancePanel(Transform parent,
+            out WaterChangeVisualController visualController)
+        {
+            var root=new GameObject("AquariumMaintenancePanel",typeof(RectTransform),typeof(Image),typeof(CanvasGroup),
+                typeof(AquariumMaintenancePanel),typeof(WaterChangeVisualController));
+            root.transform.SetParent(parent,false);Stretch((RectTransform)root.transform);
+            root.GetComponent<Image>().color=new Color(0.015f,0.03f,0.055f,0.86f);
+            var card=Panel(root.transform,"MaintenanceCard",new Vector2(0.5f,0.5f),new Vector2(0.5f,0.5f),Vector2.zero,new Vector2(980f,680f));
+            card.GetComponent<Image>().color=new Color(0.045f,0.09f,0.14f,0.99f);
+            TopLabel(card.transform,"Title","Mantenimiento del acuario",34,38f,28f,180f,56f);
+            var close=Button(card.transform,"CloseButton","Cerrar",Vector2.one,new Vector2(-28f,-28f),new Vector2(140f,64f));
+            var percentages=new Button[4];
+            var values=new[]{10,25,40,50};
+            for(var i=0;i<values.Length;i++)
+                percentages[i]=Button(card.transform,$"WaterChange{values[i]}Button",values[i]==25?"25% • Recomendado":$"{values[i]}%",
+                    new Vector2(0f,1f),new Vector2(42f+i*205f,-112f),new Vector2(185f,62f));
+            for(var i=0;i<percentages.Length;i++)percentages[i].GetComponent<RectTransform>().pivot=new Vector2(0f,1f);
+            var preview=TopLabel(card.transform,"Preview","",23,42f,200f,500f,300f);
+            var filter=TopLabel(card.transform,"FilterSummary","",23,520f,200f,38f,240f);
+            var status=TopLabel(card.transform,"MaintenanceStatus","Disponible",22,42f,515f,38f,42f);
+            var confirm=Button(card.transform,"ConfirmButton","Confirmar",new Vector2(0f,0f),new Vector2(42f,32f),new Vector2(190f,68f));
+            var cancel=Button(card.transform,"CancelButton","Cancelar",new Vector2(0f,0f),new Vector2(250f,32f),new Vector2(170f,68f));
+            var gentle=Button(card.transform,"GentleRinseButton","Enjuague suave",new Vector2(1f,0f),new Vector2(-250f,32f),new Vector2(210f,68f));
+            var deep=Button(card.transform,"DeepCleanButton","Limpieza profunda",new Vector2(1f,0f),new Vector2(-28f,32f),new Vector2(210f,68f));
+            confirm.GetComponent<RectTransform>().pivot=cancel.GetComponent<RectTransform>().pivot=Vector2.zero;
+            gentle.GetComponent<RectTransform>().pivot=deep.GetComponent<RectTransform>().pivot=new Vector2(1f,0f);
+            var overlayObject=new GameObject("WaterChangeOverlay",typeof(RectTransform),typeof(Image));
+            overlayObject.transform.SetParent(root.transform,false);Stretch((RectTransform)overlayObject.transform);
+            var overlay=overlayObject.GetComponent<Image>();overlay.color=Color.clear;overlay.raycastTarget=false;
+            var panel=root.GetComponent<AquariumMaintenancePanel>();
+            panel.Configure(root.GetComponent<CanvasGroup>(),percentages,confirm,cancel,gentle,deep,close,preview,filter,status);
+            visualController=root.GetComponent<WaterChangeVisualController>();visualController.Configure(overlay,null);
+            root.SetActive(false);return panel;
         }
 
         private static GameObject Panel(Transform parent, string name, Vector2 anchorMin, Vector2 anchorMax,

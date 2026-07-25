@@ -11,3 +11,6 @@ En cada tick:
 Cada conversión se limita a la sustancia disponible. El paso es determinista, sin `Random`, y limita pasos grandes a 24 horas para estabilidad. `AquariumCycleEvaluator` distingue sin ciclar, ciclando, casi ciclado, ciclado e inestable.
 
 La comida expirada se deduplica por ID. La consumida no expira y aporta solo la fracción mínima configurada. El modelo es educativo, no una conservación molar científica. No existen plantas, filtros ni cambios de agua.
+# Capacidad del filtro
+
+La conversión recibe un multiplicador biológico determinista derivado de la eficiencia y capacidad del filtro.

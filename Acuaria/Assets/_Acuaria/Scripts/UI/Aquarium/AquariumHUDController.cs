@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Acuaria.Aquarium;
 using Acuaria.Food;
 using Acuaria.Simulation.Water;
+using Acuaria.UI.Maintenance;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,6 +29,7 @@ namespace Acuaria.UI.Aquarium
         private readonly AquariumRuntimeState runtimeState = new();
         private bool focused;
         private WaterChemistryViewModel waterChemistry;
+        [SerializeField] private AquariumMaintenanceController maintenance;
 
         public bool IsVisible => compactHud != null && compactHud.activeSelf;
         public bool AreDetailsOpen => detailsPanel != null && detailsPanel.IsOpen;
@@ -99,6 +101,7 @@ namespace Acuaria.UI.Aquarium
         public void SetAquariumFocused(bool isFocused)
         {
             focused = isFocused;
+            maintenance?.SetAquariumFocused(isFocused);
             if (runtimeState.IsInitialized) runtimeState.SetFocused(isFocused);
             if (compactHud != null) compactHud.SetActive(isFocused);
             if (detailsButton != null) detailsButton.interactable = isFocused;
@@ -109,6 +112,8 @@ namespace Acuaria.UI.Aquarium
                 Refresh();
             }
         }
+
+        public void SetMaintenanceController(AquariumMaintenanceController controller) => maintenance = controller;
 
         public void SetInteractionEnabled(bool enabledState)
         {

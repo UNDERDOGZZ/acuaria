@@ -18,3 +18,6 @@ El estado no contiene química, suciedad, filtración, salud, historial ni persi
 # Extensión de química
 
 `AquariumRuntimeState` continúa representando presentación general. `WaterChemistryState` es un estado separado, sin GameObjects, y `AquariumStatusEvaluator` dispone de una sobrecarga que permite que una calidad peligrosa eleve la severidad general.
+# Estado de mantenimiento
+
+El acuario conserva estados independientes de química, mantenimiento y filtro. Ninguna clase de dominio contiene referencias a GameObjects o UI.

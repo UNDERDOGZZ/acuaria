@@ -25,3 +25,6 @@ Todo cuelga del `SafeArea` existente. El `CanvasScaler` conserva referencia 1920
 Los estados combinan badge, símbolo y texto. Botones tienen áreas táctiles amplias, contraste alto y etiquetas explícitas. `AquariumUIText` centraliza textos compartidos para facilitar una futura migración a Localization sin instalar paquetes en este sprint.
 
 La ficha incluye una sección desplazable de calidad del agua con NH₃/NH₄, NO₂, NO₃, tendencias, estado del ciclado y consejo contextual. El HUD solo muestra el indicador compacto `Agua: <estado>`.
+# Acceso a mantenimiento
+
+El HUD enfocado añade `Mantenimiento`. Detalles y Mantenimiento son mutuamente excluyentes y Alimentar se cancela al abrir mantenimiento.
