@@ -4,6 +4,8 @@ using Acuaria.Food;
 using Acuaria.Simulation.Water;
 using Acuaria.UI.Maintenance;
 using Acuaria.Fish.Welfare;
+using System;
+using Acuaria.UI.Progression;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,6 +34,7 @@ namespace Acuaria.UI.Aquarium
         private WaterChemistryViewModel waterChemistry;
         private string welfareDetails;
         [SerializeField] private AquariumMaintenanceController maintenance;
+        [SerializeField] private AquaristJournalController journal;
 
         public bool IsVisible => compactHud != null && compactHud.activeSelf;
         public bool AreDetailsOpen => detailsPanel != null && detailsPanel.IsOpen;
@@ -41,6 +44,7 @@ namespace Acuaria.UI.Aquarium
         public TMP_Text TemperatureText => temperatureText;
         public TMP_Text FishCountText => fishCountText;
         public TMP_Text StatusText => statusText;
+        public event Action DetailsOpened;
 
         public void Configure(AquariumDefinition aquariumDefinition, AquariumInhabitantProvider provider,
             FeedingUIController feeding, AquariumDetailsPanel details, AquariumHUDResponsiveLayout responsive,
@@ -104,6 +108,7 @@ namespace Acuaria.UI.Aquarium
         {
             focused = isFocused;
             maintenance?.SetAquariumFocused(isFocused);
+            journal?.SetAquariumFocused(isFocused);
             if (runtimeState.IsInitialized) runtimeState.SetFocused(isFocused);
             if (compactHud != null) compactHud.SetActive(isFocused);
             if (detailsButton != null) detailsButton.interactable = isFocused;
@@ -116,6 +121,7 @@ namespace Acuaria.UI.Aquarium
         }
 
         public void SetMaintenanceController(AquariumMaintenanceController controller) => maintenance = controller;
+        public void SetJournalController(AquaristJournalController controller) => journal = controller;
 
         public void SetInteractionEnabled(bool enabledState)
         {
@@ -130,6 +136,7 @@ namespace Acuaria.UI.Aquarium
             detailsPanel.SetWaterChemistry(waterChemistry);
             detailsPanel.SetFishWelfare(welfareDetails);
             detailsPanel.Show(BuildViewModel());
+            DetailsOpened?.Invoke();
         }
 
         public void SetFishWelfare(string compact,string details,FishWelfareStatus status)
@@ -193,7 +200,7 @@ namespace Acuaria.UI.Aquarium
             }
         }
 
-        private static void CheckMissing(List<string> issues, Object value, string fieldName)
+        private static void CheckMissing(List<string> issues, UnityEngine.Object value, string fieldName)
         {
             if (value == null) issues.Add($"falta la referencia '{fieldName}'.");
         }

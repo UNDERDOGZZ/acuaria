@@ -11,6 +11,8 @@ using Acuaria.UI.Maintenance;
 using Acuaria.UI.WaterChemistry;
 using Acuaria.Fish.Welfare;
 using Acuaria.UI.FishWelfare;
+using Acuaria.Progression;
+using Acuaria.UI.Progression;
 using TMPro;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -31,6 +33,8 @@ namespace Acuaria.Editor
         private const string FilterDefinitionPath = Root + "/Data/Filters/StarterInternalFilter.asset";
         private const string MaintenancePrefabPath = Root + "/Prefabs/UI/Maintenance/AquariumMaintenancePanel.prefab";
         private const string WelfareDefinitionPath = Root + "/Data/FishCare/StarterFishWelfareSettings.asset";
+        private const string ProgressionRoot = Root + "/Data/Progression";
+        private const string JournalPrefabPath = Root + "/Prefabs/UI/Progression/AquaristJournal.prefab";
         private static readonly Color PanelColor = new(0.055f, 0.105f, 0.16f, 0.9f);
         private static readonly Color AccentColor = new(0.27f, 0.78f, 0.76f, 1f);
 
@@ -43,6 +47,7 @@ namespace Acuaria.Editor
             var maintenanceDefinition = CreateMaintenanceDefinition();
             var filterDefinition = CreateFilterDefinition();
             var welfareDefinition = CreateWelfareDefinition();
+            var missions=CreateMissions();var codexEntries=CreateCodexEntries();var achievements=CreateAchievements();
             var scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
             var safeArea = FindSceneObject("SafeArea").transform;
             var back = FindSceneObject("BackButton").GetComponent<Button>();
@@ -53,6 +58,9 @@ namespace Acuaria.Editor
                 back.transform.SetParent(safeArea, true);
                 Object.DestroyImmediate(existing.gameObject);
             }
+            DestroyDirectChild(safeArea,"MaintenanceButton");
+            DestroyDirectChild(safeArea,"JournalButton");
+            DestroyDirectChild(safeArea,"ProgressionNotification");
 
             var system = new GameObject("AquariumHUDSystem", typeof(RectTransform), typeof(AquariumInhabitantProvider),
                 typeof(AquariumHUDController), typeof(AquariumSimulationController),
@@ -88,6 +96,14 @@ namespace Acuaria.Editor
             var welfareDebug=system.AddComponent<FishWelfareDebugController>();
             welfareController.Configure(welfareDefinition,spawner,provider,simulation,controller,definition.NominalVolumeLitres);
             welfareDebug.Configure(welfareController,controller);
+            var journalButton=Button(safeArea,"JournalButton","Diario",new Vector2(0f,0f),new Vector2(250f,28f),new Vector2(160f,72f));
+            journalButton.GetComponent<RectTransform>().pivot=Vector2.zero;
+            var progressionPanel=CreateProgressionPanel(system.transform,safeArea);
+            var journal=system.AddComponent<AquaristJournalController>();
+            journal.Configure(missions,codexEntries,achievements,Object.FindAnyObjectByType<AquariumFoodController>(),simulation,
+                maintenanceController,welfareController,controller,progressionPanel,journalButton,feeding);
+            controller.SetJournalController(journal);
+            PrefabUtility.SaveAsPrefabAsset(progressionPanel.gameObject,JournalPrefabPath);
             PrefabUtility.SaveAsPrefabAsset(maintenancePanel.gameObject, MaintenancePrefabPath);
             compact.SetActive(false);
 
@@ -133,6 +149,8 @@ namespace Acuaria.Editor
             Directory.CreateDirectory(Root + "/Data/Filters");
             Directory.CreateDirectory(Root + "/Prefabs/UI/Maintenance");
             Directory.CreateDirectory(Root + "/Data/FishCare");
+            Directory.CreateDirectory(ProgressionRoot+"/Missions");Directory.CreateDirectory(ProgressionRoot+"/Codex");
+            Directory.CreateDirectory(ProgressionRoot+"/Achievements");Directory.CreateDirectory(Root+"/Prefabs/UI/Progression");
         }
 
         private static FishWelfareDefinition CreateWelfareDefinition()
@@ -141,6 +159,50 @@ namespace Acuaria.Editor
             if(asset==null){asset=ScriptableObject.CreateInstance<FishWelfareDefinition>();AssetDatabase.CreateAsset(asset,WelfareDefinitionPath);}
             asset.Configure("starter-fish-welfare",new Vector4(1.2f,1.1f,1.3f,1.5f),new Vector3(.9f,1.1f,.7f),
                 new Vector3(12f,20f,.05f),new Vector3(40f,70f,90f),5f);EditorUtility.SetDirty(asset);return asset;
+        }
+
+        private static MissionDefinition[] CreateMissions()
+        {
+            var values=new[]{
+                ("welcome","Bienvenido","Abre tu camino como acuarista.",MissionType.Tutorial,ProgressionEventType.Welcome,1,20,"welcome"),
+                ("feed","Alimenta un pez","Ofrece una porción y deja que un pez la consuma.",MissionType.Tutorial,ProgressionEventType.FishFed,1,25,"feeding-basics"),
+                ("details","Observa el panel de detalles","Consulta los parámetros del ecosistema.",MissionType.Tutorial,ProgressionEventType.DetailsObserved,1,20,"ammonia"),
+                ("water-change","Haz un cambio parcial de agua","Completa un mantenimiento de agua.",MissionType.Progression,ProgressionEventType.WaterChanged,1,40,"water-change"),
+                ("excellent-water","Mantén agua excelente","Acumula una hora simulada con agua excelente.",MissionType.Progression,ProgressionEventType.ExcellentWaterHour,1,50,"nitrate"),
+                ("filter","Limpia el filtro correctamente","Realiza mantenimiento del filtro.",MissionType.Educational,ProgressionEventType.FilterMaintained,1,35,"filter"),
+                ("welfare","Cuida a tus peces","Mantén bienestar Good o superior.",MissionType.Progression,ProgressionEventType.GoodWelfareHour,1,45,"schooling"),
+                ("learn-ammonia","Aprende sobre amoníaco","Desbloquea una ficha educativa.",MissionType.Educational,ProgressionEventType.ConceptLearned,1,15,"ammonia"),
+                ("learn-nitrite","Aprende sobre nitritos","Desbloquea otra ficha educativa.",MissionType.Educational,ProgressionEventType.ConceptLearned,2,20,"nitrite"),
+                ("learn-nitrate","Aprende sobre nitratos","Amplía tu conocimiento del ciclo.",MissionType.Educational,ProgressionEventType.ConceptLearned,3,25,"nitrate")};
+            var assets=new MissionDefinition[values.Length];for(var i=0;i<values.Length;i++){var v=values[i];var path=$"{ProgressionRoot}/Missions/{v.Item1}.asset";
+                var asset=AssetDatabase.LoadAssetAtPath<MissionDefinition>(path);if(asset==null){asset=ScriptableObject.CreateInstance<MissionDefinition>();AssetDatabase.CreateAsset(asset,path);}
+                asset.Configure(v.Item1,v.Item2,v.Item3,v.Item4,v.Item5,v.Item6,v.Item7,v.Item8);EditorUtility.SetDirty(asset);assets[i]=asset;}return assets;
+        }
+        private static CodexEntry[] CreateCodexEntries()
+        {
+            var values=new[]{
+                ("welcome","Tu primer acuario","Observa antes de actuar.","Los cambios pequeños y consistentes mantienen estable el ecosistema.","Consulta el Diario cuando necesites un próximo objetivo.",CodexCategory.Fish),
+                ("feeding-basics","Alimentación responsable","Porciones pequeñas reducen desperdicio.","Los peces deben terminar la comida antes de ofrecer más.","Evita llenar el acuario de comida.",CodexCategory.Feeding),
+                ("ammonia","¿Qué es el amoníaco?","Un residuo tóxico del ecosistema.","Los residuos orgánicos producen amoníaco, que debe ser procesado por bacterias.","Si aumenta, reduce residuos y revisa el filtro.",CodexCategory.Water),
+                ("nitrite","¿Qué son los nitritos?","Una etapa intermedia del ciclo.","Las bacterias transforman amoníaco en nitritos, que también requieren control.","Un acuario maduro los procesa gradualmente.",CodexCategory.Water),
+                ("nitrate","¿Qué son los nitratos?","El producto final simplificado del ciclo.","Los nitratos se acumulan y se reducen mediante cambios parciales.","No cambies toda el agua sin motivo.",CodexCategory.Water),
+                ("filter","¿Qué hace el filtro?","Aloja bacterias beneficiosas.","La eficiencia biológica cae con suciedad, pero limpiar agresivamente elimina bacterias.","Prefiere un enjuague suave.",CodexCategory.Filtration),
+                ("bacteria","Bacterias beneficiosas","Sostienen el ciclo del nitrógeno.","Dos poblaciones simplificadas procesan amoníaco y nitritos.","Protege el material biológico.",CodexCategory.Filtration),
+                ("water-change","¿Por qué cambiar agua?","Reduce contaminantes acumulados.","Un cambio parcial conserva estabilidad mientras reduce concentraciones.","25% es una opción equilibrada.",CodexCategory.Maintenance),
+                ("schooling","¿Qué es un cardumen?","Algunas especies necesitan un grupo.","La convivencia con suficientes ejemplares puede mejorar el bienestar.","Revisa siempre necesidades sociales.",CodexCategory.Compatibility)};
+            var assets=new CodexEntry[values.Length];for(var i=0;i<values.Length;i++){var v=values[i];var path=$"{ProgressionRoot}/Codex/{v.Item1}.asset";var asset=AssetDatabase.LoadAssetAtPath<CodexEntry>(path);
+                if(asset==null){asset=ScriptableObject.CreateInstance<CodexEntry>();AssetDatabase.CreateAsset(asset,path);}asset.Configure(v.Item1,v.Item2,v.Item3,v.Item4,v.Item5,v.Item6);EditorUtility.SetDirty(asset);assets[i]=asset;}return assets;
+        }
+        private static AchievementDefinition[] CreateAchievements()
+        {
+            var values=new[]{("first-food","Primer alimento","Un pez consumió su primera porción.",ProgressionEventType.FishFed,1,15),
+                ("first-maintenance","Primer mantenimiento","Completaste un cambio de agua.",ProgressionEventType.WaterChanged,1,20),
+                ("perfect-water","Agua perfecta","Mantuviste agua excelente.",ProgressionEventType.ExcellentWaterHour,1,30),
+                ("clean-filter","Filtro limpio","Cuidaste el filtro biológico.",ProgressionEventType.FilterMaintained,1,20),
+                ("excellent-welfare","Bienestar excelente","Tus peces se mantuvieron en excelente bienestar.",ProgressionEventType.GoodWelfareHour,1,30),
+                ("learner","Acuarista curioso","Desbloqueaste cinco conceptos.",ProgressionEventType.ConceptLearned,5,35)};
+            var assets=new AchievementDefinition[values.Length];for(var i=0;i<values.Length;i++){var v=values[i];var path=$"{ProgressionRoot}/Achievements/{v.Item1}.asset";var asset=AssetDatabase.LoadAssetAtPath<AchievementDefinition>(path);
+                if(asset==null){asset=ScriptableObject.CreateInstance<AchievementDefinition>();AssetDatabase.CreateAsset(asset,path);}asset.Configure(v.Item1,v.Item2,v.Item3,v.Item4,v.Item5,v.Item6);EditorUtility.SetDirty(asset);assets[i]=asset;}return assets;
         }
 
         private static AquariumMaintenanceDefinition CreateMaintenanceDefinition()
@@ -480,6 +542,32 @@ namespace Acuaria.Editor
             root.SetActive(false);return panel;
         }
 
+        private static ProgressionUI CreateProgressionPanel(Transform parent,Transform safeArea)
+        {
+            var root=new GameObject("AquaristJournal",typeof(RectTransform),typeof(Image),typeof(CanvasGroup),typeof(ProgressionUI));
+            root.transform.SetParent(parent,false);Stretch((RectTransform)root.transform);root.GetComponent<Image>().color=new Color(.015f,.03f,.055f,.9f);
+            var card=Panel(root.transform,"JournalCard",new Vector2(.5f,.5f),new Vector2(.5f,.5f),Vector2.zero,new Vector2(1120,760));
+            card.GetComponent<Image>().color=new Color(.045f,.09f,.14f,.99f);
+            var title=TopLabel(card.transform,"JournalHeader","Diario del Acuarista",30,38,24,180,80);
+            var close=Button(card.transform,"JournalCloseButton","Cerrar",Vector2.one,new Vector2(-28,-28),new Vector2(140,64));
+            var viewport=new GameObject("JournalViewport",typeof(RectTransform),typeof(Image),typeof(Mask),typeof(ScrollRect));viewport.transform.SetParent(card.transform,false);
+            var viewportRect=(RectTransform)viewport.transform;viewportRect.anchorMin=Vector2.zero;viewportRect.anchorMax=Vector2.one;viewportRect.offsetMin=new Vector2(34,32);viewportRect.offsetMax=new Vector2(-34,-120);
+            viewport.GetComponent<Image>().color=new Color(1,1,1,.015f);viewport.GetComponent<Mask>().showMaskGraphic=false;
+            var content=new GameObject("JournalContent",typeof(RectTransform));content.transform.SetParent(viewport.transform,false);var contentRect=(RectTransform)content.transform;
+            contentRect.anchorMin=new Vector2(0,1);contentRect.anchorMax=new Vector2(1,1);contentRect.pivot=new Vector2(.5f,1);contentRect.sizeDelta=new Vector2(0,1700);
+            var scroll=viewport.GetComponent<ScrollRect>();scroll.viewport=viewportRect;scroll.content=contentRect;scroll.horizontal=false;scroll.movementType=ScrollRect.MovementType.Clamped;
+            var missions=TopLabel(content.transform,"MissionList","",22,18,18,540,550);
+            var codex=TopLabel(content.transform,"CodexList","",22,570,18,18,920);
+            var achievements=TopLabel(content.transform,"AchievementList","",22,18,600,540,450);
+            var statistics=TopLabel(content.transform,"Statistics","",22,18,1100,18,260);
+            TopLabel(content.transform,"JournalEducation","El Diario registra aprendizaje durante esta sesión. No usa monedas, energía ni guardado todavía.",21,18,1400,18,120);
+            var toastRoot=new GameObject("ProgressionNotification",typeof(RectTransform),typeof(Image));toastRoot.transform.SetParent(safeArea,false);
+            var toastRect=(RectTransform)toastRoot.transform;toastRect.anchorMin=toastRect.anchorMax=new Vector2(.5f,1);toastRect.pivot=new Vector2(.5f,1);toastRect.anchoredPosition=new Vector2(0,-150);toastRect.sizeDelta=new Vector2(520,70);
+            toastRoot.GetComponent<Image>().color=new Color(.12f,.5f,.46f,.96f);var toast=Label(toastRoot.transform,"NotificationText","",22,TextAnchor.MiddleCenter,new Vector2(16,8),new Vector2(-16,-8));toastRoot.SetActive(false);
+            var panel=root.GetComponent<ProgressionUI>();panel.Configure(root.GetComponent<CanvasGroup>(),close,title,missions,codex,achievements,statistics,toast);
+            root.SetActive(false);return panel;
+        }
+
         private static GameObject Panel(Transform parent, string name, Vector2 anchorMin, Vector2 anchorMax,
             Vector2 position, Vector2 size)
         {
@@ -575,6 +663,16 @@ namespace Acuaria.Editor
             for (var index = 0; index < components.Length; index++)
                 if (components[index].gameObject.scene.IsValid()) return components[index];
             return null;
+        }
+
+        private static void DestroyDirectChild(Transform parent,string childName)
+        {
+            if(parent==null)return;
+            for(var index=parent.childCount-1;index>=0;index--)
+            {
+                var child=parent.GetChild(index);
+                if(child.name==childName)Object.DestroyImmediate(child.gameObject);
+            }
         }
     }
 }
