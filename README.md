@@ -28,6 +28,8 @@ Crear cambios pequeños y enfocados, respetar los namespaces y límites de assem
 
 ## Roadmap
 
+Room permite seleccionar el acuario ocupado, enfocarlo suavemente y volver mediante una UI mínima respetando Safe Area.
+
 Room cuenta ahora con una composición refinada: acuario central dominante, dos slots futuros y una raíz estructural preparada para un carrusel futuro sin interacción.
 
 Los próximos hitos previstos son: interacción y navegación de habitación; modelo de acuarios; simulación gradual del agua; peces y compatibilidad; progresión; guardado versionado; y pulido mobile. Consultar [04_Roadmap.md](docs/04_Roadmap.md) y [11_RoomScene.md](docs/11_RoomScene.md).

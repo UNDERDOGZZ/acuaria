@@ -75,6 +75,8 @@ Existen tres slots bajo `AquariumCarouselRoot`. `AquariumSlot_01` ocupa el centr
 
 `SafeAreaPanel` está preparado para futuros `RectTransform` de interfaz. No existe Canvas visible y la safe area no altera la composición del mundo.
 
+La escena incorpora ahora un Canvas de enfoque oculto en overview, con botón volver y velo de transición. La Safe Area sigue sin afectar el mundo.
+
 ## Limitaciones y reemplazo de arte
 
 Todo el arte es provisional y parte de `PrototypeWhite.png`, tintado y escalado mediante `SpriteRenderer`. No hay partículas de polvo ni animaciones ambientales. Para reemplazar arte:

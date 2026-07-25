@@ -8,4 +8,6 @@ La primera versión de Room establece la lectura visual del hogar: ventana y luz
 
 Este documento todavía no define economía, balance ni reglas detalladas. Esas decisiones se tomarán en sprints de gameplay con prototipos medibles y criterios de bienestar animal coherentes.
 
+La primera interacción jugable permite entrar y salir de la vista enfocada del acuario activo; no habilita aún acciones dentro del tanque.
+
 La composición refinada comunica un acuario activo central y dos posiciones futuras parcialmente visibles. Esta señal es puramente visual y no implica selección ni desbloqueo.

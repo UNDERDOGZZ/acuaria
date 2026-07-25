@@ -12,4 +12,6 @@
 
 Cada fase requiere criterios de aceptación, pruebas y revisión de alcance antes de comenzar.
 
+La selección y enfoque del acuario activo están implementados; swipe y navegación entre acuarios continúan pendientes.
+
 La fase de habitación visual incluye ya el refinamiento de foco, profundidad, agua provisional y preparación estructural para un carrusel futuro.

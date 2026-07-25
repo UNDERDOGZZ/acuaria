@@ -33,4 +33,6 @@ El agua combina profundidad oscura, tono medio, superficie clara, línea de supe
 
 ## Limitaciones
 
-Todo continúa provisional. No hay peces, simulación, colliders, input, UI funcional, movimiento ni desbloqueos. El siguiente sprint deberá validar interacción como sistema independiente.
+Todo continúa provisional. No hay peces, simulación, swipe, movimiento del carrusel ni desbloqueos.
+
+El tanque central dispone ahora de collider rectangular e interacción de enfoque. Los slots vacíos continúan sin collider ni selección; el carrusel permanece inmóvil.

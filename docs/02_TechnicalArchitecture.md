@@ -17,3 +17,5 @@ Los ScriptableObjects almacenan configuración y definiciones authoring. No son 
 `Acuaria.UI.SafeAreaPanel` queda disponible para futuros paneles UI y no modifica el mundo de Room. La herramienta de Editor `RoomSceneSetup` genera de forma reproducible el arte provisional, prefabs, sorting layers y escena.
 
 `AquariumCarouselRoot` es una estructura espacial sin input, movimiento, snapping ni selección. Un sistema futuro podrá desplazar esa raíz sin modificar los prefabs visuales.
+
+El enfoque separa `AquariumInteractable`, `AquariumFocusTarget`, `RoomViewStateMachine` y `RoomViewController`. Input emite selección; el controlador coordina cámara y UI.
