@@ -1,0 +1,6 @@
+{
+  "name": "Acuaria.Simulation",
+  "rootNamespace": "Acuaria.Simulation",
+  "references": ["Acuaria.Core"],
+  "autoReferenced": true
+}

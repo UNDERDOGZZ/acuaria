@@ -1,0 +1,7 @@
+{
+  "name": "Acuaria.Editor",
+  "rootNamespace": "Acuaria.Editor",
+  "references": ["Acuaria.Core", "Acuaria.Audio", "Acuaria.Simulation"],
+  "includePlatforms": ["Editor"],
+  "autoReferenced": true
+}

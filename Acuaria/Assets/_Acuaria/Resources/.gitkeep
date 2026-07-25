@@ -1,0 +1,1 @@
+Reserved; gameplay loading must not depend on Resources.Load.

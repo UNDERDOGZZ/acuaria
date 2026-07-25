@@ -1,0 +1,6 @@
+{
+  "name": "Acuaria.Audio",
+  "rootNamespace": "Acuaria.Audio",
+  "references": ["Acuaria.Core"],
+  "autoReferenced": true
+}

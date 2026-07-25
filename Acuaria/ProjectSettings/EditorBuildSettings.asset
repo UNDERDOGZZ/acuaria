@@ -6,8 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/_Acuaria/Scenes/Bootstrap.unity
+    guid: d690f7050b8443ebac6b9f44a8e4aa4e
+  - enabled: 1
+    path: Assets/_Acuaria/Scenes/MainMenu.unity
+    guid: 7dc7fa7c58e149c080a31182447531ce
+  - enabled: 1
+    path: Assets/_Acuaria/Scenes/Room.unity
+    guid: a3b5a88ed8054a0593ad02fd67cf9338
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
