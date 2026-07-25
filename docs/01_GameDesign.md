@@ -13,3 +13,7 @@ La primera interacción jugable permite entrar y salir de la vista enfocada del 
 La composición refinada comunica un acuario activo central y dos posiciones futuras parcialmente visibles. Esta señal es puramente visual y no implica selección ni desbloqueo.
 
 El acuario inicial contiene tres peces provisionales con ritmos y niveles de nado diferentes. Su función actual es aportar vida contemplativa; aún no poseen necesidades, salud, compatibilidad ni progresión.
+
+## Alimentación básica
+
+El primer gesto de cuidado consiste en enfocar el acuario, activar `Alimentar` y tocar la superficie. Cada toque válido deja una porción visible de escamas. Los peces cercanos reaccionan, reclaman una partícula y vuelven a su nado normal después de comer. El límite simultáneo evita sobrecargar la escena.

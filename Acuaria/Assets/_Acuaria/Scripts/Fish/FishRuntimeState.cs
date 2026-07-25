@@ -16,6 +16,7 @@ namespace Acuaria.Fish
         public float TimeSinceTargetChange { get; set; }
         public float TargetDuration { get; set; }
         public bool IsInitialized { get; private set; }
+        public float Satiety { get; set; }
 
         public void Initialize(string instanceId, string speciesId, Vector2 position, int seed)
         {
@@ -30,6 +31,7 @@ namespace Acuaria.Fish
             Direction = Vector2.right;
             RandomSeed = seed;
             TimeSinceTargetChange = 0f;
+            Satiety = 0.45f;
             IsInitialized = true;
         }
     }

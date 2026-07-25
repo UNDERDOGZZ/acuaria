@@ -1,0 +1,6 @@
+{
+  "name": "Acuaria.Food",
+  "rootNamespace": "Acuaria.Food",
+  "references": ["Unity.InputSystem", "UnityEngine.UI"],
+  "autoReferenced": true
+}

@@ -13,3 +13,6 @@ No existen LINQ, búsquedas ni allocations deliberadas en `Update`. Los Gizmos o
 ## Validación manual
 
 Observar dos minutos, enfocar y regresar cinco veces, comprobar exactamente tres instancias, ausencia de vibración y límites correctos. Repetir en 16:9, 20:9 y tablet horizontal y revisar Console.
+## Objetivos prioritarios temporales
+
+Durante `SeekingFood`, el destino pasa a la partícula reclamada y se aplica un multiplicador leve de velocidad. Al consumir, expirar o perder el objetivo, se limpia la prioridad y se reanuda el nado autónomo.

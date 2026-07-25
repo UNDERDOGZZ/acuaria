@@ -10,9 +10,26 @@ namespace Acuaria.Fish
         private FishRuntimeState state;
         private FishMovementModel2D model;
         private FishMovement2D[] neighbours;
+        private bool hasPriorityTarget;
+        private Vector2 priorityTarget;
+        private float prioritySpeedMultiplier = 1f;
 
         public FishRuntimeState State => state;
         public Vector2 Direction => state?.Direction ?? Vector2.right;
+
+        public void SetPriorityTarget(Vector2 target, float speedMultiplier)
+        {
+            hasPriorityTarget = true;
+            priorityTarget = area != null ? area.ClampLocal(target) : target;
+            prioritySpeedMultiplier = Mathf.Clamp(speedMultiplier, 1f, 1.3f);
+        }
+
+        public void ClearPriorityTarget()
+        {
+            hasPriorityTarget = false;
+            prioritySpeedMultiplier = 1f;
+            if (state != null) PickTarget();
+        }
 
         public void Initialize(AquariumSwimArea2D swimArea, FishSpeciesDefinition definition,
             FishRuntimeState runtimeState, FishMovement2D[] nearbyFish)
@@ -29,11 +46,13 @@ namespace Acuaria.Fish
         private void Update()
         {
             if (state == null || model == null || area == null) return;
-            if ((state.Target - state.Position).sqrMagnitude < 0.04f ||
+            if (!hasPriorityTarget && ((state.Target - state.Position).sqrMagnitude < 0.04f ||
                 state.TimeSinceTargetChange >= state.TargetDuration)
+               )
             {
                 PickTarget();
             }
+            if (hasPriorityTarget) state.Target = priorityTarget;
 
             var correction = Vector2.zero;
             if (neighbours != null)
@@ -46,7 +65,10 @@ namespace Acuaria.Fish
                 }
             }
 
+            var baseSpeed = state.CurrentSpeed;
+            state.CurrentSpeed = baseSpeed * prioritySpeedMultiplier;
             model.Step(state, area.LocalBounds, Time.deltaTime);
+            state.CurrentSpeed = baseSpeed;
             state.Position = area.ClampLocal(state.Position + correction * Time.deltaTime);
             var desired = new Vector3(state.Position.x, state.Position.y, transform.localPosition.z);
             transform.localPosition = Vector3.Lerp(transform.localPosition, desired, 1f - Mathf.Exp(-12f * Time.deltaTime));

@@ -23,3 +23,6 @@ El enfoque separa `AquariumInteractable`, `AquariumFocusTarget`, `RoomViewStateM
 ## Dominio Fish
 
 `Acuaria.Fish` separa configuración inmutable (`FishSpeciesDefinition`), estado mutable sin referencias visuales (`FishRuntimeState`), modelo determinista (`FishMovementModel2D`) y adaptadores Unity (`FishMovement2D`, `FishVisual2D`, `FishView`). `FishSpawner2D` compone instancias desde entradas serializadas y `AquariumSwimArea2D` define el espacio válido.
+## Dominio de alimentación
+
+`Acuaria.Food` contiene definición, estado runtime, vista, movimiento, área válida, input y controlador de partículas. `Acuaria.Fish` depende de ese dominio para búsqueda y consumo; `Acuaria.Room` solo coordina la UI durante el enfoque. No hay búsquedas de objetos por frame.

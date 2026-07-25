@@ -12,6 +12,9 @@ namespace Acuaria.Fish
         private float phase;
         private bool facingRight = true;
         private float baseScale = 1f;
+        private float eatingPulseUntil;
+
+        public void PlayEatingPulse() => eatingPulseUntil = Time.time + 0.22f;
 
         public void Initialize(FishSpeciesDefinition species, int seed, float scale)
         {
@@ -29,7 +32,9 @@ namespace Acuaria.Fish
             else if (direction.x < -flipDeadZone) facingRight = false;
 
             var wave = Mathf.Sin(time * 7f + phase);
-            visualRoot.localScale = new Vector3(facingRight ? baseScale : -baseScale, baseScale, 1f);
+            var pulse = Time.time < eatingPulseUntil ? 1f + Mathf.Sin((eatingPulseUntil - Time.time) * 28f) * 0.08f : 1f;
+            visualRoot.localScale = new Vector3(facingRight ? baseScale * pulse : -baseScale * pulse,
+                baseScale * pulse, 1f);
             visualRoot.localPosition = new Vector3(0f, Mathf.Sin(time * 1.8f + phase) * 0.025f, 0f);
             if (tail != null) tail.localRotation = Quaternion.Euler(0f, 0f, wave * 16f);
             if (sideFin != null) sideFin.localRotation = Quaternion.Euler(0f, 0f, wave * 10f);

@@ -9,3 +9,12 @@ Este bucle es una dirección de diseño, no una implementación. Se validará an
 El tramo implementado actualmente es observar Room, seleccionar el tanque activo, entrar en vista enfocada y regresar.
 
 Los peces continúan nadando y conservan su estado durante enfoque y regreso.
+## Bucle de cuidado disponible
+
+1. Enfocar el acuario.
+2. Activar `Alimentar`.
+3. Tocar la superficie.
+4. Observar la caída y reacción de los peces.
+5. Cancelar o volver.
+
+La saciedad y el cooldown regulan solo la respuesta inmediata.

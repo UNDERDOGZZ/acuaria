@@ -17,3 +17,8 @@ La selección y enfoque del acuario activo están implementados; swipe y navegac
 La fase de habitación visual incluye ya el refinamiento de foco, profundidad, agua provisional y preparación estructural para un carrusel futuro.
 
 El primer hito de vida visual está completado con tres peces autónomos. Alimentación, bienestar, química, persistencia y swipe continúan pendientes.
+## Sprint 4 — alimentación interactiva
+
+Completado: modo mobile, porciones de escamas, límite activo, reclamación exclusiva, búsqueda/consumo, saciedad y cooldown runtime, feedback educativo y pruebas EditMode.
+
+Fuera del hito: química, hambre persistente, economía, inventario, progresión, guardado y arte final.

@@ -324,6 +324,7 @@ GameObject:
   - component: {fileID: 4213978023285862836}
   - component: {fileID: 2829244633583455934}
   - component: {fileID: 8466895437553514399}
+  - component: {fileID: 7879933361666408068}
   m_Layer: 0
   m_Name: Fish2D
   m_TagString: Untagged
@@ -393,6 +394,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375025a4a8594074f8216aee44717010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Acuaria.Fish::Acuaria.Fish.FishView
+  movement: {fileID: 4213978023285862836}
+  visual: {fileID: 2829244633583455934}
+  feedingBehaviour: {fileID: 7879933361666408068}
+--- !u!114 &7879933361666408068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5005592230560944493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03433db18fb0ad647b2b41a42634bddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Acuaria.Fish::Acuaria.Fish.FishFeedingBehaviour
+  maximumSatiety: 0.92
+  satietyGainPerUnit: 0.22
+  biteCooldown: 1.8
   movement: {fileID: 4213978023285862836}
   visual: {fileID: 2829244633583455934}
 --- !u!1 &5072386543233664777

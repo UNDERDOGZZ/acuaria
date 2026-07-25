@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Acuaria.Food;
 using UnityEngine;
 
 namespace Acuaria.Fish
@@ -7,6 +8,7 @@ namespace Acuaria.Fish
     {
         [SerializeField] private AquariumSwimArea2D swimArea;
         [SerializeField] private FishSpawnEntry[] entries;
+        [SerializeField] private AquariumFoodController foodController;
         private readonly List<FishMovement2D> spawned = new(3);
         private bool hasSpawned;
 
@@ -45,7 +47,7 @@ namespace Acuaria.Fish
             for (var index = 0; index < pending.Count; index++)
             {
                 var fish = pending[index];
-                fish.view.Initialize(swimArea, fish.species, fish.state, neighbours, fish.scale);
+                fish.view.Initialize(swimArea, fish.species, fish.state, neighbours, fish.scale, foodController);
             }
         }
 
@@ -54,5 +56,7 @@ namespace Acuaria.Fish
             swimArea = area;
             entries = spawnEntries;
         }
+
+        public void SetFoodController(AquariumFoodController controller) => foodController = controller;
     }
 }

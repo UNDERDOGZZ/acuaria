@@ -35,3 +35,7 @@ Room cuenta ahora con una composición refinada: acuario central dominante, dos 
 El acuario inicial contiene tres peces 2D provisionales. Cada uno usa una especie, semilla, nivel de nado, velocidad y fase visual diferentes; alimentación, química, economía y guardado siguen fuera de alcance.
 
 Los próximos hitos previstos son: interacción y navegación de habitación; modelo de acuarios; simulación gradual del agua; peces y compatibilidad; progresión; guardado versionado; y pulido mobile. Consultar [04_Roadmap.md](docs/04_Roadmap.md) y [11_RoomScene.md](docs/11_RoomScene.md).
+
+## Alimentación interactiva
+
+El vertical slice permite enfocar el acuario, activar `Alimentar`, tocar la superficie y observar cómo los peces reclaman y consumen escamas antes de reanudar su nado. Incluye límite de comida activa y feedback educativo. Consultar [16_FeedingSystem.md](docs/16_FeedingSystem.md) y [17_FishBehaviourStates.md](docs/17_FishBehaviourStates.md).

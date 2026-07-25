@@ -16,3 +16,6 @@ El flujo es `FishSpawnEntry → Species → RuntimeState → MovementModel → M
 ## Limitaciones
 
 No hay alimentación, salud, edad, reproducción, compatibilidad, química, persistencia, pooling, boids ni colisiones físicas.
+## Integración con alimentación
+
+`FishFeedingBehaviour` está separado de vista y locomoción. Consulta `AquariumFoodController`, reclama una partícula antes de fijar un objetivo prioritario, solicita feedback visual al consumir y libera el reclamo al deshabilitarse.

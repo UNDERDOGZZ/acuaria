@@ -1,6 +1,6 @@
 {
   "name": "Acuaria.Fish",
   "rootNamespace": "Acuaria.Fish",
-  "references": [],
+  "references": ["Acuaria.Food"],
   "autoReferenced": true
 }
