@@ -15,3 +15,5 @@ Los ScriptableObjects almacenan configuración y definiciones authoring. No son 
 `Acuaria.Room` contiene componentes visuales pequeños: `RoomCameraFitter` calcula el encuadre ortográfico, `AquariumSlotView` administra una vista opcional sin datos de simulación y `RoomCompositionController` valida la composición inicial. Los prefabs se conectan mediante referencias serializadas; no se realizan búsquedas por frame.
 
 `Acuaria.UI.SafeAreaPanel` queda disponible para futuros paneles UI y no modifica el mundo de Room. La herramienta de Editor `RoomSceneSetup` genera de forma reproducible el arte provisional, prefabs, sorting layers y escena.
+
+`AquariumCarouselRoot` es una estructura espacial sin input, movimiento, snapping ni selección. Un sistema futuro podrá desplazar esa raíz sin modificar los prefabs visuales.

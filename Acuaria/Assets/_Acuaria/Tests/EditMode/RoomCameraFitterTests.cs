@@ -5,6 +5,7 @@ namespace Acuaria.Room.Tests
     public sealed class RoomCameraFitterTests
     {
         [TestCase(16f / 9f, 5.625f)]
+        [TestCase(19.5f / 9f, 5.625f)]
         [TestCase(20f / 9f, 5.625f)]
         [TestCase(4f / 3f, 7.5f)]
         public void CalculateOrthographicSize_FitsReferenceArea(float aspect, float expected)

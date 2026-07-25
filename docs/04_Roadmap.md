@@ -11,3 +11,5 @@
 9. **Producción mobile:** rendimiento, accesibilidad, telemetría responsable y publicación.
 
 Cada fase requiere criterios de aceptación, pruebas y revisión de alcance antes de comenzar.
+
+La fase de habitación visual incluye ya el refinamiento de foco, profundidad, agua provisional y preparación estructural para un carrusel futuro.

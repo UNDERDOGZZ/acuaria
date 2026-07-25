@@ -7,3 +7,5 @@ La habitación actúa como hogar y navegación espacial. Los acuarios son unidad
 La primera versión de Room establece la lectura visual del hogar: ventana y luz nocturna en un lateral, acuario inicial como foco central y decoración secundaria que enmarca la composición. Dos espacios reservados anticipan acuarios futuros, pero no representan desbloqueos funcionales.
 
 Este documento todavía no define economía, balance ni reglas detalladas. Esas decisiones se tomarán en sprints de gameplay con prototipos medibles y criterios de bienestar animal coherentes.
+
+La composición refinada comunica un acuario activo central y dos posiciones futuras parcialmente visibles. Esta señal es puramente visual y no implica selección ni desbloqueo.

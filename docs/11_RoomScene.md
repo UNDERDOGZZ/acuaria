@@ -69,7 +69,7 @@ Las luces no proyectan sombras y se evita postprocesado para mantener un coste m
 - `RoomLamp`: geometría provisional y luz cálida.
 - `DecorativePlant`: maceta, tallo y hojas independientes.
 
-Existen tres slots. Solo `AquariumSlot_01` contiene el acuario. Los otros dos muestran una reserva visual tenue; no existe sistema de desbloqueo.
+Existen tres slots bajo `AquariumCarouselRoot`. `AquariumSlot_01` ocupa el centro y contiene el acuario; `02` y `03` están a −11.2 y +11.2 unidades y muestran reservas visuales parciales. No existe desbloqueo ni movimiento.
 
 ## Safe Area
 
