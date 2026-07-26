@@ -6,3 +6,4 @@ Durante mantenimiento se bloquean Confirmar, Volver, Alimentar, Detalles y otro 
 
 La sección del filtro muestra eficiencia, suciedad y recomendación, con `Enjuague suave` y `Limpieza profunda`. El panel vive bajo `SafeArea`, usa un único Canvas y está diseñado para horizontal responsive.
 La información de bienestar permanece en Detalles y no se superpone con Mantenimiento.
+Abrir Mantenimiento bloquea input y Alimentar, pero nunca pausa `FishMovement2D`. Los peces continúan durante todas las fases.

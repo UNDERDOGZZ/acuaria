@@ -55,6 +55,17 @@ namespace Acuaria.Fish.Tests
         }
 
         [Test]
+        public void Inset_ProducesValidPositiveBoundsAndHandlesExcessivePadding()
+        {
+            var bounds = new SwimBounds2D(-3f, 3f, -1f, 1f);
+            var inset = bounds.Inset(100f, float.PositiveInfinity);
+            Assert.That(inset.IsValid, Is.True);
+            Assert.That(inset.Width, Is.GreaterThan(0f));
+            Assert.That(inset.Height, Is.GreaterThan(0f));
+            Assert.That(bounds.Contains(inset.Center), Is.True);
+        }
+
+        [Test]
         public void SameSeed_ProducesEquivalentSequence()
         {
             var bounds = new SwimBounds2D(-3f, 3f, -1f, 1f);
@@ -73,6 +84,65 @@ namespace Acuaria.Fish.Tests
             var bounds = new SwimBounds2D(-3f, 3f, -1f, 1f);
             Assert.That(new FishMovementModel2D(1).ChooseTarget(bounds, SwimmingLevel.Any, 0f),
                 Is.Not.EqualTo(new FishMovementModel2D(2).ChooseTarget(bounds, SwimmingLevel.Any, 0f)));
+        }
+
+        [TestCase(-2.8f, 1)]
+        [TestCase(2.8f, -1)]
+        public void WanderTarget_PrefersOppositeSideAndRespectsMinimumTravel(float currentX, int expectedDirection)
+        {
+            var bounds = new SwimBounds2D(-3f, 3f, -1f, 1f);
+            var current = new Vector2(currentX, 0f);
+            var target = new FishMovementModel2D(17).ChooseWanderTarget(
+                bounds, SwimmingLevel.Any, 0f, current, 1.5f);
+            Assert.That(bounds.Contains(target), Is.True);
+            Assert.That(Mathf.Abs(target.x - current.x), Is.GreaterThanOrEqualTo(1.5f));
+            Assert.That(Mathf.Sign(target.x - current.x), Is.EqualTo(expectedDirection));
+            Assert.That(float.IsFinite(target.x) && float.IsFinite(target.y), Is.True);
+        }
+
+        [Test]
+        public void WanderTarget_FallbackIsFiniteAndInsideWhenAttemptsAreLimited()
+        {
+            var bounds = new SwimBounds2D(-3f, 3f, -1f, 1f);
+            var target = new FishMovementModel2D(4).ChooseWanderTarget(
+                bounds, SwimmingLevel.Middle, 0f, Vector2.zero, 5.4f, 1);
+            Assert.That(bounds.Contains(target), Is.True);
+            Assert.That(float.IsFinite(target.x) && float.IsFinite(target.y), Is.True);
+        }
+
+        [Test]
+        public void Arrival_UsesThresholdAndBoundaryHorizontalFallback()
+        {
+            var bounds = new SwimBounds2D(-3f, 3f, -1f, 1f);
+            Assert.That(FishMovementModel2D.TargetReached(Vector2.zero, new Vector2(0.1f, 0.1f),
+                bounds, 0.2f, 0.1f), Is.True);
+            Assert.That(FishMovementModel2D.TargetReached(Vector2.zero, Vector2.one,
+                bounds, 0.2f, 0.1f), Is.False);
+            Assert.That(FishMovementModel2D.TargetReached(new Vector2(2.95f, 0f), new Vector2(3f, 0.8f),
+                bounds, 0.2f, 0.1f), Is.True);
+        }
+
+        [TestCase(-2.95f, -1f, true)]
+        [TestCase(2.95f, 1f, true)]
+        [TestCase(0f, 1f, false)]
+        public void BoundaryRecovery_DetectsOnlyOutwardMotion(float positionX, float directionX, bool expected)
+        {
+            var bounds = new SwimBounds2D(-3f, 3f, -1f, 1f);
+            var target = new Vector2(positionX + directionX, 0f);
+            Assert.That(FishMovementModel2D.NeedsBoundaryRecovery(
+                new Vector2(positionX, 0f), new Vector2(directionX, 0f), target, bounds, 0.1f), Is.EqualTo(expected));
+        }
+
+        [TestCase(-2.95f, 1)]
+        [TestCase(2.95f, -1)]
+        public void BoundaryRecovery_DirectionPointsInsideAndNeverTeleports(float positionX, int expectedDirection)
+        {
+            var bounds = new SwimBounds2D(-3f, 3f, -1f, 1f);
+            var position = new Vector2(positionX, 0f);
+            var direction = FishMovementModel2D.InteriorRecoveryDirection(position, Vector2.zero, bounds);
+            Assert.That(Mathf.Sign(direction.x), Is.EqualTo(expectedDirection));
+            Assert.That(position.x, Is.EqualTo(positionX));
+            Assert.That(direction.sqrMagnitude, Is.EqualTo(1f).Within(0.0001f));
         }
 
         [Test]

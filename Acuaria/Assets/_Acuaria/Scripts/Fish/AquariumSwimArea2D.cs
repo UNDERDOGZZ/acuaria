@@ -9,6 +9,8 @@ namespace Acuaria.Fish
         [SerializeField, Min(0f)] private float rightMargin = 0.2f;
         [SerializeField, Min(0f)] private float topMargin = 0.2f;
         [SerializeField, Min(0f)] private float bottomMargin = 0.25f;
+        [SerializeField, Min(0f)] private float horizontalBoundaryPadding = 0.16f;
+        [SerializeField, Min(0f)] private float verticalBoundaryPadding = 0.1f;
         [SerializeField] private bool showGizmos = true;
 
         public SwimBounds2D LocalBounds => new(
@@ -17,7 +19,8 @@ namespace Acuaria.Fish
             -size.y * 0.5f + bottomMargin,
             size.y * 0.5f - topMargin);
 
-        public Vector2 ClampLocal(Vector2 position) => LocalBounds.Clamp(position);
+        public SwimBounds2D NavigationBounds => LocalBounds.Inset(horizontalBoundaryPadding, verticalBoundaryPadding);
+        public Vector2 ClampLocal(Vector2 position) => NavigationBounds.Clamp(position);
         public Vector2 LocalToWorld(Vector2 position) => transform.TransformPoint(position);
         public Vector2 WorldToLocal(Vector2 position) => transform.InverseTransformPoint(position);
 
@@ -35,7 +38,7 @@ namespace Acuaria.Fish
             if (!showGizmos) return;
             Gizmos.matrix = transform.localToWorldMatrix;
             Gizmos.color = new Color(0.2f, 0.9f, 0.8f, 0.8f);
-            var bounds = LocalBounds;
+            var bounds = NavigationBounds;
             Gizmos.DrawWireCube(new Vector3((bounds.Left + bounds.Right) * 0.5f, (bounds.Bottom + bounds.Top) * 0.5f),
                 new Vector3(bounds.Right - bounds.Left, bounds.Top - bounds.Bottom, 0f));
         }

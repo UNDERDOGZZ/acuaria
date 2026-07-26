@@ -19,6 +19,7 @@ namespace Acuaria.UI.Progression
         [SerializeField]AquariumFoodController food;[SerializeField]AquariumSimulationController simulation;[SerializeField]AquariumMaintenanceController maintenance;
         [SerializeField]FishWelfareController welfare;[SerializeField]AquariumHUDController hud;[SerializeField]ProgressionUI panel;[SerializeField]Button openButton;
         [SerializeField]FeedingUIController feedingUi;
+        [SerializeField]Button fishCatalogButton;[SerializeField]Acuaria.UI.FishCatalogPanel fishCatalogPanel;
         readonly PlayerProgression player=new();MissionController missions;CodexController codex;AchievementController achievements;StatisticsController statistics;
         int lastExcellentWaterHour,lastExcellentWelfareHour;bool focused;
         Coroutine notificationRoutine;
@@ -32,10 +33,14 @@ namespace Acuaria.UI.Progression
             if(maintenance!=null){maintenance.WaterChangeCompleted+=OnWaterChanged;maintenance.FilterMaintenanceCompleted+=OnFilter;}
             if(simulation!=null)simulation.ChemistryChanged+=OnChemistry;if(welfare!=null)welfare.AquariumWelfareChanged+=OnWelfare;if(hud!=null)hud.DetailsOpened+=OnDetails;
             missions.MissionCompleted+=OnMissionCompleted;codex.EntryUnlocked+=entry=>Notify($"Nuevo concepto: {entry.Title}");achievements.AchievementUnlocked+=a=>Notify($"Logro: {a.Title}");
-            player.Experience.ExperienceGained+=OnXp;player.Experience.LevelReached+=level=>Notify($"Nivel {level.Number}: {level.Title}");Process(ProgressionEventType.Welcome);Unlock("welcome");Refresh();}
+            player.Experience.ExperienceGained+=OnXp;player.Experience.LevelReached+=level=>Notify($"Nivel {level.Number}: {level.Title}");
+            fishCatalogButton?.onClick.AddListener(OpenFishCatalog);Process(ProgressionEventType.Welcome);Unlock("welcome");Refresh();}
         void OnDisable(){openButton?.onClick.RemoveListener(Open);if(panel!=null)panel.Closed-=Close;if(food!=null){food.FoodConsumed-=OnFed;food.FoodExpired-=OnWaste;}
             if(maintenance!=null){maintenance.WaterChangeCompleted-=OnWaterChanged;maintenance.FilterMaintenanceCompleted-=OnFilter;}
-            if(simulation!=null)simulation.ChemistryChanged-=OnChemistry;if(welfare!=null)welfare.AquariumWelfareChanged-=OnWelfare;if(hud!=null)hud.DetailsOpened-=OnDetails;}
+            if(simulation!=null)simulation.ChemistryChanged-=OnChemistry;if(welfare!=null)welfare.AquariumWelfareChanged-=OnWelfare;if(hud!=null)hud.DetailsOpened-=OnDetails;
+            fishCatalogButton?.onClick.RemoveListener(OpenFishCatalog);}
+        public void SetFishCatalog(Button button,Acuaria.UI.FishCatalogPanel catalog){fishCatalogButton=button;fishCatalogPanel=catalog;}
+        void OpenFishCatalog()=>fishCatalogPanel?.Open();
         public void SetAquariumFocused(bool value){focused=value;if(openButton!=null)openButton.gameObject.SetActive(value);if(!value)panel?.Close();}
         public void Open(){if(!focused||maintenance!=null&&maintenance.IsActive)return;feedingUi?.CancelFeedingMode();hud?.SetInteractionEnabled(false);panel?.Show();Refresh();}
         void Close()=>hud?.SetInteractionEnabled(true);

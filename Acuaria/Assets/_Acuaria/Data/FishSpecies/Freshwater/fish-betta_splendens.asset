@@ -1,0 +1,149 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d17dc1ce8bb4526448e954ea523fe44d, type: 3}
+  m_Name: fish-betta_splendens
+  m_EditorClassIdentifier: Acuaria.Fish::Acuaria.Fish.FishSpeciesDefinition
+  speciesId: fish.betta_splendens
+  displayName: Betta
+  minimumSpeed: 0.45
+  maximumSpeed: 0.8
+  minimumScale: 0.75
+  maximumScale: 1
+  minimumTargetDuration: 2.5
+  maximumTargetDuration: 5
+  verticalPreference: 0.45
+  prototypeColor: {r: 0.8, g: 0.2, b: 0.35, a: 1}
+  swimmingLevel: 0
+  prototypeSprite: {fileID: 0}
+  care:
+    temperatureRange: {x: 24, y: 28}
+    minimumIndividualVolume: 20
+    minimumGroupVolume: 20
+    adultSizeCm: 6.5
+    activity: 0
+    swimmingZone: 0
+    waterSensitivity: 1
+    needsHidingPlaces: 0
+    needsPlants: 1
+    chemicalSensitivity: {x: 1, y: 1, z: 1}
+    feedingFrequencyPerDay: 2
+    diet: 1
+    difficulty: 0
+    minimumTankLengthCm: 60
+    preferredCurrent: 0
+    preferredLighting: 1
+    openSpaceRequired: 0.55
+    plantCoverageRecommended: 0.55
+    stableWaterRequired: 1
+    specialNotes: "No alojes dos machos juntos; eval\xFAa cualquier comunidad caso
+      por caso."
+  social:
+    socialType: 0
+    recommendedMinimum: 1
+    provisionalMaximum: 10
+    toleratesSolitary: 1
+    territoriality: 2
+    coexistsWithSameSpecies: 1
+    needsSchool: 0
+    needsPair: 0
+    toleratesActiveSpecies: 1
+    toleratesTerritorialSpecies: 0
+    preferredCount: 1
+    maleBehaviour: "Comportamiento intraespec\xEDfico sujeto a sexo y espacio."
+    femaleBehaviour: "Informaci\xF3n educativa; sin sexo runtime."
+    communityNotes: "Pez laber\xEDntido territorial; los individuos y variedades
+      pueden responder de forma distinta."
+  compatibility:
+    acceptableCompanionSize: {x: 2, y: 12}
+    peaceful: 1
+    semiTerritorial: 1
+    territorial: 0
+    slow: 1
+    active: 1
+    sameZoneConflict: 1
+    conceptualPredationRisk: 0
+    compatibleSpecies: []
+    incompatibleSpecies:
+    - fish.betta_splendens
+  biologicalProfile:
+    scientificName: Betta splendens
+    alternateCommonName: 
+    family: Osphronemidae
+    originRegion: "Sudeste asi\xE1tico"
+    bodyShape: 
+    generalBehaviour: "Pez laber\xEDntido territorial; los individuos y variedades
+      pueden responder de forma distinta."
+    sexualDimorphism: 
+    reproductionNotes: 
+    notes: 
+    waterType: 0
+    adultLengthCm: {x: 5, y: 7}
+    lifespanYears: {x: 2, y: 5}
+    activity: 0
+    primaryZone: 0
+    secondaryZones: 
+  educationalProfile:
+    summary: "Pez laber\xEDntido territorial; los individuos y variedades pueden
+      responder de forma distinta."
+    behaviour: "Pez laber\xEDntido territorial; los individuos y variedades pueden
+      responder de forma distinta."
+    care: "No alojes dos machos juntos; eval\xFAa cualquier comunidad caso por caso."
+    feeding: "Dieta omn\xEDvora variada en porciones peque\xF1as."
+    socialLife: Se mantiene de forma solitaria.
+    compatibility: La compatibilidad depende del conjunto completo de necesidades.
+    commonMistakes: 
+    funFact: 
+    beginnerTip: Compara la ficha con el acuario actual.
+    mainWarning: "No alojes dos machos juntos; eval\xFAa cualquier comunidad caso
+      por caso."
+    welfare: 
+    habitat: 
+    maintenance: 
+    relatedConcepts: []
+    codexEntryId: species.fish.betta_splendens
+  visualDefinition:
+    prefab: {fileID: 8466895437553514399, guid: 93122697bd8f3784ebfccfa8cf4a72e9, type: 3}
+    primarySprite: {fileID: 0}
+    alternateSprite: {fileID: 0}
+    catalogIcon: {fileID: 0}
+    detailImage: {fileID: 0}
+    scaleRange: {x: 0.75, y: 1}
+    speedRange: {x: 0.45, y: 0.8}
+    baseColor: {r: 0.8, g: 0.2, b: 0.35, a: 1}
+    oscillationFrequency: 1
+    tailAmplitude: 0.08
+    approximateSize: 1
+    spriteFacesRight: 1
+    sortingLayer: Fish
+    sortingOrder: 0
+  validationStatus: 2
+  sources:
+  - sourceId: fishbase.betta.splendens
+    title: Betta splendens summary page
+    organisation: FishBase
+    consultedOn: 2026-07-26
+    url: https://www.fishbase.se/summary/Betta-splendens
+    notes: "Taxonom\xEDa, distribuci\xF3n, tama\xF1o y temperatura."
+    sourceType: 0
+    supportedFields:
+    - scientificName
+    - family
+    - origin
+    - adultLength
+    - temperature
+  tags:
+  - freshwater
+  - real-species
+  - placeholder-art
+  contentVersion: 1
+  shortDescription: "Perfil educativo aproximado basado en fuentes documentadas;
+    requiere revisi\xF3n acuarista."

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using Acuaria.Fish.Care;
 using Acuaria.Fish.Compatibility;
 
@@ -22,6 +23,14 @@ namespace Acuaria.Fish
         [SerializeField] private FishCareRequirements care = new();
         [SerializeField] private FishSocialRequirements social = new();
         [SerializeField] private FishCompatibilityProfile compatibility = new();
+        [SerializeField] private FishBiologicalProfile biologicalProfile = new();
+        [SerializeField] private FishEducationalProfile educationalProfile = new();
+        [SerializeField] private FishVisualDefinition visualDefinition = new();
+        [SerializeField] private SpeciesDataValidationStatus validationStatus = SpeciesDataValidationStatus.Draft;
+        [SerializeField] private SpeciesSourceReference[] sources = Array.Empty<SpeciesSourceReference>();
+        [SerializeField] private string[] tags = Array.Empty<string>();
+        [SerializeField, Min(1)] private int contentVersion = 1;
+        [SerializeField, TextArea] private string shortDescription;
 
         public string SpeciesId => speciesId;
         public string DisplayName => displayName;
@@ -38,6 +47,29 @@ namespace Acuaria.Fish
         public FishCareRequirements Care => care;
         public FishSocialRequirements Social => social;
         public FishCompatibilityProfile Compatibility => compatibility;
+        public FishBiologicalProfile BiologicalProfile => biologicalProfile;
+        public FishEducationalProfile EducationalProfile => educationalProfile;
+        public FishVisualDefinition VisualDefinition => visualDefinition;
+        public SpeciesDataValidationStatus ValidationStatus => validationStatus;
+        public SpeciesSourceReference[] Sources => sources;
+        public string[] Tags => tags;
+        public int ContentVersion => contentVersion;
+        public string ScientificName => biologicalProfile?.ScientificName;
+        public string ShortDescription => shortDescription;
+        public bool HasDocumentedSources
+        {
+            get
+            {
+                if (sources == null || sources.Length == 0) return false;
+                for (var index = 0; index < sources.Length; index++)
+                    if (sources[index] != null && sources[index].IsValid) return true;
+                return false;
+            }
+        }
+        public bool HasCompleteContent => IsValid && biologicalProfile?.IsValid == true && care?.IsValid == true &&
+                                          social?.IsValid == true && visualDefinition?.IsValid == true &&
+                                          educationalProfile?.IsValid == true &&
+                                          (validationStatus != SpeciesDataValidationStatus.Verified || HasDocumentedSources);
         public bool IsValid => !string.IsNullOrWhiteSpace(speciesId) && minimumSpeed > 0f &&
                                maximumSpeed >= minimumSpeed && minimumScale > 0f &&
                                maximumScale >= minimumScale && minimumTargetDuration > 0f &&
@@ -47,6 +79,19 @@ namespace Acuaria.Fish
             FishCompatibilityProfile compatibilityProfile)
         {care=careRequirements??new FishCareRequirements();social=socialRequirements??new FishSocialRequirements();
          compatibility=compatibilityProfile??new FishCompatibilityProfile();}
+
+        public void ConfigureContent(FishBiologicalProfile biological,FishEducationalProfile educational,
+            FishVisualDefinition visual,SpeciesDataValidationStatus status,SpeciesSourceReference[] references,
+            string description,int version=1,params string[] contentTags)
+        {
+            biologicalProfile=biological??new FishBiologicalProfile();
+            educationalProfile=educational??new FishEducationalProfile();
+            visualDefinition=visual??new FishVisualDefinition();
+            sources=references??Array.Empty<SpeciesSourceReference>();
+            validationStatus=status==SpeciesDataValidationStatus.Verified&&sources.Length==0
+                ?SpeciesDataValidationStatus.NeedsReview:status;
+            shortDescription=description;contentVersion=Mathf.Max(1,version);tags=contentTags??Array.Empty<string>();
+        }
 
         public void Configure(string id, string label, Vector2 speed, Vector2 scale, Vector2 targetDuration,
             float preference, Color color, SwimmingLevel level)
@@ -72,6 +117,9 @@ namespace Acuaria.Fish
             maximumScale = Mathf.Max(minimumScale, maximumScale);
             minimumTargetDuration = Mathf.Max(0.1f, minimumTargetDuration);
             maximumTargetDuration = Mathf.Max(minimumTargetDuration, maximumTargetDuration);
+            contentVersion = Mathf.Max(1, contentVersion);
+            if (validationStatus == SpeciesDataValidationStatus.Verified && !HasDocumentedSources)
+                validationStatus = SpeciesDataValidationStatus.NeedsReview;
         }
     }
 }

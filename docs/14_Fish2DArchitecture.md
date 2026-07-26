@@ -22,3 +22,6 @@ No hay alimentación, salud, edad, reproducción, compatibilidad, química, pers
 
 `FishSpawner2D` conserva además un registro pequeño de las definiciones instanciadas y emite `PopulationChanged`. `AquariumInhabitantProvider` copia ese registro bajo demanda y agrupa por especie; la UI no inspecciona GameObjects en `Update`.
 El movimiento recibe un multiplicador absoluto de bienestar; nunca calcula necesidades ni modifica la velocidad base.
+El movimiento visual utiliza `Time.unscaledDeltaTime`, multiplicadores absolutos limitados y una pausa explícita independiente de la UI.
+Los límites efectivos descuentan márgenes de seguridad. Wander exige recorrido horizontal, prefiere el lado contrario y dispone de recuperación explícita si el clamp detecta inercia hacia el exterior. El flip permanece aislado en `VisualRoot`.
+`FishSpeciesDefinition` referencia perfiles biológico, educativo y visual. `FishSpawner2D` obtiene cantidad, especie, semilla y prefab visual desde `AquariumPopulationDefinition`; la ruta legacy permanece durante la migración.

@@ -27,7 +27,7 @@ namespace Acuaria.Fish
 
         private void LateUpdate()
         {
-            if (movement != null && visual != null) visual.Render(movement.Direction, Time.time);
+            if (movement != null && visual != null) visual.Render(movement.Direction, Time.unscaledTime);
         }
     }
 }

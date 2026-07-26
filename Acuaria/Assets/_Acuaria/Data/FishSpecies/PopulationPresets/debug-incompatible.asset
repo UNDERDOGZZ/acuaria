@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08b569d79b4a84e448341278df36eb99, type: 3}
+  m_Name: debug-incompatible
+  m_EditorClassIdentifier: Acuaria.Fish::Acuaria.Fish.AquariumPopulationDefinition
+  populationId: debug-incompatible
+  displayName: Debug incompatible
+  description: 
+  notes: 
+  entries:
+  - species: {fileID: 11400000, guid: 2ea242fc52f3e5a4b8b062d0da50c107, type: 2}
+    quantity: 2
+    baseSeed: 500
+    initialZone: 0
+    instanceNamePrefix: 
+  validationStatus: 1

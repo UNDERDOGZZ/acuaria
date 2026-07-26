@@ -1,0 +1,798 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="108" result="Passed" total="108" passed="108" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:06Z" duration="0.4098239">
+  <test-suite type="TestSuite" id="1000" name="Acuaria" fullname="Acuaria" runstate="Runnable" testcasecount="108" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:06Z" duration="0.409824" total="108" passed="108" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1046" name="Acuaria.Aquarium.EditModeTests.dll" fullname="C:/Users/ricar/Documents/github/acuaria/Acuaria/Library/ScriptAssemblies/Acuaria.Aquarium.EditModeTests.dll" runstate="Runnable" testcasecount="39" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.292048" total="39" passed="39" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="32016" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1047" name="Acuaria" fullname="Acuaria" runstate="Runnable" testcasecount="39" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.290605" total="39" passed="39" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1048" name="Aquarium" fullname="Acuaria.Aquarium" runstate="Runnable" testcasecount="39" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.290022" total="39" passed="39" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1049" name="Tests" fullname="Acuaria.Aquarium.Tests" runstate="Runnable" testcasecount="39" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.289344" total="39" passed="39" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1001" name="AquariumSystemTests" fullname="Acuaria.Aquarium.Tests.AquariumSystemTests" classname="Acuaria.Aquarium.Tests.AquariumSystemTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.213120" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1002" name="Definition_ValidatesRequiredFieldsAndNormalizesRanges" fullname="Acuaria.Aquarium.Tests.AquariumSystemTests.Definition_ValidatesRequiredFieldsAndNormalizesRanges" methodname="Definition_ValidatesRequiredFieldsAndNormalizesRanges" classname="Acuaria.Aquarium.Tests.AquariumSystemTests" runstate="Runnable" seed="2133896681" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.026965" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1008" name="HudController_DetectsMissingAndDuplicateTextReferences" fullname="Acuaria.Aquarium.Tests.AquariumSystemTests.HudController_DetectsMissingAndDuplicateTextReferences" methodname="HudController_DetectsMissingAndDuplicateTextReferences" classname="Acuaria.Aquarium.Tests.AquariumSystemTests" runstate="Runnable" seed="963349478" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.135968" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1007" name="HudController_VisibilityFollowsFocusedState" fullname="Acuaria.Aquarium.Tests.AquariumSystemTests.HudController_VisibilityFollowsFocusedState" methodname="HudController_VisibilityFollowsFocusedState" classname="Acuaria.Aquarium.Tests.AquariumSystemTests" runstate="Runnable" seed="1510717922" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001864" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1009" name="HudStatus_CompositionKeepsWaterAndWelfareTogether" fullname="Acuaria.Aquarium.Tests.AquariumSystemTests.HudStatus_CompositionKeepsWaterAndWelfareTogether" methodname="HudStatus_CompositionKeepsWaterAndWelfareTogether" classname="Acuaria.Aquarium.Tests.AquariumSystemTests" runstate="Runnable" seed="1929496564" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.005028" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1006" name="InhabitantProvider_GroupsValidSpeciesAndEmitsUpdates" fullname="Acuaria.Aquarium.Tests.AquariumSystemTests.InhabitantProvider_GroupsValidSpeciesAndEmitsUpdates" methodname="InhabitantProvider_GroupsValidSpeciesAndEmitsUpdates" classname="Acuaria.Aquarium.Tests.AquariumSystemTests" runstate="Runnable" seed="1435699956" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.005921" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1010" name="ResponsiveLayout_ChoosesModeSafelyWithoutRedundantChanges" fullname="Acuaria.Aquarium.Tests.AquariumSystemTests.ResponsiveLayout_ChoosesModeSafelyWithoutRedundantChanges" methodname="ResponsiveLayout_ChoosesModeSafelyWithoutRedundantChanges" classname="Acuaria.Aquarium.Tests.AquariumSystemTests" runstate="Runnable" seed="648321525" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.003305" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1003" name="RuntimeState_InitializesAndClampsMutableValues" fullname="Acuaria.Aquarium.Tests.AquariumSystemTests.RuntimeState_InitializesAndClampsMutableValues" methodname="RuntimeState_InitializesAndClampsMutableValues" classname="Acuaria.Aquarium.Tests.AquariumSystemTests" runstate="Runnable" seed="1294826904" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001364" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1004" name="StatusEvaluator_CoversTemperatureAndCapacitySeverities" fullname="Acuaria.Aquarium.Tests.AquariumSystemTests.StatusEvaluator_CoversTemperatureAndCapacitySeverities" methodname="StatusEvaluator_CoversTemperatureAndCapacitySeverities" classname="Acuaria.Aquarium.Tests.AquariumSystemTests" runstate="Runnable" seed="578096285" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001597" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1005" name="ViewModel_FormatsAquariumAndInhabitants" fullname="Acuaria.Aquarium.Tests.AquariumSystemTests.ViewModel_FormatsAquariumAndInhabitants" methodname="ViewModel_FormatsAquariumAndInhabitants" classname="Acuaria.Aquarium.Tests.AquariumSystemTests" runstate="Runnable" seed="1519882815" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.002466" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1011" name="MaintenanceSystemTests" fullname="Acuaria.Aquarium.Tests.MaintenanceSystemTests" classname="Acuaria.Aquarium.Tests.MaintenanceSystemTests" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.033349" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1026" name="DeepClean_NeverCreatesNegativeValues" fullname="Acuaria.Aquarium.Tests.MaintenanceSystemTests.DeepClean_NeverCreatesNegativeValues" methodname="DeepClean_NeverCreatesNegativeValues" classname="Acuaria.Aquarium.Tests.MaintenanceSystemTests" runstate="Runnable" seed="36050343" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.009234" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1012" name="Definition_HasRequiredOptionsAndRecommendation" fullname="Acuaria.Aquarium.Tests.MaintenanceSystemTests.Definition_HasRequiredOptionsAndRecommendation" methodname="Definition_HasRequiredOptionsAndRecommendation" classname="Acuaria.Aquarium.Tests.MaintenanceSystemTests" runstate="Runnable" seed="735292147" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001852" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1023" name="Filter_DirtReducesEfficiencyDeterministically" fullname="Acuaria.Aquarium.Tests.MaintenanceSystemTests.Filter_DirtReducesEfficiencyDeterministically" methodname="Filter_DirtReducesEfficiencyDeterministically" classname="Acuaria.Aquarium.Tests.MaintenanceSystemTests" runstate="Runnable" seed="327849417" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001216" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1024" name="Filter_OffAddsNoBiologicalCapacity" fullname="Acuaria.Aquarium.Tests.MaintenanceSystemTests.Filter_OffAddsNoBiologicalCapacity" methodname="Filter_OffAddsNoBiologicalCapacity" classname="Acuaria.Aquarium.Tests.MaintenanceSystemTests" runstate="Runnable" seed="1688921112" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000477" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1025" name="GentleRinse_PreservesMoreBacteriaThanDeepClean" fullname="Acuaria.Aquarium.Tests.MaintenanceSystemTests.GentleRinse_PreservesMoreBacteriaThanDeepClean" methodname="GentleRinse_PreservesMoreBacteriaThanDeepClean" classname="Acuaria.Aquarium.Tests.MaintenanceSystemTests" runstate="Runnable" seed="1992127419" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000597" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1022" name="MaintenanceState_BlocksDoubleBeginAndTracksCompletion" fullname="Acuaria.Aquarium.Tests.MaintenanceSystemTests.MaintenanceState_BlocksDoubleBeginAndTracksCompletion" methodname="MaintenanceState_BlocksDoubleBeginAndTracksCompletion" classname="Acuaria.Aquarium.Tests.MaintenanceSystemTests" runstate="Runnable" seed="971919269" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001284" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1027" name="NitrogenCycle_FilterMultiplierChangesConversion" fullname="Acuaria.Aquarium.Tests.MaintenanceSystemTests.NitrogenCycle_FilterMultiplierChangesConversion" methodname="NitrogenCycle_FilterMultiplierChangesConversion" classname="Acuaria.Aquarium.Tests.MaintenanceSystemTests" runstate="Runnable" seed="486200524" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.003003" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1021" name="Preview_MatchesFinalModel" fullname="Acuaria.Aquarium.Tests.MaintenanceSystemTests.Preview_MatchesFinalModel" methodname="Preview_MatchesFinalModel" classname="Acuaria.Aquarium.Tests.MaintenanceSystemTests" runstate="Runnable" seed="737325812" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.002222" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1016" name="WaterChange_ReducesConcentrations" fullname="Acuaria.Aquarium.Tests.MaintenanceSystemTests.WaterChange_ReducesConcentrations" classname="Acuaria.Aquarium.Tests.MaintenanceSystemTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.003525" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1013" name="WaterChange_ReducesConcentrations(10,0.9f)" fullname="Acuaria.Aquarium.Tests.MaintenanceSystemTests.WaterChange_ReducesConcentrations(10,0.9f)" methodname="WaterChange_ReducesConcentrations" classname="Acuaria.Aquarium.Tests.MaintenanceSystemTests" runstate="Runnable" seed="884912554" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001804" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1014" name="WaterChange_ReducesConcentrations(25,0.75f)" fullname="Acuaria.Aquarium.Tests.MaintenanceSystemTests.WaterChange_ReducesConcentrations(25,0.75f)" methodname="WaterChange_ReducesConcentrations" classname="Acuaria.Aquarium.Tests.MaintenanceSystemTests" runstate="Runnable" seed="528652808" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000359" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1015" name="WaterChange_ReducesConcentrations(50,0.5f)" fullname="Acuaria.Aquarium.Tests.MaintenanceSystemTests.WaterChange_ReducesConcentrations(50,0.5f)" methodname="WaterChange_ReducesConcentrations" classname="Acuaria.Aquarium.Tests.MaintenanceSystemTests" runstate="Runnable" seed="121405361" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000214" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1020" name="WaterChange_RejectsInvalidPercentages" fullname="Acuaria.Aquarium.Tests.MaintenanceSystemTests.WaterChange_RejectsInvalidPercentages" classname="Acuaria.Aquarium.Tests.MaintenanceSystemTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001679" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1017" name="WaterChange_RejectsInvalidPercentages(0)" fullname="Acuaria.Aquarium.Tests.MaintenanceSystemTests.WaterChange_RejectsInvalidPercentages(0)" methodname="WaterChange_RejectsInvalidPercentages" classname="Acuaria.Aquarium.Tests.MaintenanceSystemTests" runstate="Runnable" seed="1745521561" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000540" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1018" name="WaterChange_RejectsInvalidPercentages(-10)" fullname="Acuaria.Aquarium.Tests.MaintenanceSystemTests.WaterChange_RejectsInvalidPercentages(-10)" methodname="WaterChange_RejectsInvalidPercentages" classname="Acuaria.Aquarium.Tests.MaintenanceSystemTests" runstate="Runnable" seed="116301409" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000228" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1019" name="WaterChange_RejectsInvalidPercentages(51)" fullname="Acuaria.Aquarium.Tests.MaintenanceSystemTests.WaterChange_RejectsInvalidPercentages(51)" methodname="WaterChange_RejectsInvalidPercentages" classname="Acuaria.Aquarium.Tests.MaintenanceSystemTests" runstate="Runnable" seed="454416043" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000179" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+            </test-suite>
+            <test-suite type="TestFixture" id="1028" name="ProgressionTests" fullname="Acuaria.Aquarium.Tests.ProgressionTests" classname="Acuaria.Aquarium.Tests.ProgressionTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.029568" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1034" name="Achievement_UnlocksAndRewardsOnce" fullname="Acuaria.Aquarium.Tests.ProgressionTests.Achievement_UnlocksAndRewardsOnce" methodname="Achievement_UnlocksAndRewardsOnce" classname="Acuaria.Aquarium.Tests.ProgressionTests" runstate="Runnable" seed="198585595" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.006001" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1033" name="Codex_UnlockIsIdempotent" fullname="Acuaria.Aquarium.Tests.ProgressionTests.Codex_UnlockIsIdempotent" methodname="Codex_UnlockIsIdempotent" classname="Acuaria.Aquarium.Tests.ProgressionTests" runstate="Runnable" seed="8555962" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.004520" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1030" name="Experience_LevelsWithoutFixedCap" fullname="Acuaria.Aquarium.Tests.ProgressionTests.Experience_LevelsWithoutFixedCap" methodname="Experience_LevelsWithoutFixedCap" classname="Acuaria.Aquarium.Tests.ProgressionTests" runstate="Runnable" seed="493639154" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001597" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1029" name="Experience_RejectsNegativeAndAddsPositive" fullname="Acuaria.Aquarium.Tests.ProgressionTests.Experience_RejectsNegativeAndAddsPositive" methodname="Experience_RejectsNegativeAndAddsPositive" classname="Acuaria.Aquarium.Tests.ProgressionTests" runstate="Runnable" seed="847798661" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001420" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1031" name="Mission_CompletesAtTargetOnce" fullname="Acuaria.Aquarium.Tests.ProgressionTests.Mission_CompletesAtTargetOnce" methodname="Mission_CompletesAtTargetOnce" classname="Acuaria.Aquarium.Tests.ProgressionTests" runstate="Runnable" seed="1799376805" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001578" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1032" name="MissionController_GrantsRewardOnce" fullname="Acuaria.Aquarium.Tests.ProgressionTests.MissionController_GrantsRewardOnce" methodname="MissionController_GrantsRewardOnce" classname="Acuaria.Aquarium.Tests.ProgressionTests" runstate="Runnable" seed="1779534685" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.005304" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1037" name="PlayerProgression_TracksGrantedXp" fullname="Acuaria.Aquarium.Tests.ProgressionTests.PlayerProgression_TracksGrantedXp" methodname="PlayerProgression_TracksGrantedXp" classname="Acuaria.Aquarium.Tests.ProgressionTests" runstate="Runnable" seed="610781104" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.002839" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1035" name="Statistics_RecordAllSupportedEvents" fullname="Acuaria.Aquarium.Tests.ProgressionTests.Statistics_RecordAllSupportedEvents" methodname="Statistics_RecordAllSupportedEvents" classname="Acuaria.Aquarium.Tests.ProgressionTests" runstate="Runnable" seed="880820870" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001680" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1036" name="Statistics_TrackSimulatedExcellentTime" fullname="Acuaria.Aquarium.Tests.ProgressionTests.Statistics_TrackSimulatedExcellentTime" methodname="Statistics_TrackSimulatedExcellentTime" classname="Acuaria.Aquarium.Tests.ProgressionTests" runstate="Runnable" seed="344057674" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001401" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1038" name="WaterChemistryTests" fullname="Acuaria.Aquarium.Tests.WaterChemistryTests" classname="Acuaria.Aquarium.Tests.WaterChemistryTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.009814" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1044" name="Clock_TicksCapsPausesAndResumes" fullname="Acuaria.Aquarium.Tests.WaterChemistryTests.Clock_TicksCapsPausesAndResumes" methodname="Clock_TicksCapsPausesAndResumes" classname="Acuaria.Aquarium.Tests.WaterChemistryTests" runstate="Runnable" seed="1758344632" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001533" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1039" name="Definition_ValidatesRequiredAndOrderedConfiguration" fullname="Acuaria.Aquarium.Tests.WaterChemistryTests.Definition_ValidatesRequiredAndOrderedConfiguration" methodname="Definition_ValidatesRequiredAndOrderedConfiguration" classname="Acuaria.Aquarium.Tests.WaterChemistryTests" runstate="Runnable" seed="1978802562" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000983" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1045" name="Evaluators_WorstParameterDominatesAndViewModelFormatsUnits" fullname="Acuaria.Aquarium.Tests.WaterChemistryTests.Evaluators_WorstParameterDominatesAndViewModelFormatsUnits" methodname="Evaluators_WorstParameterDominatesAndViewModelFormatsUnits" classname="Acuaria.Aquarium.Tests.WaterChemistryTests" runstate="Runnable" seed="353903959" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.002250" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1042" name="NitrogenCycle_IsDeterministicConservativeAndNonNegative" fullname="Acuaria.Aquarium.Tests.WaterChemistryTests.NitrogenCycle_IsDeterministicConservativeAndNonNegative" methodname="NitrogenCycle_IsDeterministicConservativeAndNonNegative" classname="Acuaria.Aquarium.Tests.WaterChemistryTests" runstate="Runnable" seed="456285480" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000635" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1043" name="NitrogenCycle_ZeroDeltaDoesNotChangeValues" fullname="Acuaria.Aquarium.Tests.WaterChemistryTests.NitrogenCycle_ZeroDeltaDoesNotChangeValues" methodname="NitrogenCycle_ZeroDeltaDoesNotChangeValues" classname="Acuaria.Aquarium.Tests.WaterChemistryTests" runstate="Runnable" seed="1414558574" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000576" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1040" name="State_ClampsInvalidValuesAndSnapshotIsIndependent" fullname="Acuaria.Aquarium.Tests.WaterChemistryTests.State_ClampsInvalidValuesAndSnapshotIsIndependent" methodname="State_ClampsInvalidValuesAndSnapshotIsIndependent" classname="Acuaria.Aquarium.Tests.WaterChemistryTests" runstate="Runnable" seed="521663092" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000818" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1041" name="Waste_ScalesWithFishAndVolumeSafely" fullname="Acuaria.Aquarium.Tests.WaterChemistryTests.Waste_ScalesWithFishAndVolumeSafely" methodname="Waste_ScalesWithFishAndVolumeSafely" classname="Acuaria.Aquarium.Tests.WaterChemistryTests" runstate="Runnable" seed="1536096848" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000927" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1055" name="Acuaria.Feeding.EditModeTests.dll" fullname="C:/Users/ricar/Documents/github/acuaria/Acuaria/Library/ScriptAssemblies/Acuaria.Feeding.EditModeTests.dll" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.015359" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="32016" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1056" name="Acuaria" fullname="Acuaria" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.014819" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1057" name="Feeding" fullname="Acuaria.Feeding" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.014642" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1058" name="Tests" fullname="Acuaria.Feeding.Tests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.014451" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1050" name="FeedingSystemTests" fullname="Acuaria.Feeding.Tests.FeedingSystemTests" classname="Acuaria.Feeding.Tests.FeedingSystemTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.014183" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1051" name="Definition_ClampsValuesButRequiresId" fullname="Acuaria.Feeding.Tests.FeedingSystemTests.Definition_ClampsValuesButRequiresId" methodname="Definition_ClampsValuesButRequiresId" classname="Acuaria.Feeding.Tests.FeedingSystemTests" runstate="Runnable" seed="1595416746" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001936" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1053" name="FeedingArea_ValidatesAndProjectsSurface" fullname="Acuaria.Feeding.Tests.FeedingSystemTests.FeedingArea_ValidatesAndProjectsSurface" methodname="FeedingArea_ValidatesAndProjectsSurface" classname="Acuaria.Feeding.Tests.FeedingSystemTests" runstate="Runnable" seed="300618000" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.002421" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1054" name="FoodController_LimitsClaimsAndConsumesUnits" fullname="Acuaria.Feeding.Tests.FeedingSystemTests.FoodController_LimitsClaimsAndConsumesUnits" methodname="FoodController_LimitsClaimsAndConsumesUnits" classname="Acuaria.Feeding.Tests.FeedingSystemTests" runstate="Runnable" seed="566626753" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.007173" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1052" name="RuntimeState_ClaimsReleasesConsumesAndExpiresSafely" fullname="Acuaria.Feeding.Tests.FeedingSystemTests.RuntimeState_ClaimsReleasesConsumesAndExpiresSafely" methodname="RuntimeState_ClaimsReleasesConsumesAndExpiresSafely" classname="Acuaria.Feeding.Tests.FeedingSystemTests" runstate="Runnable" seed="301627140" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001062" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1120" name="Acuaria.Fish.EditModeTests.dll" fullname="C:/Users/ricar/Documents/github/acuaria/Acuaria/Library/ScriptAssemblies/Acuaria.Fish.EditModeTests.dll" runstate="Runnable" testcasecount="51" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:06Z" duration="0.065688" total="51" passed="51" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="32016" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1121" name="Acuaria" fullname="Acuaria" runstate="Runnable" testcasecount="51" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:06Z" duration="0.064395" total="51" passed="51" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1124" name="Fish" fullname="Acuaria.Fish" runstate="Runnable" testcasecount="46" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.050797" total="46" passed="46" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1125" name="Tests" fullname="Acuaria.Fish.Tests" runstate="Runnable" testcasecount="46" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.050126" total="46" passed="46" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1065" name="FishArchitectureTests" fullname="Acuaria.Fish.Tests.FishArchitectureTests" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" testcasecount="20" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.019802" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1080" name="Arrival_UsesThresholdAndBoundaryHorizontalFallback" fullname="Acuaria.Fish.Tests.FishArchitectureTests.Arrival_UsesThresholdAndBoundaryHorizontalFallback" methodname="Arrival_UsesThresholdAndBoundaryHorizontalFallback" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" seed="246606228" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001051" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1084" name="BoundaryRecovery_DetectsOnlyOutwardMotion" fullname="Acuaria.Fish.Tests.FishArchitectureTests.BoundaryRecovery_DetectsOnlyOutwardMotion" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.003414" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1081" name="BoundaryRecovery_DetectsOnlyOutwardMotion(-2.95f,-1.0f,True)" fullname="Acuaria.Fish.Tests.FishArchitectureTests.BoundaryRecovery_DetectsOnlyOutwardMotion(-2.95f,-1.0f,True)" methodname="BoundaryRecovery_DetectsOnlyOutwardMotion" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" seed="2058395775" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001990" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1082" name="BoundaryRecovery_DetectsOnlyOutwardMotion(2.95f,1.0f,True)" fullname="Acuaria.Fish.Tests.FishArchitectureTests.BoundaryRecovery_DetectsOnlyOutwardMotion(2.95f,1.0f,True)" methodname="BoundaryRecovery_DetectsOnlyOutwardMotion" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" seed="611122186" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000199" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1083" name="BoundaryRecovery_DetectsOnlyOutwardMotion(0.0f,1.0f,False)" fullname="Acuaria.Fish.Tests.FishArchitectureTests.BoundaryRecovery_DetectsOnlyOutwardMotion(0.0f,1.0f,False)" methodname="BoundaryRecovery_DetectsOnlyOutwardMotion" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" seed="261720297" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000162" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1087" name="BoundaryRecovery_DirectionPointsInsideAndNeverTeleports" fullname="Acuaria.Fish.Tests.FishArchitectureTests.BoundaryRecovery_DirectionPointsInsideAndNeverTeleports" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.002126" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1085" name="BoundaryRecovery_DirectionPointsInsideAndNeverTeleports(-2.95f,1)" fullname="Acuaria.Fish.Tests.FishArchitectureTests.BoundaryRecovery_DirectionPointsInsideAndNeverTeleports(-2.95f,1)" methodname="BoundaryRecovery_DirectionPointsInsideAndNeverTeleports" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" seed="88460244" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001284" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1086" name="BoundaryRecovery_DirectionPointsInsideAndNeverTeleports(2.95f,-1)" fullname="Acuaria.Fish.Tests.FishArchitectureTests.BoundaryRecovery_DirectionPointsInsideAndNeverTeleports(2.95f,-1)" methodname="BoundaryRecovery_DirectionPointsInsideAndNeverTeleports" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" seed="607881729" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000097" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1071" name="Bounds_LevelZonesRemainInsideArea" fullname="Acuaria.Fish.Tests.FishArchitectureTests.Bounds_LevelZonesRemainInsideArea" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001849" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1068" name="Bounds_LevelZonesRemainInsideArea(Upper)" fullname="Acuaria.Fish.Tests.FishArchitectureTests.Bounds_LevelZonesRemainInsideArea(Upper)" methodname="Bounds_LevelZonesRemainInsideArea" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" seed="1420327867" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000930" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1069" name="Bounds_LevelZonesRemainInsideArea(Middle)" fullname="Acuaria.Fish.Tests.FishArchitectureTests.Bounds_LevelZonesRemainInsideArea(Middle)" methodname="Bounds_LevelZonesRemainInsideArea" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" seed="538750338" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000131" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1070" name="Bounds_LevelZonesRemainInsideArea(Lower)" fullname="Acuaria.Fish.Tests.FishArchitectureTests.Bounds_LevelZonesRemainInsideArea(Lower)" methodname="Bounds_LevelZonesRemainInsideArea" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" seed="2102495749" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000073" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1072" name="Clamp_RespectsEveryBoundary" fullname="Acuaria.Fish.Tests.FishArchitectureTests.Clamp_RespectsEveryBoundary" methodname="Clamp_RespectsEveryBoundary" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" seed="108090209" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000822" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1075" name="DifferentSeeds_ProduceDifferentTargets" fullname="Acuaria.Fish.Tests.FishArchitectureTests.DifferentSeeds_ProduceDifferentTargets" methodname="DifferentSeeds_ProduceDifferentTargets" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" seed="2024618560" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001196" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1073" name="Inset_ProducesValidPositiveBoundsAndHandlesExcessivePadding" fullname="Acuaria.Fish.Tests.FishArchitectureTests.Inset_ProducesValidPositiveBoundsAndHandlesExcessivePadding" methodname="Inset_ProducesValidPositiveBoundsAndHandlesExcessivePadding" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" seed="145196161" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000761" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1067" name="RuntimeState_InitializesWithoutVisualDependencies" fullname="Acuaria.Fish.Tests.FishArchitectureTests.RuntimeState_InitializesWithoutVisualDependencies" methodname="RuntimeState_InitializesWithoutVisualDependencies" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" seed="1484013589" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000741" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1074" name="SameSeed_ProducesEquivalentSequence" fullname="Acuaria.Fish.Tests.FishArchitectureTests.SameSeed_ProducesEquivalentSequence" methodname="SameSeed_ProducesEquivalentSequence" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" seed="1544057886" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000388" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1089" name="Separation_AffectsOnlyNearbyFish" fullname="Acuaria.Fish.Tests.FishArchitectureTests.Separation_AffectsOnlyNearbyFish" methodname="Separation_AffectsOnlyNearbyFish" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" seed="1659767645" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000698" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1066" name="Species_ClampsAuthoringValuesAndRequiresId" fullname="Acuaria.Fish.Tests.FishArchitectureTests.Species_ClampsAuthoringValuesAndRequiresId" methodname="Species_ClampsAuthoringValuesAndRequiresId" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" seed="1714275914" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000772" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1088" name="Step_StaysInsideBoundsAndLimitsVerticalDirection" fullname="Acuaria.Fish.Tests.FishArchitectureTests.Step_StaysInsideBoundsAndLimitsVerticalDirection" methodname="Step_StaysInsideBoundsAndLimitsVerticalDirection" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" seed="801148562" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001060" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1079" name="WanderTarget_FallbackIsFiniteAndInsideWhenAttemptsAreLimited" fullname="Acuaria.Fish.Tests.FishArchitectureTests.WanderTarget_FallbackIsFiniteAndInsideWhenAttemptsAreLimited" methodname="WanderTarget_FallbackIsFiniteAndInsideWhenAttemptsAreLimited" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" seed="1526536670" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000385" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1078" name="WanderTarget_PrefersOppositeSideAndRespectsMinimumTravel" fullname="Acuaria.Fish.Tests.FishArchitectureTests.WanderTarget_PrefersOppositeSideAndRespectsMinimumTravel" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001229" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1076" name="WanderTarget_PrefersOppositeSideAndRespectsMinimumTravel(-2.8f,1)" fullname="Acuaria.Fish.Tests.FishArchitectureTests.WanderTarget_PrefersOppositeSideAndRespectsMinimumTravel(-2.8f,1)" methodname="WanderTarget_PrefersOppositeSideAndRespectsMinimumTravel" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" seed="683006989" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000511" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1077" name="WanderTarget_PrefersOppositeSideAndRespectsMinimumTravel(2.8f,-1)" fullname="Acuaria.Fish.Tests.FishArchitectureTests.WanderTarget_PrefersOppositeSideAndRespectsMinimumTravel(2.8f,-1)" methodname="WanderTarget_PrefersOppositeSideAndRespectsMinimumTravel" classname="Acuaria.Fish.Tests.FishArchitectureTests" runstate="Runnable" seed="1263842118" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000089" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+            </test-suite>
+            <test-suite type="TestFixture" id="1090" name="FishWelfareTests" fullname="Acuaria.Fish.Tests.FishWelfareTests" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" testcasecount="26" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.029255" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1107" name="AquariumWelfare_ConsidersWorst" fullname="Acuaria.Fish.Tests.FishWelfareTests.AquariumWelfare_ConsidersWorst" methodname="AquariumWelfare_ConsidersWorst" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="1054676071" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.003284" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1091" name="CareRequirements_AreValidAndFinite" fullname="Acuaria.Fish.Tests.FishWelfareTests.CareRequirements_AreValidAndFinite" methodname="CareRequirements_AreValidAndFinite" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="189530013" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000502" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1112" name="ClosingModal_RestoresInput" fullname="Acuaria.Fish.Tests.FishWelfareTests.ClosingModal_RestoresInput" methodname="ClosingModal_RestoresInput" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="551450396" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000413" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1098" name="DangerousWater_PenalizesSensitiveMore" fullname="Acuaria.Fish.Tests.FishWelfareTests.DangerousWater_PenalizesSensitiveMore" methodname="DangerousWater_PenalizesSensitiveMore" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="632240947" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.002331" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1100" name="EmptyAquarium_IsSpacious" fullname="Acuaria.Fish.Tests.FishWelfareTests.EmptyAquarium_IsSpacious" methodname="EmptyAquarium_IsSpacious" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="494059290" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000782" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1103" name="Evolution_ApproachesTarget" fullname="Acuaria.Fish.Tests.FishWelfareTests.Evolution_ApproachesTarget" methodname="Evolution_ApproachesTarget" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="972398055" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001252" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1113" name="ExplicitPause_IsIndependentFromModal" fullname="Acuaria.Fish.Tests.FishWelfareTests.ExplicitPause_IsIndependentFromModal" methodname="ExplicitPause_IsIndependentFromModal" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="1096034120" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000521" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1101" name="HighActivity_RaisesDemand" fullname="Acuaria.Fish.Tests.FishWelfareTests.HighActivity_RaisesDemand" methodname="HighActivity_RaisesDemand" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="3913045" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000612" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1094" name="IdealConditions_ProduceHighScore" fullname="Acuaria.Fish.Tests.FishWelfareTests.IdealConditions_ProduceHighScore" methodname="IdealConditions_ProduceHighScore" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="1662609479" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000385" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1099" name="Incompatibility_ReducesScore" fullname="Acuaria.Fish.Tests.FishWelfareTests.Incompatibility_ReducesScore" methodname="Incompatibility_ReducesScore" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="2144105327" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000476" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1097" name="InsufficientGroup_CreatesIssue" fullname="Acuaria.Fish.Tests.FishWelfareTests.InsufficientGroup_CreatesIssue" methodname="InsufficientGroup_CreatesIssue" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="1662154571" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000557" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1096" name="InsufficientVolume_ReducesScore" fullname="Acuaria.Fish.Tests.FishWelfareTests.InsufficientVolume_ReducesScore" methodname="InsufficientVolume_ReducesScore" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="725159747" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000391" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1111" name="Modal_BlocksInteractionWithoutPausingFish" fullname="Acuaria.Fish.Tests.FishWelfareTests.Modal_BlocksInteractionWithoutPausingFish" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.003081" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1108" name="Modal_BlocksInteractionWithoutPausingFish(Journal)" fullname="Acuaria.Fish.Tests.FishWelfareTests.Modal_BlocksInteractionWithoutPausingFish(Journal)" methodname="Modal_BlocksInteractionWithoutPausingFish" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="1722268693" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000773" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1109" name="Modal_BlocksInteractionWithoutPausingFish(Maintenance)" fullname="Acuaria.Fish.Tests.FishWelfareTests.Modal_BlocksInteractionWithoutPausingFish(Maintenance)" methodname="Modal_BlocksInteractionWithoutPausingFish" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="118845569" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000378" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1110" name="Modal_BlocksInteractionWithoutPausingFish(Details)" fullname="Acuaria.Fish.Tests.FishWelfareTests.Modal_BlocksInteractionWithoutPausingFish(Details)" methodname="Modal_BlocksInteractionWithoutPausingFish" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="481248942" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000380" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1092" name="SocialRequirements_AreValid" fullname="Acuaria.Fish.Tests.FishWelfareTests.SocialRequirements_AreValid" methodname="SocialRequirements_AreValid" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="1085039235" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000714" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1117" name="SpeedPolicy_ClampsActiveMultipliers" fullname="Acuaria.Fish.Tests.FishWelfareTests.SpeedPolicy_ClampsActiveMultipliers" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.003195" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1114" name="SpeedPolicy_ClampsActiveMultipliers(1.0f,1.0f,1.0f,1.0f,1.0f)" fullname="Acuaria.Fish.Tests.FishWelfareTests.SpeedPolicy_ClampsActiveMultipliers(1.0f,1.0f,1.0f,1.0f,1.0f)" methodname="SpeedPolicy_ClampsActiveMultipliers" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="1525223675" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001151" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1115" name="SpeedPolicy_ClampsActiveMultipliers(1.0f,0.68f,1.0f,1.0f,0.68f)" fullname="Acuaria.Fish.Tests.FishWelfareTests.SpeedPolicy_ClampsActiveMultipliers(1.0f,0.68f,1.0f,1.0f,0.68f)" methodname="SpeedPolicy_ClampsActiveMultipliers" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="565152116" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000462" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1116" name="SpeedPolicy_ClampsActiveMultipliers(1.0f,0.0f,0.0f,0.0f,0.35f)" fullname="Acuaria.Fish.Tests.FishWelfareTests.SpeedPolicy_ClampsActiveMultipliers(1.0f,0.0f,0.0f,0.0f,0.35f)" methodname="SpeedPolicy_ClampsActiveMultipliers" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="705149508" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000350" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1119" name="SpeedPolicy_ExplicitPauseCanStopAndRestore" fullname="Acuaria.Fish.Tests.FishWelfareTests.SpeedPolicy_ExplicitPauseCanStopAndRestore" methodname="SpeedPolicy_ExplicitPauseCanStopAndRestore" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="1042343820" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000617" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1118" name="SpeedPolicy_HandlesInvalidValues" fullname="Acuaria.Fish.Tests.FishWelfareTests.SpeedPolicy_HandlesInvalidValues" methodname="SpeedPolicy_HandlesInvalidValues" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="1135791857" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000473" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1095" name="TemperatureOutsideRange_ReducesScore" fullname="Acuaria.Fish.Tests.FishWelfareTests.TemperatureOutsideRange_ReducesScore" methodname="TemperatureOutsideRange_ReducesScore" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="864890409" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000559" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1102" name="ThreeSpecies_GenerateThreeUniquePairs" fullname="Acuaria.Fish.Tests.FishWelfareTests.ThreeSpecies_GenerateThreeUniquePairs" methodname="ThreeSpecies_GenerateThreeUniquePairs" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="436305729" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001917" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1106" name="VisualAdapter_IsAbsolute" fullname="Acuaria.Fish.Tests.FishWelfareTests.VisualAdapter_IsAbsolute" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.001606" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1104" name="VisualAdapter_IsAbsolute(Excellent,1.0f)" fullname="Acuaria.Fish.Tests.FishWelfareTests.VisualAdapter_IsAbsolute(Excellent,1.0f)" methodname="VisualAdapter_IsAbsolute" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="1873385486" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000649" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1105" name="VisualAdapter_IsAbsolute(Poor,0.68f)" fullname="Acuaria.Fish.Tests.FishWelfareTests.VisualAdapter_IsAbsolute(Poor,0.68f)" methodname="VisualAdapter_IsAbsolute" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="1783168378" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000251" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1093" name="WelfareDefinition_IsValid" fullname="Acuaria.Fish.Tests.FishWelfareTests.WelfareDefinition_IsValid" methodname="WelfareDefinition_IsValid" classname="Acuaria.Fish.Tests.FishWelfareTests" runstate="Runnable" seed="816734213" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.000410" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+        <test-suite type="TestSuite" id="1122" name="Tests" fullname="Acuaria.Tests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:06Z" duration="0.012841" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1123" name="Fish" fullname="Acuaria.Tests.Fish" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:06Z" duration="0.012406" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1059" name="FishSpeciesContentTests" fullname="Acuaria.Tests.Fish.FishSpeciesContentTests" classname="Acuaria.Tests.Fish.FishSpeciesContentTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:06Z" duration="0.012071" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1063" name="Discovery_OnlyAdvancesAndNeverDuplicatesRewards" fullname="Acuaria.Tests.Fish.FishSpeciesContentTests.Discovery_OnlyAdvancesAndNeverDuplicatesRewards" methodname="Discovery_OnlyAdvancesAndNeverDuplicatesRewards" classname="Acuaria.Tests.Fish.FishSpeciesContentTests" runstate="Runnable" seed="1354801847" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:05Z" duration="0.002294" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1061" name="Population_TotalIsDataDrivenAndNotLimitedToThree" fullname="Acuaria.Tests.Fish.FishSpeciesContentTests.Population_TotalIsDataDrivenAndNotLimitedToThree" methodname="Population_TotalIsDataDrivenAndNotLimitedToThree" classname="Acuaria.Tests.Fish.FishSpeciesContentTests" runstate="Runnable" seed="1445603574" result="Passed" start-time="2026-07-26 04:38:05Z" end-time="2026-07-26 04:38:06Z" duration="0.001841" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1060" name="Registry_FindsStableIdsAndDetectsDuplicates" fullname="Acuaria.Tests.Fish.FishSpeciesContentTests.Registry_FindsStableIdsAndDetectsDuplicates" methodname="Registry_FindsStableIdsAndDetectsDuplicates" classname="Acuaria.Tests.Fish.FishSpeciesContentTests" runstate="Runnable" seed="712494613" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.002710" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1062" name="Suitability_WorstConditionDominatesAndIsDeterministic" fullname="Acuaria.Tests.Fish.FishSpeciesContentTests.Suitability_WorstConditionDominatesAndIsDeterministic" methodname="Suitability_WorstConditionDominatesAndIsDeterministic" classname="Acuaria.Tests.Fish.FishSpeciesContentTests" runstate="Runnable" seed="1215098683" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.002168" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1064" name="VerifiedWithoutSources_IsDowngradedForReview" fullname="Acuaria.Tests.Fish.FishSpeciesContentTests.VerifiedWithoutSources_IsDowngradedForReview" methodname="VerifiedWithoutSources_IsDowngradedForReview" classname="Acuaria.Tests.Fish.FishSpeciesContentTests" runstate="Runnable" seed="1301548248" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.001172" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1145" name="Acuaria.Room.EditModeTests.dll" fullname="C:/Users/ricar/Documents/github/acuaria/Acuaria/Library/ScriptAssemblies/Acuaria.Room.EditModeTests.dll" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.021645" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="32016" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1146" name="Acuaria" fullname="Acuaria" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.020960" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1147" name="Room" fullname="Acuaria.Room" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.020600" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1148" name="Tests" fullname="Acuaria.Room.Tests" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.020251" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1126" name="AquariumSlotViewTests" fullname="Acuaria.Room.Tests.AquariumSlotViewTests" classname="Acuaria.Room.Tests.AquariumSlotViewTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.006388" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1128" name="AssignAndClearView_UpdatesOccupiedStateSafely" fullname="Acuaria.Room.Tests.AquariumSlotViewTests.AssignAndClearView_UpdatesOccupiedStateSafely" methodname="AssignAndClearView_UpdatesOccupiedStateSafely" classname="Acuaria.Room.Tests.AquariumSlotViewTests" runstate="Runnable" seed="1920532495" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.002208" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1129" name="AssignView_RejectsNull" fullname="Acuaria.Room.Tests.AquariumSlotViewTests.AssignView_RejectsNull" methodname="AssignView_RejectsNull" classname="Acuaria.Room.Tests.AquariumSlotViewTests" runstate="Runnable" seed="778505454" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.002055" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1127" name="Configure_RejectsEmptyId" fullname="Acuaria.Room.Tests.AquariumSlotViewTests.Configure_RejectsEmptyId" methodname="Configure_RejectsEmptyId" classname="Acuaria.Room.Tests.AquariumSlotViewTests" runstate="Runnable" seed="1801310496" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.000702" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1130" name="RoomCameraFitterTests" fullname="Acuaria.Room.Tests.RoomCameraFitterTests" classname="Acuaria.Room.Tests.RoomCameraFitterTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.004453" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-suite type="ParameterizedMethod" id="1135" name="CalculateOrthographicSize_FitsReferenceArea" fullname="Acuaria.Room.Tests.RoomCameraFitterTests.CalculateOrthographicSize_FitsReferenceArea" classname="Acuaria.Room.Tests.RoomCameraFitterTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.002525" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1131" name="CalculateOrthographicSize_FitsReferenceArea(1.777778f,5.625f)" fullname="Acuaria.Room.Tests.RoomCameraFitterTests.CalculateOrthographicSize_FitsReferenceArea(1.777778f,5.625f)" methodname="CalculateOrthographicSize_FitsReferenceArea" classname="Acuaria.Room.Tests.RoomCameraFitterTests" runstate="Runnable" seed="1082259649" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.001049" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1132" name="CalculateOrthographicSize_FitsReferenceArea(2.166667f,5.625f)" fullname="Acuaria.Room.Tests.RoomCameraFitterTests.CalculateOrthographicSize_FitsReferenceArea(2.166667f,5.625f)" methodname="CalculateOrthographicSize_FitsReferenceArea" classname="Acuaria.Room.Tests.RoomCameraFitterTests" runstate="Runnable" seed="759450087" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.000140" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1133" name="CalculateOrthographicSize_FitsReferenceArea(2.222222f,5.625f)" fullname="Acuaria.Room.Tests.RoomCameraFitterTests.CalculateOrthographicSize_FitsReferenceArea(2.222222f,5.625f)" methodname="CalculateOrthographicSize_FitsReferenceArea" classname="Acuaria.Room.Tests.RoomCameraFitterTests" runstate="Runnable" seed="2012726780" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.000075" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1134" name="CalculateOrthographicSize_FitsReferenceArea(1.333333f,7.5f)" fullname="Acuaria.Room.Tests.RoomCameraFitterTests.CalculateOrthographicSize_FitsReferenceArea(1.333333f,7.5f)" methodname="CalculateOrthographicSize_FitsReferenceArea" classname="Acuaria.Room.Tests.RoomCameraFitterTests" runstate="Runnable" seed="1790400151" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.000075" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1136" name="CalculateOrthographicSize_InvalidInput_ReturnsSafePositiveValue" fullname="Acuaria.Room.Tests.RoomCameraFitterTests.CalculateOrthographicSize_InvalidInput_ReturnsSafePositiveValue" methodname="CalculateOrthographicSize_InvalidInput_ReturnsSafePositiveValue" classname="Acuaria.Room.Tests.RoomCameraFitterTests" runstate="Runnable" seed="40473352" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.000237" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1137" name="RoomViewStateMachineTests" fullname="Acuaria.Room.Tests.RoomViewStateMachineTests" classname="Acuaria.Room.Tests.RoomViewStateMachineTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.008706" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1140" name="FocusTarget_UsesConfiguredPointAndPositiveSize" fullname="Acuaria.Room.Tests.RoomViewStateMachineTests.FocusTarget_UsesConfiguredPointAndPositiveSize" methodname="FocusTarget_UsesConfiguredPointAndPositiveSize" classname="Acuaria.Room.Tests.RoomViewStateMachineTests" runstate="Runnable" seed="114866463" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.002448" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1144" name="Interactable_OnlyAllowsAvailableTargetsWithValidIds" fullname="Acuaria.Room.Tests.RoomViewStateMachineTests.Interactable_OnlyAllowsAvailableTargetsWithValidIds" classname="Acuaria.Room.Tests.RoomViewStateMachineTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.003556" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1141" name="Interactable_OnlyAllowsAvailableTargetsWithValidIds(True,&quot;slot-test&quot;,True)" fullname="Acuaria.Room.Tests.RoomViewStateMachineTests.Interactable_OnlyAllowsAvailableTargetsWithValidIds(True,&quot;slot-test&quot;,True)" methodname="Interactable_OnlyAllowsAvailableTargetsWithValidIds" classname="Acuaria.Room.Tests.RoomViewStateMachineTests" runstate="Runnable" seed="1056189411" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.001701" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1142" name="Interactable_OnlyAllowsAvailableTargetsWithValidIds(False,&quot;slot-test&quot;,False)" fullname="Acuaria.Room.Tests.RoomViewStateMachineTests.Interactable_OnlyAllowsAvailableTargetsWithValidIds(False,&quot;slot-test&quot;,False)" methodname="Interactable_OnlyAllowsAvailableTargetsWithValidIds" classname="Acuaria.Room.Tests.RoomViewStateMachineTests" runstate="Runnable" seed="1707393945" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.000292" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1143" name="Interactable_OnlyAllowsAvailableTargetsWithValidIds(True,&quot;&quot;,False)" fullname="Acuaria.Room.Tests.RoomViewStateMachineTests.Interactable_OnlyAllowsAvailableTargetsWithValidIds(True,&quot;&quot;,False)" methodname="Interactable_OnlyAllowsAvailableTargetsWithValidIds" classname="Acuaria.Room.Tests.RoomViewStateMachineTests" runstate="Runnable" seed="1986482989" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.000208" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1139" name="InvalidAndDuplicateTransitions_AreRejected" fullname="Acuaria.Room.Tests.RoomViewStateMachineTests.InvalidAndDuplicateTransitions_AreRejected" methodname="InvalidAndDuplicateTransitions_AreRejected" classname="Acuaria.Room.Tests.RoomViewStateMachineTests" runstate="Runnable" seed="1068627366" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.000517" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1138" name="ValidFlow_ReturnsToOverview" fullname="Acuaria.Room.Tests.RoomViewStateMachineTests.ValidFlow_ReturnsToOverview" methodname="ValidFlow_ReturnsToOverview" classname="Acuaria.Room.Tests.RoomViewStateMachineTests" runstate="Runnable" seed="365971565" result="Passed" start-time="2026-07-26 04:38:06Z" end-time="2026-07-26 04:38:06Z" duration="0.000663" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: C:/Users/ricar/AppData/LocalLow/DefaultCompany/Acuaria\TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

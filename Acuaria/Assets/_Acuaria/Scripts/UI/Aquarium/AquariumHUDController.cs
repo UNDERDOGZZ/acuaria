@@ -32,6 +32,7 @@ namespace Acuaria.UI.Aquarium
         private readonly AquariumRuntimeState runtimeState = new();
         private bool focused;
         private WaterChemistryViewModel waterChemistry;
+        private string welfareCompact;
         private string welfareDetails;
         [SerializeField] private AquariumMaintenanceController maintenance;
         [SerializeField] private AquaristJournalController journal;
@@ -139,19 +140,30 @@ namespace Acuaria.UI.Aquarium
             DetailsOpened?.Invoke();
         }
 
-        public void SetFishWelfare(string compact,string details,FishWelfareStatus status)
+        public void SetFishWelfare(string compact, string details, FishWelfareStatus status)
         {
-            welfareDetails=details;
-            if(statusText!=null&&waterChemistry!=null)statusText.text=$"Agua: {waterChemistry.QualityLabel} · {compact}";
-            if(detailsPanel!=null&&detailsPanel.IsOpen)detailsPanel.SetFishWelfare(details);
+            welfareCompact = compact;
+            welfareDetails = details;
+            RenderCombinedStatus();
+            if (detailsPanel != null && detailsPanel.IsOpen) detailsPanel.SetFishWelfare(details);
         }
 
         public void SetWaterChemistry(WaterChemistryViewModel chemistry)
         {
             waterChemistry = chemistry;
-            if (statusText != null && chemistry != null) statusText.text = $"Agua: {chemistry.QualityLabel}";
+            RenderCombinedStatus();
             if (statusBadge != null && chemistry != null) statusBadge.color = WaterQualityColor(chemistry.Quality.Status);
             if (detailsPanel != null && detailsPanel.IsOpen) detailsPanel.SetWaterChemistry(chemistry);
+        }
+
+        public static string ComposeStatusText(string waterLabel, string welfareLabel, string fallback = "")
+        {
+            var hasWater = !string.IsNullOrWhiteSpace(waterLabel);
+            var hasWelfare = !string.IsNullOrWhiteSpace(welfareLabel);
+            if (hasWater && hasWelfare) return $"Agua: {waterLabel} \u00B7 {welfareLabel}";
+            if (hasWater) return $"Agua: {waterLabel}";
+            if (hasWelfare) return welfareLabel;
+            return fallback ?? string.Empty;
         }
 
         public void SetTemperature(float value) => runtimeState.SetTemperature(value);
@@ -195,9 +207,15 @@ namespace Acuaria.UI.Aquarium
             fishCountText.text = model.FishCountText;
             if (waterChemistry == null)
             {
-                statusText.text = model.StatusLabel;
                 if (statusBadge != null) statusBadge.color = StatusColor(model.Status.Status);
             }
+            RenderCombinedStatus(model.StatusLabel);
+        }
+
+        private void RenderCombinedStatus(string fallback = "")
+        {
+            if (statusText == null) return;
+            statusText.text = ComposeStatusText(waterChemistry?.QualityLabel, welfareCompact, fallback);
         }
 
         private static void CheckMissing(List<string> issues, UnityEngine.Object value, string fieldName)

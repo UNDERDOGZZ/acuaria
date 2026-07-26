@@ -58,3 +58,4 @@ El indicador químico reutiliza `StatusBadge` y `StatusText`; no añade tarjetas
 # Panel de mantenimiento
 
 El panel se aloja dentro de Safe Area, mantiene objetivos táctiles amplios y evita crear Canvas adicionales.
+Los overlays responsive interceptan raycasts sin modificar el mundo ni el tiempo de simulación visual.

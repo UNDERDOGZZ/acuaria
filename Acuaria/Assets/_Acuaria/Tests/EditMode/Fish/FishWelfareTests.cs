@@ -3,6 +3,7 @@ using Acuaria.Fish.Care;
 using Acuaria.Fish.Compatibility;
 using Acuaria.Fish.Welfare;
 using Acuaria.Simulation.Water;
+using Acuaria.Simulation.Time;
 using NUnit.Framework;
 using UnityEngine;
 namespace Acuaria.Fish.Tests
@@ -35,5 +36,14 @@ namespace Acuaria.Fish.Tests
         [Test] public void Evolution_ApproachesTarget(){var state=new FishWelfareState();state.Initialize("fish",50);var evaluation=new FishWelfareEvaluator().Evaluate(species,Context(),settings);new FishWelfareSimulationModel().Step(state,evaluation,settings,1);Assert.Greater(state.CurrentScore,50);Assert.LessOrEqual(state.CurrentScore,evaluation.OverallScore);}
         [TestCase(FishWelfareStatus.Excellent,1f)][TestCase(FishWelfareStatus.Poor,.68f)] public void VisualAdapter_IsAbsolute(FishWelfareStatus status,float expected)=>Assert.AreEqual(expected,FishWelfareVisualAdapter.SpeedMultiplier(status),.001f);
         [Test] public void AquariumWelfare_ConsidersWorst(){var a=new FishWelfareState();a.Initialize("a",95);var b=new FishWelfareState();b.Initialize("b",20);Assert.Less(AquariumWelfareEvaluator.Evaluate(new[]{a,b}).Score,70);}
+        [TestCase(AquariumModalType.Journal)][TestCase(AquariumModalType.Maintenance)][TestCase(AquariumModalType.Details)]
+        public void Modal_BlocksInteractionWithoutPausingFish(AquariumModalType modal){var state=new AquariumInteractionState();state.Open(modal);Assert.IsTrue(state.InteractionBlocked);Assert.IsFalse(state.SimulationPaused);Assert.IsFalse(state.FishVisualMovementPaused);}
+        [Test] public void ClosingModal_RestoresInput(){var state=new AquariumInteractionState();state.Open(AquariumModalType.Journal);state.Close(AquariumModalType.Journal);Assert.IsFalse(state.InteractionBlocked);}
+        [Test] public void ExplicitPause_IsIndependentFromModal(){var state=new AquariumInteractionState();state.SetExplicitFishVisualPause(true);Assert.IsTrue(state.FishVisualMovementPaused);Assert.IsFalse(state.InteractionBlocked);state.SetExplicitFishVisualPause(false);Assert.IsFalse(state.FishVisualMovementPaused);}
+        [TestCase(1f,1f,1f,1f,1f)][TestCase(1f,.68f,1f,1f,.68f)][TestCase(1f,0f,0f,0f,.35f)]
+        public void SpeedPolicy_ClampsActiveMultipliers(float baseSpeed,float welfare,float behaviour,float maintenance,float expected)
+        {Assert.AreEqual(expected,FishMovementSpeedPolicy.Calculate(baseSpeed,welfare,behaviour,maintenance,false),.001f);}
+        [Test] public void SpeedPolicy_HandlesInvalidValues(){Assert.AreEqual(1f,FishMovementSpeedPolicy.Calculate(1f,float.NaN,float.PositiveInfinity,-1f,false),.001f);}
+        [Test] public void SpeedPolicy_ExplicitPauseCanStopAndRestore(){Assert.AreEqual(0f,FishMovementSpeedPolicy.Calculate(1,1,1,1,true));Assert.AreEqual(1f,FishMovementSpeedPolicy.Calculate(1,1,1,1,false));}
     }
 }

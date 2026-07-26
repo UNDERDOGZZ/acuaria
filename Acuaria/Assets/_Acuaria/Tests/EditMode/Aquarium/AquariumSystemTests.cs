@@ -200,6 +200,21 @@ namespace Acuaria.Aquarium.Tests
         }
 
         [Test]
+        public void HudStatus_CompositionKeepsWaterAndWelfareTogether()
+        {
+            var combined = AquariumHUDController.ComposeStatusText(
+                "Excelente", "Bienestar: Bien 84/100");
+
+            Assert.That(combined, Is.EqualTo("Agua: Excelente · Bienestar: Bien 84/100"));
+            Assert.That(AquariumHUDController.ComposeStatusText("Excelente", null),
+                Is.EqualTo("Agua: Excelente"));
+            Assert.That(AquariumHUDController.ComposeStatusText(null, "Bienestar: Bien 84/100"),
+                Is.EqualTo("Bienestar: Bien 84/100"));
+            Assert.That(AquariumHUDController.ComposeStatusText(null, null, "Estable"),
+                Is.EqualTo("Estable"));
+        }
+
+        [Test]
         public void ResponsiveLayout_ChoosesModeSafelyWithoutRedundantChanges()
         {
             var root = new GameObject("Responsive", typeof(RectTransform), typeof(AquariumHUDResponsiveLayout));

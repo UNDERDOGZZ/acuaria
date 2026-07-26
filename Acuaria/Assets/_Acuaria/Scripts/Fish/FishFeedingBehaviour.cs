@@ -13,6 +13,7 @@ namespace Acuaria.Fish
         private AquariumFoodController foodController;
         private FishRuntimeState runtimeState;
         private FoodView2D target;
+        private bool hasTarget;
         private float cooldownRemaining;
         private float stateTimer;
 
@@ -35,11 +36,12 @@ namespace Acuaria.Fish
         private void Update()
         {
             if (runtimeState == null || movement == null || foodController == null) return;
-            cooldownRemaining = Mathf.Max(0f, cooldownRemaining - Time.deltaTime);
+            var deltaTime=Time.unscaledDeltaTime;
+            cooldownRemaining = Mathf.Max(0f, cooldownRemaining - deltaTime);
 
             if (State == FishBehaviourState.Eating || State == FishBehaviourState.ResumingWander)
             {
-                stateTimer -= Time.deltaTime;
+                stateTimer -= deltaTime;
                 if (stateTimer <= 0f)
                 {
                     if (State == FishBehaviourState.Eating)
@@ -52,16 +54,20 @@ namespace Acuaria.Fish
                 return;
             }
 
-            if (target != null && (target.State == null || target.State.IsTerminal ||
-                                   target.State.ClaimedByFishId != runtimeState.InstanceId))
+            if (hasTarget && target == null)
+            {
+                ClearTargetWithoutRelease();
+            }
+            else if (target != null && (target.State == null || target.State.IsTerminal ||
+                                        target.State.ClaimedByFishId != runtimeState.InstanceId))
             {
                 ReleaseTarget();
             }
 
-            if (target == null && cooldownRemaining <= 0f && runtimeState.Satiety < maximumSatiety)
+            if (!hasTarget && cooldownRemaining <= 0f && runtimeState.Satiety < maximumSatiety)
                 AcquireNearestFood();
 
-            if (target == null) return;
+            if (!hasTarget || target == null) return;
             movement.SetPriorityTarget(target.State.Position, 1.15f);
             var consumptionDistance = target.Definition.ConsumptionRadius;
             if ((runtimeState.Position - target.State.Position).sqrMagnitude <= consumptionDistance * consumptionDistance)
@@ -75,6 +81,7 @@ namespace Acuaria.Fish
                     stateTimer = 0.22f;
                     visual?.PlayEatingPulse();
                     target = null;
+                    hasTarget = false;
                     movement.ClearPriorityTarget();
                 }
                 else ReleaseTarget();
@@ -103,6 +110,7 @@ namespace Acuaria.Fish
             if (nearest != null && foodController.TryClaim(nearest, runtimeState.InstanceId))
             {
                 target = nearest;
+                hasTarget = true;
                 State = FishBehaviourState.SeekingFood;
             }
         }
@@ -111,7 +119,13 @@ namespace Acuaria.Fish
         {
             if (target != null && foodController != null && runtimeState != null)
                 foodController.Release(target, runtimeState.InstanceId);
+            ClearTargetWithoutRelease();
+        }
+
+        private void ClearTargetWithoutRelease()
+        {
             target = null;
+            hasTarget = false;
             movement?.ClearPriorityTarget();
             State = FishBehaviourState.Wandering;
         }

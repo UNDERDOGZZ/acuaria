@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d17dc1ce8bb4526448e954ea523fe44d, type: 3}
+  m_Name: fish-neon_tetra
+  m_EditorClassIdentifier: Acuaria.Fish::Acuaria.Fish.FishSpeciesDefinition
+  speciesId: fish.neon_tetra
+  displayName: "Tetra ne\xF3n"
+  minimumSpeed: 0.45
+  maximumSpeed: 0.8
+  minimumScale: 0.75
+  maximumScale: 1
+  minimumTargetDuration: 2.5
+  maximumTargetDuration: 5
+  verticalPreference: 0
+  prototypeColor: {r: 0.15, g: 0.65, b: 1, a: 1}
+  swimmingLevel: 1
+  prototypeSprite: {fileID: 0}
+  care:
+    temperatureRange: {x: 21, y: 26}
+    minimumIndividualVolume: 50
+    minimumGroupVolume: 60
+    adultSizeCm: 3.5
+    activity: 1
+    swimmingZone: 1
+    waterSensitivity: 1
+    needsHidingPlaces: 0
+    needsPlants: 1
+    chemicalSensitivity: {x: 1, y: 1, z: 1}
+    feedingFrequencyPerDay: 2
+    diet: 1
+    difficulty: 0
+    minimumTankLengthCm: 60
+    preferredCurrent: 0
+    preferredLighting: 1
+    openSpaceRequired: 0.55
+    plantCoverageRecommended: 0.55
+    stableWaterRequired: 1
+    specialNotes: "Mant\xE9n un cardumen y agua estable; su peque\xF1o tama\xF1o
+      no elimina la necesidad de espacio horizontal."
+  social:
+    socialType: 3
+    recommendedMinimum: 6
+    provisionalMaximum: 10
+    toleratesSolitary: 0
+    territoriality: 0
+    coexistsWithSameSpecies: 1
+    needsSchool: 1
+    needsPair: 0
+    toleratesActiveSpecies: 1
+    toleratesTerritorialSpecies: 1
+    preferredCount: 6
+    maleBehaviour: "Comportamiento intraespec\xEDfico sujeto a sexo y espacio."
+    femaleBehaviour: "Informaci\xF3n educativa; sin sexo runtime."
+    communityNotes: "Peque\xF1o pez de cardumen que se muestra m\xE1s seguro en grupo."
+  compatibility:
+    acceptableCompanionSize: {x: 2, y: 12}
+    peaceful: 1
+    semiTerritorial: 1
+    territorial: 0
+    slow: 1
+    active: 1
+    sameZoneConflict: 0
+    conceptualPredationRisk: 0
+    compatibleSpecies: []
+    incompatibleSpecies: []
+  biologicalProfile:
+    scientificName: Paracheirodon innesi
+    alternateCommonName: 
+    family: Characidae
+    originRegion: "Cuenca amaz\xF3nica"
+    bodyShape: 
+    generalBehaviour: "Peque\xF1o pez de cardumen que se muestra m\xE1s seguro en
+      grupo."
+    sexualDimorphism: 
+    reproductionNotes: 
+    notes: 
+    waterType: 0
+    adultLengthCm: {x: 2.5, y: 4}
+    lifespanYears: {x: 3, y: 5}
+    activity: 1
+    primaryZone: 1
+    secondaryZones: 
+  educationalProfile:
+    summary: "Peque\xF1o pez de cardumen que se muestra m\xE1s seguro en grupo."
+    behaviour: "Peque\xF1o pez de cardumen que se muestra m\xE1s seguro en grupo."
+    care: "Mant\xE9n un cardumen y agua estable; su peque\xF1o tama\xF1o no elimina
+      la necesidad de espacio horizontal."
+    feeding: "Dieta omn\xEDvora variada en porciones peque\xF1as."
+    socialLife: Se recomienda un grupo de al menos 6.
+    compatibility: La compatibilidad depende del conjunto completo de necesidades.
+    commonMistakes: 
+    funFact: 
+    beginnerTip: Compara la ficha con el acuario actual.
+    mainWarning: "Mant\xE9n un cardumen y agua estable; su peque\xF1o tama\xF1o no
+      elimina la necesidad de espacio horizontal."
+    welfare: 
+    habitat: 
+    maintenance: 
+    relatedConcepts: []
+    codexEntryId: species.fish.neon_tetra
+  visualDefinition:
+    prefab: {fileID: 8466895437553514399, guid: 93122697bd8f3784ebfccfa8cf4a72e9, type: 3}
+    primarySprite: {fileID: 0}
+    alternateSprite: {fileID: 0}
+    catalogIcon: {fileID: 0}
+    detailImage: {fileID: 0}
+    scaleRange: {x: 0.75, y: 1}
+    speedRange: {x: 0.45, y: 0.8}
+    baseColor: {r: 0.15, g: 0.65, b: 1, a: 1}
+    oscillationFrequency: 1
+    tailAmplitude: 0.08
+    approximateSize: 1
+    spriteFacesRight: 1
+    sortingLayer: Fish
+    sortingOrder: 0
+  validationStatus: 2
+  sources:
+  - sourceId: fishbase.paracheirodon.innesi
+    title: Paracheirodon innesi summary page
+    organisation: FishBase
+    consultedOn: 2026-07-26
+    url: https://www.fishbase.se/summary/Paracheirodon-innesi
+    notes: "Taxonom\xEDa, distribuci\xF3n, tama\xF1o y temperatura."
+    sourceType: 0
+    supportedFields:
+    - scientificName
+    - family
+    - origin
+    - adultLength
+    - temperature
+  tags:
+  - freshwater
+  - real-species
+  - placeholder-art
+  contentVersion: 1
+  shortDescription: "Perfil educativo aproximado basado en fuentes documentadas;
+    requiere revisi\xF3n acuarista."

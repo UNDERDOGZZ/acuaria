@@ -16,8 +16,20 @@ namespace Acuaria.Fish
         public float Right { get; }
         public float Bottom { get; }
         public float Top { get; }
+        public float Width => Right - Left;
+        public float Height => Top - Bottom;
+        public Vector2 Center => new((Left + Right) * 0.5f, (Bottom + Top) * 0.5f);
+        public bool IsValid => Width > Mathf.Epsilon && Height > Mathf.Epsilon;
         public bool Contains(Vector2 point) => point.x >= Left && point.x <= Right && point.y >= Bottom && point.y <= Top;
         public Vector2 Clamp(Vector2 point) => new(Mathf.Clamp(point.x, Left, Right), Mathf.Clamp(point.y, Bottom, Top));
+
+        public SwimBounds2D Inset(float horizontalPadding, float verticalPadding)
+        {
+            var safeHorizontal = Mathf.Clamp(SafePadding(horizontalPadding), 0f, Width * 0.49f);
+            var safeVertical = Mathf.Clamp(SafePadding(verticalPadding), 0f, Height * 0.49f);
+            return new SwimBounds2D(Left + safeHorizontal, Right - safeHorizontal,
+                Bottom + safeVertical, Top - safeVertical);
+        }
 
         public SwimBounds2D ForLevel(SwimmingLevel level)
         {
@@ -30,5 +42,7 @@ namespace Acuaria.Fish
                 _ => this
             };
         }
+
+        private static float SafePadding(float value) => float.IsFinite(value) ? Mathf.Max(0f, value) : 0f;
     }
 }

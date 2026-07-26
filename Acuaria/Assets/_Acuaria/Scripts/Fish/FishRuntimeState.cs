@@ -15,6 +15,7 @@ namespace Acuaria.Fish
         public int RandomSeed { get; private set; }
         public float TimeSinceTargetChange { get; set; }
         public float TargetDuration { get; set; }
+        public bool IsRecoveringFromBoundary { get; set; }
         public bool IsInitialized { get; private set; }
         public float Satiety { get; set; }
 
@@ -31,6 +32,7 @@ namespace Acuaria.Fish
             Direction = Vector2.right;
             RandomSeed = seed;
             TimeSinceTargetChange = 0f;
+            IsRecoveringFromBoundary = false;
             Satiety = 0.45f;
             IsInitialized = true;
         }

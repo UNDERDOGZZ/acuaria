@@ -22,3 +22,4 @@ El estado no contiene química, suciedad, filtración, salud, historial ni persi
 
 El acuario conserva estados independientes de química, mantenimiento y filtro. Ninguna clase de dominio contiene referencias a GameObjects o UI.
 Cada pez posee un `FishWelfareState` separado de su estado de movimiento y de la definición de especie.
+La población inicial es un asset independiente para evaluar presets sin instanciar vistas ni convertir el acuario en contenedor de especies.

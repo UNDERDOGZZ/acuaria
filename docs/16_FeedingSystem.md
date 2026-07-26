@@ -28,3 +28,5 @@ Abrir `AquariumDetailsPanel` cancela el modo de alimentación y oculta sus instr
 
 `AquariumFoodController` emite `FoodExpired` y `FoodConsumed` usando el ID de instancia. La simulación deduplica expiraciones; alimento consumido nunca se procesa como expirado y solo aporta una fracción metabólica mínima configurable.
 La saciedad es una entrada simplificada del bienestar. Comida expirada no cuenta como consumo.
+FeedingMode no pausa peces. Búsqueda, persecución, cooldown y animación de consumo continúan con tiempo visual no escalado.
+La posesión de un objetivo de comida se registra aparte de la referencia Unity. Si la porción expira o se destruye, se limpia el objetivo prioritario y se selecciona inmediatamente un nuevo destino Wander válido.
