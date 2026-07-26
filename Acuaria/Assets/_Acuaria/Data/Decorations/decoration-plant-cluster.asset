@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa0fd46b9fccf148acfe4c7ba57a356, type: 3}
+  m_Name: decoration-plant-cluster
+  m_EditorClassIdentifier: Acuaria.Aquarium::Acuaria.Aquarium.Decorations.DecorationDefinition
+  decorationId: decoration.plant.cluster
+  displayName: Plantas naturales
+  description: "Vegetaci\xF3n de hojas suaves que aporta cobertura."
+  category: 0
+  sprite: {fileID: 21300000, guid: e2b24ecd3f8289f4693fc9d74723498a, type: 3}
+  prefab: {fileID: 0}
+  scale: {x: 1, y: 1}
+  placeholderCost: 0
+  occupiedSpace: 0.1
+  plantCoverage: 0.35
+  openSpaceConsumed: 0.08
+  flowResistance: 0.08
+  lightingCoverage: 0.18
+  visualComplexity: 0.3
+  hidingPlaces: 1
+  favouredSpecies:
+  - {fileID: 11400000, guid: 2ea242fc52f3e5a4b8b062d0da50c107, type: 2}
+  - {fileID: 11400000, guid: a18a1b8f97cdb9c49af6eff14108ab0d, type: 2}
+  educationalText: "Las plantas ofrecen l\xEDmites visuales y refugio; no sustituyen
+    el mantenimiento."

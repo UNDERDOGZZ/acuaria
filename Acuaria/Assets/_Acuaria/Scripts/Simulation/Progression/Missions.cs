@@ -4,7 +4,8 @@ namespace Acuaria.Progression
 {
     public enum MissionType { Tutorial, DailySimulated, Educational, Progression }
     public enum MissionStatus { Locked, Active, Completed, Claimed }
-    public enum ProgressionEventType { Welcome, FishFed, DetailsObserved, WaterChanged, ExcellentWaterHour, FilterMaintained, GoodWelfareHour, ConceptLearned, FoodWasted }
+    public enum ProgressionEventType { Welcome, FishFed, DetailsObserved, WaterChanged, ExcellentWaterHour, FilterMaintained, GoodWelfareHour, ConceptLearned, FoodWasted,
+        PlantLearned, HidingPlaceLearned, RockObserved, WoodObserved, NaturalHabitatCreated, HidingPlaceAdded, PlantedAquariumCreated }
     [CreateAssetMenu(menuName="Acuaria/Progression/Mission")] public sealed class MissionDefinition:ScriptableObject
     {
         [SerializeField]string missionId,title,description;[SerializeField]MissionType type;[SerializeField]ProgressionEventType condition;

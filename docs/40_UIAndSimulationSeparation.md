@@ -47,3 +47,6 @@ Los paneles nunca modifican `Time.timeScale`. El movimiento visual permanece obs
 Las pruebas verifican modales sin pausa, recuperación de input, multiplicadores seguros, valores no finitos y pausa explícita reversible. La prueba manual debe observar posiciones durante cinco segundos en estado normal, Diario, Mantenimiento, Alimentar, Detalles y cambio de agua.
 
 La selección y recuperación de destinos se mantienen en la capa de movimiento. Ningún modal modifica el objetivo, los bounds ni la orientación; consultar `41_FishNavigationAndBoundaryRecovery.md`.
+## Decoraciones del mundo
+
+Las decoraciones pertenecen al mundo bajo `DecorationsRoot`, nunca a `SafeArea` ni a un `CanvasGroup`. Abrir Diario, Mantenimiento, Detalles, Hábitat o Alimentación no desactiva sus vistas ni solicita una nueva sincronización.

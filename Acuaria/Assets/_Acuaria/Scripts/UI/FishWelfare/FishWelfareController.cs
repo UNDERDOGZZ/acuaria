@@ -7,6 +7,8 @@ using Acuaria.Fish.Welfare;
 using Acuaria.Simulation.Water;
 using Acuaria.UI.Aquarium;
 using Acuaria.UI.WaterChemistry;
+using Acuaria.Aquarium;
+using Acuaria.Aquarium.Decorations;
 using UnityEngine;
 namespace Acuaria.UI.FishWelfare
 {
@@ -15,10 +17,12 @@ namespace Acuaria.UI.FishWelfare
         [SerializeField] FishWelfareDefinition definition;[SerializeField] FishSpawner2D spawner;
         [SerializeField] AquariumInhabitantProvider inhabitants;[SerializeField] AquariumSimulationController simulation;
         [SerializeField] AquariumHUDController hud;[SerializeField] float aquariumVolume=50;
+        [SerializeField] AquariumDefinition aquariumDefinition;
+        [SerializeField] AquariumHabitatController habitatController;
         readonly Dictionary<string,FishWelfareState> stateById=new();readonly List<FishWelfareState> orderedStates=new();
         readonly List<FishSpeciesDefinition> uniqueSpecies=new();readonly FishWelfareEvaluator evaluator=new();
         readonly FishWelfareSimulationModel evolution=new();readonly AquariumStockingModel stocking=new();
-        readonly AquariumHabitatProfile habitat=new();float accumulator;
+        readonly AquariumHabitatProfile fallbackHabitat=new();float accumulator;
         public event Action<AquariumWelfareResult> AquariumWelfareChanged;public event Action<string,FishWelfareState> FishWelfareChanged;
         public AquariumWelfareResult Current{get;private set;}public IReadOnlyList<FishWelfareState> States=>orderedStates;
         public void Configure(FishWelfareDefinition settings,FishSpawner2D fishSpawner,AquariumInhabitantProvider provider,
@@ -39,6 +43,7 @@ namespace Acuaria.UI.FishWelfare
                 var same=0;for(var j=0;j<fish.Count;j++)if(fish[j]?.Species?.SpeciesId==movement.Species.SpeciesId)same++;
                 var compatibility=WorstFor(movement.Species,uniqueSpecies,aquariumVolume);var snapshot=simulation.Snapshot;
                 var cycle=AquariumCycleEvaluator.Evaluate(snapshot,simulation.Definition);var quality=WaterQualityEvaluator.Evaluate(snapshot,simulation.Definition,cycle);
+                var habitat=habitatController!=null?habitatController.CurrentProfile:aquariumDefinition!=null?aquariumDefinition.HabitatProfile:fallbackHabitat;
                 var context=new FishWelfareContext(hud?.RuntimeState.CurrentTemperature??25,aquariumVolume,movement.State.Satiety,same,quality.Status,compatibility,habitat,stock.Status);
                 var result=evaluator.Evaluate(movement.Species,context,definition);evolution.Step(state,result,definition,Mathf.Max(0,hours));
                 movement.SetWelfareSpeedMultiplier(FishWelfareVisualAdapter.SpeedMultiplier(state.Status));orderedStates.Add(state);FishWelfareChanged?.Invoke(state.FishInstanceId,state);}

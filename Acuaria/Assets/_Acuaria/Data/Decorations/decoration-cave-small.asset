@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa0fd46b9fccf148acfe4c7ba57a356, type: 3}
+  m_Name: decoration-cave-small
+  m_EditorClassIdentifier: Acuaria.Aquarium::Acuaria.Aquarium.Decorations.DecorationDefinition
+  decorationId: decoration.cave.small
+  displayName: "Cueva peque\xF1a"
+  description: Refugio definido para especies que buscan esconderse.
+  category: 3
+  sprite: {fileID: 21300000, guid: e2b24ecd3f8289f4693fc9d74723498a, type: 3}
+  prefab: {fileID: 0}
+  scale: {x: 1, y: 1}
+  placeholderCost: 0
+  occupiedSpace: 0.1
+  plantCoverage: 0
+  openSpaceConsumed: 0.09
+  flowResistance: 0.04
+  lightingCoverage: 0.08
+  visualComplexity: 0.3
+  hidingPlaces: 2
+  favouredSpecies:
+  - {fileID: 11400000, guid: 2ea242fc52f3e5a4b8b062d0da50c107, type: 2}
+  - {fileID: 11400000, guid: bf8dc2b60d1c0754d8800eadc418ce03, type: 2}
+  educationalText: "Un escondite permite retirarse del est\xEDmulo sin aislar permanentemente
+    al pez."

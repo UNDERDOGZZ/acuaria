@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa0fd46b9fccf148acfe4c7ba57a356, type: 3}
+  m_Name: decoration-substrate-sand
+  m_EditorClassIdentifier: Acuaria.Aquarium::Acuaria.Aquarium.Decorations.DecorationDefinition
+  decorationId: decoration.substrate.sand
+  displayName: Arena suave
+  description: "Sustrato fino de funci\xF3n informativa."
+  category: 4
+  sprite: {fileID: 21300000, guid: e2b24ecd3f8289f4693fc9d74723498a, type: 3}
+  prefab: {fileID: 0}
+  scale: {x: 1, y: 1}
+  placeholderCost: 0
+  occupiedSpace: 0.1
+  plantCoverage: 0
+  openSpaceConsumed: 0
+  flowResistance: 0
+  lightingCoverage: 0
+  visualComplexity: 0.08
+  hidingPlaces: 0
+  favouredSpecies:
+  - {fileID: 11400000, guid: bf8dc2b60d1c0754d8800eadc418ce03, type: 2}
+  educationalText: "La arena suave protege los barbillones de peces de fondo; aqu\xED
+    no modifica qu\xEDmica."

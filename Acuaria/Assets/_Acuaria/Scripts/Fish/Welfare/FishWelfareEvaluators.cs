@@ -23,7 +23,29 @@ namespace Acuaria.Fish.Welfare
             var feed=Mathf.Lerp(35,100,Mathf.Clamp01(context.Satiety/.55f));if(context.Satiety>.95f){feed=80;Add(issues,recommendations,"Saciedad muy alta","Ofrece porciones pequeñas y espera a que terminen de comer.");}
             var compatibility=context.Compatibility switch{FishCompatibilityStatus.Compatible=>100,FishCompatibilityStatus.Caution=>65,_=>25};
             if(compatibility<90)Add(issues,recommendations,"Compatibilidad requiere atención","Revisa actividad, zona y territorialidad de las especies.");
-            var zone=context.Habitat!=null&&context.Habitat.Supports(care.SwimmingZone)?100:30;if(zone<90)Add(issues,recommendations,"Zona de nado no disponible","Proporciona acceso a su zona de nado preferida.");
+            var zone=context.Habitat!=null&&context.Habitat.Supports(care.SwimmingZone)?100f:30f;
+            if(context.Habitat!=null)
+            {
+                var habitatScores=new List<float>(3);
+                if(care.NeedsHidingPlaces)
+                {
+                    var hiding=Mathf.Clamp01(context.Habitat.HidingPlaceCount/2f)*100;habitatScores.Add(hiding);
+                    if(hiding<70)Add(issues,recommendations,"Faltan escondites","Añade cuevas, troncos o rocas sin bloquear la zona de nado.");
+                }
+                if(care.NeedsPlants)
+                {
+                    var plants=care.PlantCoverageRecommended<=0?100:
+                        Mathf.Clamp01(context.Habitat.PlantCoverageAmount/care.PlantCoverageRecommended)*100;habitatScores.Add(plants);
+                    if(plants<70)Add(issues,recommendations,"Cobertura vegetal insuficiente","Añade plantas adecuadas dejando espacio libre para nadar.");
+                }
+                if(care.OpenSpaceRequired>0)
+                {
+                    var open=Mathf.Clamp01(context.Habitat.OpenSwimmingSpace/care.OpenSpaceRequired)*100;habitatScores.Add(open);
+                    if(open<70)Add(issues,recommendations,"Poco espacio abierto","Reduce elementos que ocupan la zona de nado.");
+                }
+                if(habitatScores.Count>0){var sum=0f;for(var i=0;i<habitatScores.Count;i++)sum+=habitatScores[i];zone=Mathf.Min(zone,sum/habitatScores.Count);}
+            }
+            if(zone<90&&issues.Count==0)Add(issues,recommendations,"Zona de nado no disponible","Proporciona acceso a su zona de nado preferida.");
             var total=temp*definition.TemperatureWeight+volume*definition.VolumeWeight+social*definition.SocialWeight+water*definition.WaterWeight+
                 feed*definition.FeedingWeight+compatibility*definition.CompatibilityWeight+zone*definition.ZoneWeight;
             return new FishWelfareEvaluationResult(true,Mathf.Clamp(total/definition.WeightSum,0,100),temp,volume,social,water,feed,compatibility,zone,issues,recommendations);

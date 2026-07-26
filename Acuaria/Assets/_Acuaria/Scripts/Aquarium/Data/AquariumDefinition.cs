@@ -1,4 +1,7 @@
 using UnityEngine;
+using Acuaria.Aquarium.Decorations;
+using System;
+using System.Collections.Generic;
 
 namespace Acuaria.Aquarium
 {
@@ -16,6 +19,8 @@ namespace Acuaria.Aquarium
         [SerializeField, TextArea] private string educationTip;
         [SerializeField] private Sprite icon;
         [SerializeField] private Color themeColor = new(0.18f, 0.72f, 0.78f);
+        [SerializeField] private DecorationDefinition[] installedDecorations = Array.Empty<DecorationDefinition>();
+        [SerializeField] private DecorationPlacementData[] decorationPlacements = Array.Empty<DecorationPlacementData>();
 
         public string AquariumId => aquariumId;
         public string DisplayName => displayName;
@@ -28,6 +33,9 @@ namespace Acuaria.Aquarium
         public string EducationTip => educationTip;
         public Sprite Icon => icon;
         public Color ThemeColor => themeColor;
+        public IReadOnlyList<DecorationDefinition> InstalledDecorations => installedDecorations;
+        public IReadOnlyList<DecorationPlacementData> DecorationPlacements => decorationPlacements;
+        public Acuaria.Fish.Care.AquariumHabitatProfile HabitatProfile => AquariumHabitatCalculator.Calculate(installedDecorations);
         public bool IsValid => !string.IsNullOrWhiteSpace(aquariumId) &&
                                !string.IsNullOrWhiteSpace(displayName) &&
                                nominalVolumeLitres > 0f &&
@@ -49,6 +57,11 @@ namespace Acuaria.Aquarium
             educationTip = tip;
             themeColor = color;
         }
+
+        public void ConfigureDecorations(params DecorationDefinition[] decorations) =>
+            installedDecorations = decorations ?? Array.Empty<DecorationDefinition>();
+        public void ConfigureDecorationPlacements(params DecorationPlacementData[] placements) =>
+            decorationPlacements = placements ?? Array.Empty<DecorationPlacementData>();
 
         private void OnValidate()
         {

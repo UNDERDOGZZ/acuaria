@@ -1,5 +1,11 @@
 # Acuaria
 
+## Sprint 11 — hábitat funcional
+
+Acuaria dispone de decoraciones y plantas data-driven mediante `DecorationDefinition` y `DecorationRegistry`. La composición inicial vive en `AquariumDefinition`, se agrega en `AquariumHabitatProfile` y afecta al bienestar únicamente cuando una especie requiere plantas, escondites o espacio abierto. El panel Hábitat y el catálogo de decoraciones son educativos y de solo lectura; no existen tienda, monedas, inventario ni colocación manual.
+
+Documentación: [sistema de decoraciones](docs/48_DecorationSystem.md), [simulación de hábitat](docs/49_HabitatSimulation.md), [catálogo](docs/50_DecorationCatalog.md) y [pipeline visual](docs/51_DecorationVisualPipeline.md).
+
 Acuaria es un juego mobile de simulación, colección y decoración de acuarios. Su visión es ofrecer una experiencia acogedora donde cada acuario sea un ecosistema independiente y el jugador aprenda acuarismo mientras construye la habitación de sus sueños.
 
 ## Estado

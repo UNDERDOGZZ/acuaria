@@ -47,3 +47,6 @@ Un detector de atasco muestrea progreso horizontal en intervalos configurables. 
 
 EditMode cubre bounds positivos, inset excesivo, destino contrario, distancia mínima, fallback, llegada, detección de borde y dirección interior. Manualmente se deben observar los tres peces durante cinco minutos y repetir Diario, Mantenimiento, Detalles, FeedingMode y cambio de agua.
 Los perfiles reales conservan `SwimmingLevel`; Upper, Middle y Lower sesgan destinos sin alterar bounds ni recuperación horizontal.
+## Decoraciones
+
+Las decoraciones del hotfix son puramente visuales y no incorporan colliders sólidos. Los peces conservan sus límites, recuperación horizontal y búsqueda de comida; pueden cruzar visualmente un placeholder hasta que exista navegación alrededor de obstáculos.

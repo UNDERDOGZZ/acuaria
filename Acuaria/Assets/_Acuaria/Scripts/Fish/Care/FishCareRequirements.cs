@@ -74,8 +74,17 @@ namespace Acuaria.Fish.Care
     }
     [Serializable] public sealed class AquariumHabitatProfile
     {
-        public bool UpperZoneAvailable=true,MiddleZoneAvailable=true,LowerZoneAvailable=true,HidingPlaces=true,PlantCoverage=true;
-        [Range(0,1)] public float OpenSwimmingSpace=.8f;
+        public bool UpperZoneAvailable=true,MiddleZoneAvailable=true,LowerZoneAvailable=true;
+        [Range(0,1)] public float PlantCoverageAmount;
+        [Min(0)] public float HidingPlaceCount;
+        [Range(0,1)] public float OpenSwimmingSpace=1f,FlowResistance,LightingCoverage,VisualComplexity;
+        public bool HidingPlaces=>HidingPlaceCount>=1;
+        public bool PlantCoverage=>PlantCoverageAmount>=.2f;
+        public AquariumHabitatProfile(){}
+        public AquariumHabitatProfile(float plants,float hiding,float open,float flow,float lighting,float complexity)
+        {PlantCoverageAmount=Mathf.Clamp01(plants);HidingPlaceCount=Mathf.Max(0,hiding);OpenSwimmingSpace=Mathf.Clamp01(open);
+         FlowResistance=Mathf.Clamp01(flow);LightingCoverage=Mathf.Clamp01(lighting);VisualComplexity=Mathf.Clamp01(complexity);}
+        public float OverallScore=>Mathf.Clamp01((PlantCoverageAmount+Mathf.Clamp01(HidingPlaceCount/3f)+OpenSwimmingSpace+VisualComplexity)/4f)*100;
         public bool Supports(SwimmingLevel zone)=>zone==SwimmingLevel.Any||zone==SwimmingLevel.Upper&&UpperZoneAvailable||
             zone==SwimmingLevel.Middle&&MiddleZoneAvailable||zone==SwimmingLevel.Lower&&LowerZoneAvailable;
     }
