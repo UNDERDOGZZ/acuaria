@@ -20,6 +20,9 @@ namespace Acuaria.Simulation.Filtration
           HoursSinceMaintenance=Safe(hours);Status=status;MaintenanceRecommended=recommended; }
         public void RecordMaintenance()=>MaintenanceCount++;
         public void SetActive(bool value)=>IsActive=value;
+        public void Restore(string id,FilterDefinition definition,bool active,float dirt,float efficiency,float capacity,
+            float hours,FilterOperatingStatus status,bool recommended,int maintenanceCount)
+        {Initialize(id,definition);IsActive=active;Apply(dirt,efficiency,capacity,hours,status,recommended);MaintenanceCount=Math.Max(0,maintenanceCount);}
         private static float Safe(float v)=>float.IsFinite(v)?Mathf.Max(0f,v):0f;
     }
 }

@@ -20,5 +20,6 @@ namespace Acuaria.Aquarium.MultiAquarium
             var value = Find(id); if (value == null) return false;
             byId.Remove(id); ordered.Remove(value); return true;
         }
+        internal void Clear() { byId.Clear(); ordered.Clear(); }
     }
 }

@@ -32,5 +32,10 @@ namespace Acuaria.Aquarium.MultiAquarium
             return true;
         }
         public bool SetActiveAquarium(AquariumInstance next) => SetActive(next);
+        internal void Clear()
+        {
+            if (ActiveAquarium != null) ActiveAquarium.IsActive = false;
+            ActiveAquarium = null;
+        }
     }
 }

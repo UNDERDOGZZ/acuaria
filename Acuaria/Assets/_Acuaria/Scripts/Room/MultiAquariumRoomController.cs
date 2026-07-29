@@ -27,12 +27,15 @@ namespace Acuaria.Room
         {
             if(manager==null)manager=AquariumManager.Instance;
             if(manager==null||definition==null){Debug.LogError("MultiAquariumRoomController is not configured.",this);return;}
-            if(manager.ActiveAquarium==null)manager.CreateAquarium(definition,"aquarium-01","Acuario Inicial");
-            slots[0].Assign(manager.ActiveAquarium); ConfigureSlot(slots[0], 0);
-            var second=manager.Find("aquarium-02")??manager.CreateAquarium(DefinitionAt(1),"aquarium-02","Acuario 2");
-            if(second.FishCollection.Count==0)second.FishCollection.Add("aquarium-02-fish-01");
+            var first=FindForSlot("slot-01")??manager.Find("aquarium-01");
+            if(first==null)first=manager.CreateAquarium(definition,"aquarium-01","Acuario Inicial");
+            slots[0].Assign(first); ConfigureSlot(slots[0], 0);
+            var second=FindForSlot("slot-02")??manager.Find("aquarium-02");
+            var createdSecond=second==null;
+            second??=manager.CreateAquarium(DefinitionAt(1),"aquarium-02","Acuario 2");
+            if(createdSecond)second.FishCollection.Add("aquarium-02-fish-01");
             slots[1].Assign(second); ConfigureSlot(slots[1], 1);
-            var third=manager.Find("aquarium-03")??manager.CreateAquarium(DefinitionAt(2),"aquarium-03","Acuario 3");
+            var third=FindForSlot("slot-03")??manager.Find("aquarium-03")??manager.CreateAquarium(DefinitionAt(2),"aquarium-03","Acuario 3");
             slots[2].Assign(third); ConfigureSlot(slots[2], 2);
             for(var i=0;i<slotButtons.Length&&i<slots.Length;i++){var index=i;slotButtons[i]?.onClick.AddListener(()=>UseSlot(index));}
             manager.OnActiveAquariumChanged+=OnActiveChanged;Refresh();
@@ -40,6 +43,13 @@ namespace Acuaria.Room
         }
         AquariumDefinition DefinitionAt(int index)=>definitions!=null&&index>=0&&index<definitions.Length&&definitions[index]!=null
             ?definitions[index]:definition;
+        AquariumInstance FindForSlot(string id)
+        {
+            if(manager==null)return null;
+            foreach(var aquarium in manager.Aquariums)
+                if(string.Equals(aquarium.SlotId,id,StringComparison.Ordinal))return aquarium;
+            return null;
+        }
         static void ConfigureSlot(AquariumSlot slot,int index)
         {
             if(slot?.Aquarium==null)return;

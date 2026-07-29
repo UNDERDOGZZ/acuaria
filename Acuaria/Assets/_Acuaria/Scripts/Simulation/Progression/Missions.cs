@@ -23,6 +23,7 @@ namespace Acuaria.Progression
         {if(definition==null||!definition.IsValid)throw new ArgumentException();MissionId=definition.MissionId;Progress=0;Status=active?MissionStatus.Active:MissionStatus.Locked;IsInitialized=true;}
         public bool AddProgress(int amount,int target){if(Status!=MissionStatus.Active||amount<=0)return false;Progress=Math.Min(Math.Max(1,target),Progress+amount);if(Progress>=target){Status=MissionStatus.Completed;return true;}return false;}
         public void Claim(){if(Status==MissionStatus.Completed)Status=MissionStatus.Claimed;}
+        public void Restore(int progress,MissionStatus status,int target){Progress=Math.Clamp(progress,0,Math.Max(1,target));Status=status;}
     }
     public sealed class MissionEvaluator
     {

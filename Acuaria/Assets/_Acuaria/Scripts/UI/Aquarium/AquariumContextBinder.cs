@@ -78,6 +78,7 @@ namespace Acuaria.UI.Aquarium
             var spawnerForAquarium=SpawnerFor(aquarium);
             welfare?.Bind(aquarium,spawnerForAquarium);
             if(manageFishPresentation)fishSpawner?.BindStates(aquarium.FishCollection.Fish);
+            else spawnerForAquarium?.BindStates(aquarium.FishCollection.Fish);
         }
         FishSpawner2D SpawnerFor(AquariumInstance aquarium)
         {

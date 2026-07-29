@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Acuaria.Aquarium.MultiAquarium
 {
+    [DefaultExecutionOrder(-1200)]
     public sealed class AquariumManager : MonoBehaviour
     {
         public static AquariumManager Instance { get; private set; }
@@ -32,9 +33,14 @@ namespace Acuaria.Aquarium.MultiAquarium
         public AquariumInstance Find(string id) => repository.Find(id);
         public bool Activate(string id)
         {
+            return ActivateInternal(id, true);
+        }
+        public bool RestoreActiveAquarium(string id) => ActivateInternal(id, false);
+        bool ActivateInternal(string id, bool recordActivation)
+        {
             var next = repository.Find(id); if (next == null || ReferenceEquals(next, ActiveAquarium)) return false;
             var previous = ActiveAquarium; if (previous != null) { previous.RuntimeState.SetFocused(false); OnAquariumDeactivated?.Invoke(previous); }
-            next.RuntimeState.SetFocused(true); next.StatisticsState.Activate(); context.SetActive(next);
+            next.RuntimeState.SetFocused(true); if(recordActivation) next.StatisticsState.Activate(); context.SetActive(next);
             OnAquariumActivated?.Invoke(next); OnActiveAquariumChanged?.Invoke(previous, next); return true;
         }
         public bool ActivateNext(int direction)
@@ -57,6 +63,11 @@ namespace Acuaria.Aquarium.MultiAquarium
         public void TickInactive(double seconds)
         {
             foreach (var aquarium in repository.All) if (!ReferenceEquals(aquarium, ActiveAquarium)) aquarium.TickInactive(seconds);
+        }
+        public void ResetForLoad()
+        {
+            context.Clear();
+            repository.Clear();
         }
         void OnDestroy() { if (Instance == this) Instance = null; }
     }

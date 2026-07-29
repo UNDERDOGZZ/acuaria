@@ -1,5 +1,16 @@
 # Acuaria
 
+## Sprint 14 — guardado local
+
+La partida se captura en DTOs puros y se guarda como JSON versionado en
+`Application.persistentDataPath`. La escritura usa temporal, verificación SHA-256, archivo
+principal y backup; una carga inválida intenta el respaldo y una versión futura nunca se
+sobrescribe. `SaveCoordinator` restaura el repositorio multiacuario antes de que la UI cree
+contenido por defecto y realiza autosave con dirty state y debounce.
+
+Documentación: [arquitectura](docs/70_SaveSystemArchitecture.md),
+[esquema](docs/71_SaveDataSchema.md) y [guía de pruebas](docs/77_SaveTestingGuide.md).
+
 ## Sprint 13 — arquitectura multiacuario
 
 El dominio incorpora `AquariumInstance` como agregado independiente, creado exclusivamente por

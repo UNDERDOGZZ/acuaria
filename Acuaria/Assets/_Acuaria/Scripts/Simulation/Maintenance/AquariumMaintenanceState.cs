@@ -44,6 +44,15 @@ namespace Acuaria.Simulation.Maintenance
         public void Cancel() { if (!IsActive || Phase == AquariumMaintenancePhase.Preparing) { Phase = AquariumMaintenancePhase.Cancelled; LastResult = AquariumMaintenanceResult.Cancelled; Progress = 0f; } }
         public void ReturnToIdle() { if (!IsActive) Phase = AquariumMaintenancePhase.Idle; }
         public void AdvanceCooldown(float seconds) => CooldownRemaining = Mathf.Max(0f, CooldownRemaining - Safe(seconds));
+        public void RestoreStable(string id, AquariumMaintenanceResult result, int percentage, float cooldown,
+            float totalChanged, int changes)
+        {
+            if (string.IsNullOrWhiteSpace(id)) throw new ArgumentException(nameof(id));
+            InstanceId = id; Phase = AquariumMaintenancePhase.Idle; Progress = 0f;
+            LastResult = result; LastPercentage = Mathf.Clamp(percentage, 0, 100);
+            CooldownRemaining = Safe(cooldown); TotalWaterChangedPercent = Safe(totalChanged);
+            ChangesPerformed = Math.Max(0, changes); IsInitialized = true;
+        }
         private static float Safe(float value) => float.IsFinite(value) ? Mathf.Max(0f, value) : 0f;
     }
 }

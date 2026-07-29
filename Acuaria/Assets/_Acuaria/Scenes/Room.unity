@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
     m_Mode: 3
@@ -81539,6 +81539,7 @@ GameObject:
   - component: {fileID: 2002237750}
   - component: {fileID: 2002237749}
   - component: {fileID: 2002237748}
+  - component: {fileID: 2002237754}
   m_Layer: 0
   m_Name: MultiAquariumRuntime
   m_TagString: Untagged
@@ -81579,6 +81580,7 @@ MonoBehaviour:
   - {fileID: 2015220569}
   - {fileID: 471570508}
   - {fileID: 984488887}
+  journal: {fileID: 704068109}
 --- !u!114 &2002237749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81679,6 +81681,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a336aec11c69f4f8d6f69aba601551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Acuaria.Aquarium::Acuaria.Aquarium.MultiAquarium.AquariumManager
+--- !u!114 &2002237754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002237746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81336b27d8d62364aa24bf567ca50872, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Acuaria.Room::Acuaria.Room.SaveCoordinator
+  manager: {fileID: 2002237753}
+  aquariumDefinitions:
+  - {fileID: 11400000, guid: 99477183209131f48b71507314f7309b, type: 2}
+  - {fileID: 11400000, guid: f52b96585c1119a419956772d960a29c, type: 2}
+  - {fileID: 11400000, guid: c29a1c87af5c9a943b87c9fb2cffca99, type: 2}
+  decorationRegistry: {fileID: 11400000, guid: 4b4f9616acbb50749b7a9f627efc8b63, type: 2}
+  waterDefinition: {fileID: 11400000, guid: b26341852e2bf98419440b0a8b875d9c, type: 2}
+  filterDefinition: {fileID: 11400000, guid: e67749964b48c5144aa26ca02ff9691d, type: 2}
+  bindings:
+  - {fileID: 2015220569}
+  - {fileID: 471570508}
+  - {fileID: 984488887}
+  journal: {fileID: 704068109}
+  debounceSeconds: 2
+  minimumSaveInterval: 5
 --- !u!1 &2004212548
 GameObject:
   m_ObjectHideFlags: 0

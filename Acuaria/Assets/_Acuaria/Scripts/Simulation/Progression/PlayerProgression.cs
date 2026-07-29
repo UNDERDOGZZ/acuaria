@@ -12,6 +12,7 @@ namespace Acuaria.Progression
         public int TotalXp{get;private set;}public event Action<int,int> ExperienceGained;public event Action<PlayerLevel> LevelReached;
         public PlayerLevel Level=>CalculateLevel(TotalXp);
         public int Add(int amount){if(amount<=0)return 0;var before=Level.Number;TotalXp=Math.Min(int.MaxValue,TotalXp+amount);ExperienceGained?.Invoke(amount,TotalXp);if(Level.Number>before)LevelReached?.Invoke(Level);return amount;}
+        public void Restore(int totalXp)=>TotalXp=Math.Max(0,totalXp);
         public static PlayerLevel CalculateLevel(int xp){xp=Math.Max(0,xp);var level=1;var required=100;var consumed=0;while(xp>=consumed+required&&level<10000){consumed+=required;level++;required=100+(level-1)*50;}
             var title=level switch{1=>"Principiante",2=>"Aprendiz",3=>"Cuidador",4=>"Acuarista",_=>"Experto"};return new PlayerLevel(level,title,xp-consumed,required);}
     }
@@ -23,6 +24,12 @@ namespace Acuaria.Progression
         public void RecordMeal()=>MealsGiven++;public void RecordWaterChange()=>WaterChanges++;public void RecordFilterCleaning()=>FilterCleanings++;
         public void RecordWaste()=>WastedFood++;public void AddXp(int value)=>XpEarned=Math.Max(0,XpEarned+Math.Max(0,value));
         public void AddSimulation(float hours,bool excellentWater,bool excellentWelfare){if(!float.IsFinite(hours)||hours<=0)return;SimulatedHours+=hours;if(excellentWater)ExcellentWaterHours+=hours;if(excellentWelfare)ExcellentWelfareHours+=hours;}
+        public void Restore(int meals,int waterChanges,int filterCleanings,double simulatedHours,int xpEarned,
+            double excellentWater,double excellentWelfare,int wastedFood)
+        {MealsGiven=Math.Max(0,meals);WaterChanges=Math.Max(0,waterChanges);FilterCleanings=Math.Max(0,filterCleanings);
+         SimulatedHours=double.IsFinite(simulatedHours)?Math.Max(0,simulatedHours):0;XpEarned=Math.Max(0,xpEarned);
+         ExcellentWaterHours=double.IsFinite(excellentWater)?Math.Max(0,excellentWater):0;
+         ExcellentWelfareHours=double.IsFinite(excellentWelfare)?Math.Max(0,excellentWelfare):0;WastedFood=Math.Max(0,wastedFood);}
     }
     [Serializable] public sealed class PlayerProgression
     {

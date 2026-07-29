@@ -9,6 +9,7 @@ using Acuaria.UI.Progression;
 using Acuaria.UI.WaterChemistry;
 using Acuaria.Fish;
 using Acuaria.UI.FishWelfare;
+using Acuaria.Simulation.Water;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -93,7 +94,7 @@ namespace Acuaria.Editor
             var old=Find("MultiAquariumRuntime");if(old!=null)Object.DestroyImmediate(old.gameObject);
             var runtime=new GameObject("MultiAquariumRuntime",typeof(AquariumManager),typeof(AquariumContextBinder),
                 typeof(MultiAquariumRoomController),typeof(AquariumSwipeNavigationController),
-                typeof(AquariumCameraCarouselController),typeof(AquariumNavigationCoordinator));
+                typeof(AquariumCameraCarouselController),typeof(AquariumNavigationCoordinator),typeof(SaveCoordinator));
             runtime.transform.SetParent(root,false);
             var manager=runtime.GetComponent<AquariumManager>();
             var hud=Object.FindFirstObjectByType<AquariumHUDController>(FindObjectsInactive.Include);
@@ -142,6 +143,11 @@ namespace Acuaria.Editor
             roomController.Configure(manager,definition,buttons,labels);
             roomController.SetDefinitions(aquariumDefinitions);
             roomController.SetNavigation(navigation);
+            runtime.GetComponent<SaveCoordinator>().Configure(manager,aquariumDefinitions,
+                AssetDatabase.LoadAssetAtPath<DecorationRegistry>("Assets/_Acuaria/Data/Decorations/DecorationRegistry.asset"),
+                AssetDatabase.LoadAssetAtPath<WaterChemistryDefinition>("Assets/_Acuaria/Data/WaterChemistry/StarterAquariumChemistry.asset"),
+                bindings,journal,AssetDatabase.LoadAssetAtPath<Acuaria.Simulation.Filtration.FilterDefinition>(
+                    "Assets/_Acuaria/Data/Filters/StarterInternalFilter.asset"));
             EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);AssetDatabase.SaveAssets();
             Debug.Log("Sprint 13 multi-aquarium runtime and three slots configured.");
         }

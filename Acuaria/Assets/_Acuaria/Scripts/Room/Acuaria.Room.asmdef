@@ -1,6 +1,6 @@
 {
   "name": "Acuaria.Room",
   "rootNamespace": "Acuaria.Room",
-  "references": ["Acuaria.Core", "Acuaria.Food", "Acuaria.Fish", "Acuaria.UI", "Acuaria.Aquarium", "UnityEngine.UI", "Unity.InputSystem"],
+  "references": ["Acuaria.Core", "Acuaria.Food", "Acuaria.Fish", "Acuaria.UI", "Acuaria.Aquarium", "Acuaria.Simulation", "UnityEngine.UI", "Unity.InputSystem"],
   "autoReferenced": true
 }

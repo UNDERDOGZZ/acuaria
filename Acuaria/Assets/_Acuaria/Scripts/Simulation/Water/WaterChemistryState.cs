@@ -86,6 +86,20 @@ namespace Acuaria.Simulation.Water
             return copy;
         }
 
+        public void Restore(string id, float ammonia, float nitrite, float nitrate, float ammoniaBacteria,
+            float nitriteBacteria, float waste, double totalSeconds, float lastStep,
+            WaterParameterTrend ammoniaTrend, WaterParameterTrend nitriteTrend, WaterParameterTrend nitrateTrend,
+            WaterChemistryDefinition definition)
+        {
+            if (string.IsNullOrWhiteSpace(id) || definition == null) throw new ArgumentException("Valid restore data is required.");
+            InstanceId = id;
+            SetValues(ammonia, nitrite, nitrate, ammoniaBacteria, nitriteBacteria, waste, definition);
+            TotalSimulatedSeconds = double.IsFinite(totalSeconds) ? Math.Max(0d, totalSeconds) : 0d;
+            LastSimulationStep = float.IsFinite(lastStep) ? Mathf.Max(0f, lastStep) : 0f;
+            AmmoniaTrend = ammoniaTrend; NitriteTrend = nitriteTrend; NitrateTrend = nitrateTrend;
+            Version = Math.Max(1u, Version); IsInitialized = true;
+        }
+
         private void SetWaste(float waste, WaterChemistryDefinition definition)
         {
             OrganicWaste = Mathf.Clamp(Safe(waste), 0f, definition.MaximumWaste);

@@ -5,6 +5,7 @@ using Acuaria.Fish.Care;
 using Acuaria.Fish;
 using Acuaria.Simulation.Maintenance;
 using Acuaria.Simulation.Water;
+using Acuaria.Simulation.Filtration;
 
 namespace Acuaria.Aquarium.MultiAquarium
 {
@@ -34,6 +35,14 @@ namespace Acuaria.Aquarium.MultiAquarium
             fish.RemoveAt(index); Changed?.Invoke(); return true;
         }
         public bool Contains(string id) => fish.Exists(item => item.InstanceId == id);
+        public void Replace(IEnumerable<FishRuntimeState> values)
+        {
+            fish.Clear();
+            if (values != null)
+                foreach (var value in values)
+                    if (value?.IsInitialized == true && !Contains(value.InstanceId)) fish.Add(value);
+            Changed?.Invoke();
+        }
     }
 
     [Serializable]
@@ -50,6 +59,11 @@ namespace Acuaria.Aquarium.MultiAquarium
         readonly List<string> entries = new();
         public IReadOnlyList<string> Entries => entries;
         public void Record(string entry) { if (!string.IsNullOrWhiteSpace(entry)) entries.Add(entry); }
+        public void Restore(IEnumerable<string> values)
+        {
+            entries.Clear();
+            if (values != null) foreach (var value in values) Record(value);
+        }
     }
 
     [Serializable]
@@ -59,6 +73,11 @@ namespace Acuaria.Aquarium.MultiAquarium
         public int Activations { get; private set; }
         public void Activate() => Activations++;
         public void AddActiveTime(double seconds) { if (double.IsFinite(seconds) && seconds > 0) ActiveSeconds += seconds; }
+        public void Restore(double activeSeconds, int activations)
+        {
+            ActiveSeconds = double.IsFinite(activeSeconds) ? Math.Max(0d, activeSeconds) : 0d;
+            Activations = Math.Max(0, activations);
+        }
     }
 
     [Serializable]
@@ -66,6 +85,8 @@ namespace Acuaria.Aquarium.MultiAquarium
     {
         public double SimplifiedSimulatedSeconds { get; private set; }
         public void Tick(double seconds) { if (double.IsFinite(seconds) && seconds > 0) SimplifiedSimulatedSeconds += seconds; }
+        public void Restore(double seconds) =>
+            SimplifiedSimulatedSeconds = double.IsFinite(seconds) ? Math.Max(0d, seconds) : 0d;
     }
 
     [Serializable]
@@ -81,6 +102,7 @@ namespace Acuaria.Aquarium.MultiAquarium
         public WaterChemistryState WaterState { get; private set; }
         public NitrogenCycleRuntimeState NitrogenCycleState { get; }
         public AquariumMaintenanceState MaintenanceState { get; }
+        public FilterRuntimeState FilterState { get; } = new();
         public AquariumJournalState JournalState { get; }
         public AquariumStatisticsState StatisticsState { get; }
         public string SlotId { get; internal set; }
@@ -104,6 +126,11 @@ namespace Acuaria.Aquarium.MultiAquarium
         public void SetName(string value) { if (!string.IsNullOrWhiteSpace(value)) { Name = value.Trim(); NotifySummaryChanged(); } }
         public void SetHabitat(AquariumHabitatProfile value) => HabitatProfile = value ?? new AquariumHabitatProfile();
         public void ReplaceWaterState(WaterChemistryState value) { if (value != null) WaterState = value; }
+        public FilterRuntimeState EnsureFilterState(FilterDefinition definition)
+        {
+            if (!FilterState.IsInitialized && definition != null) FilterState.Initialize($"{InstanceId}-filter", definition);
+            return FilterState;
+        }
         public void TickInactive(double seconds) => NitrogenCycleState.Tick(seconds);
         public void SetTemperature(float value) { RuntimeState.SetTemperature(value); NotifySummaryChanged(); }
         public void AssignPresentation(string slotId,string visualRootId)

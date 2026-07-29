@@ -17,7 +17,7 @@ namespace Acuaria.UI.Maintenance
         [SerializeField] AquariumSimulationController simulation;[SerializeField] AquariumHUDController hud;
         [SerializeField] FeedingUIController feeding;[SerializeField] AquariumMaintenancePanel panel;
         [SerializeField] WaterChangeVisualController visuals;[SerializeField] Button openButton;[SerializeField] Button backButton;
-        AquariumMaintenanceState state=new();readonly FilterRuntimeState filterState=new();
+        AquariumMaintenanceState state=new();FilterRuntimeState filterState=new();
         readonly WaterChangeModel waterChange=new();readonly FilterSimulationModel filterSimulation=new();
         readonly FilterMaintenanceModel filterMaintenance=new();int selected=25;bool applied;Coroutine flow;bool focused;
         public event Action<AquariumMaintenancePhase> PhaseChanged;public event Action<int> WaterChangeCompleted;
@@ -28,7 +28,7 @@ namespace Acuaria.UI.Maintenance
         {
             if(aquarium==null||ReferenceEquals(BoundAquarium,aquarium))return;
             if(IsActive)Cancel();
-            BoundAquarium=aquarium;state=aquarium.MaintenanceState;Refresh();
+            BoundAquarium=aquarium;state=aquarium.MaintenanceState;filterState=aquarium.EnsureFilterState(filterDefinition);Refresh();
         }
         public void Configure(AquariumMaintenanceDefinition maintenance,FilterDefinition filter,AquariumSimulationController chemistry,
             AquariumHUDController hudController,FeedingUIController feedingController,AquariumMaintenancePanel maintenancePanel,

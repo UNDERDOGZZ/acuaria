@@ -18,6 +18,7 @@ namespace Acuaria.Fish
         public int SpawnedCount => spawned.Count;
         public event Action PopulationChanged;
         public IReadOnlyList<FishMovement2D> SpawnedFish => spawned;
+        public AquariumSwimArea2D SwimArea => swimArea;
 
         private void Start() => Spawn();
 
