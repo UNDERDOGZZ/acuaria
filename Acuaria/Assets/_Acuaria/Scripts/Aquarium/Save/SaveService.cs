@@ -6,7 +6,7 @@ namespace Acuaria.Save
     public sealed class SaveOperationResult
     {
         public bool Success; public string Message; public AcuariaSaveData Data;
-        public SaveLoadSource Source; public SaveValidationResult Validation;
+        public SaveLoadSource Source; public SaveValidationResult Validation; public bool WasMigrated;
     }
     public sealed class SaveService
     {
@@ -53,8 +53,10 @@ namespace Acuaria.Save
                 if (validation.IsFutureVersion) return new SaveOperationResult { Message = "Future schema was not modified.", Source = source, Validation = validation };
                 if (!validation.IsValid || !SaveIntegrity.Verify(data, serializer))
                 { storage.PreserveCorrupt(path); return new SaveOperationResult { Message = "Validation or checksum failed.", Source = source, Validation = validation }; }
+                var sourceSchemaVersion = data.SchemaVersion;
                 data = migrations.Migrate(data);
-                return new SaveOperationResult { Success = true, Message = "Loaded.", Source = source, Data = data, Validation = validation };
+                return new SaveOperationResult { Success = true, Message = "Loaded.", Source = source, Data = data,
+                    Validation = validation, WasMigrated = data.SchemaVersion != sourceSchemaVersion };
             }
             catch (Exception exception) { storage.PreserveCorrupt(path); return new SaveOperationResult { Message = exception.Message, Source = source }; }
         }

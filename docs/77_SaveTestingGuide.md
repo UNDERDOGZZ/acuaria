@@ -12,3 +12,6 @@ principal y comprobar recuperación; no usar partidas reales sin respaldo.
 
 Android e iOS requieren prueba en dispositivo de suspensión, kill del proceso, espacio lleno y
 permisos. En este sprint solo se valida Editor/Windows; no se afirma certificación móvil.
+# Pruebas offline
+
+La suite EditMode cubre validación temporal, cap, determinismo, idempotencia, seguridad, multiacuario, agregación y migración. La guía manual ampliada está en `docs/85_OfflineProgressTestingGuide.md`.

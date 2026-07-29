@@ -57,6 +57,18 @@ namespace Acuaria.UI.Progression
             var hours=Mathf.Max(0,state.LastSimulationStep/3600f);player.Statistics.AddSimulation(hours,quality.Status==WaterQualityStatus.Excellent,welfare!=null&&welfare.Current.Status==FishWelfareStatus.Excellent);
             var whole=(int)player.Statistics.ExcellentWaterHours;if(whole>lastExcellentWaterHour){Process(ProgressionEventType.ExcellentWaterHour,whole-lastExcellentWaterHour);lastExcellentWaterHour=whole;}Refresh();}
         void OnWelfare(AquariumWelfareResult result){var whole=(int)player.Statistics.ExcellentWelfareHours;if(whole>lastExcellentWelfareHour){Process(ProgressionEventType.GoodWelfareHour,whole-lastExcellentWelfareHour);lastExcellentWelfareHour=whole;}if(result.Status==FishWelfareStatus.Excellent)Unlock("schooling");Refresh();}
+        public void ApplyOfflineProgress(float hours,bool excellentWater,bool excellentWelfare)
+        {
+            if(!float.IsFinite(hours)||hours<=0)return;
+            var previousWater=(int)player.Statistics.ExcellentWaterHours;var previousWelfare=(int)player.Statistics.ExcellentWelfareHours;
+            player.Statistics.AddSimulation(hours,excellentWater,excellentWelfare);
+            var waterDelta=(int)player.Statistics.ExcellentWaterHours-previousWater;
+            var welfareDelta=(int)player.Statistics.ExcellentWelfareHours-previousWelfare;
+            if(waterDelta>0)Process(ProgressionEventType.ExcellentWaterHour,waterDelta);
+            if(welfareDelta>0)Process(ProgressionEventType.GoodWelfareHour,welfareDelta);
+            lastExcellentWaterHour=(int)player.Statistics.ExcellentWaterHours;
+            lastExcellentWelfareHour=(int)player.Statistics.ExcellentWelfareHours;Refresh();
+        }
         void Process(ProgressionEventType type,int amount=1){missions.Process(type,amount);achievements.Process(type,amount);player.NotifyChanged();Refresh();}
         void Unlock(string id){if(codex.Unlock(id)){missions.Process(ProgressionEventType.ConceptLearned);achievements.Process(ProgressionEventType.ConceptLearned);player.NotifyChanged();Refresh();}}
         void OnMissionCompleted(MissionDefinition mission)=>Notify($"Misión completada: {mission.Title}");

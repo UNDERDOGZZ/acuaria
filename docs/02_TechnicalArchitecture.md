@@ -40,3 +40,6 @@ La configuración vive en ScriptableObjects, el estado y los cálculos en `Acuar
 El dominio de bienestar vive en `Acuaria.Fish`; la UI solo coordina estados, eventos y adaptación visual.
 Las especies reales se componen desde perfiles serializables, un registry explícito y presets de población. La UI consume view models; no calcula biología ni instancia peces.
 El editor de hábitat separa dominio puro (snapshot, validación, footprint y comandos), coordinación runtime, input y UI. Las vistas nunca escriben directamente en simulación.
+# Sprint 15
+
+La capa de progreso offline opera exclusivamente sobre DTOs de dominio y se ejecuta entre carga/migración y restauración del runtime. La UI consume únicamente el reporte resultante.

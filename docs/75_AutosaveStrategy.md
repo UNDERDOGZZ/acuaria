@@ -7,3 +7,6 @@ frame. El debounce es de 2 segundos y el intervalo mínimo entre escrituras es d
 Pausa, pérdida de foco y salida solicitan guardado inmediato. `SaveService` rechaza una segunda
 operación mientras otra está activa. Las animaciones de mantenimiento no se reanudan a mitad:
 se persiste y restaura el último estado estable `Idle`.
+# Persistencia offline
+
+El estado offline se guarda inmediatamente por defecto. Si falla, el coordinador queda `Dirty` y el autosave vuelve a intentarlo; el intervalo no se vuelve a ejecutar dentro de la sesión.

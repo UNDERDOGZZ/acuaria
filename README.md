@@ -100,3 +100,6 @@ La navegación multiacuario usa `AquariumContext` como única fuente del acuario
 RoomOverview usa ahora un carrusel espacial: raíces reales por slot, preview lateral y transición ortográfica animada compartida por botones y swipe. Véanse `docs/66_AquariumCarouselLayout.md` a `docs/69_RoomOverviewComposition.md`.
 
 El escenario cubre todo el recorrido horizontal; los tanques conservan escala uniforme, foco propio y parámetros independientes. El HUD, las tarjetas y la población visual se sincronizan con el `AquariumInstance` activo.
+# Sprint 15: progreso offline
+
+Acuaria incluye progreso offline determinista y acotado para todos los acuarios. El guardado v2 registra el último intervalo aplicado; ausencias menores de cinco minutos se ignoran y las largas se limitan a 48 horas. Véase `docs/78_OfflineProgressArchitecture.md`.

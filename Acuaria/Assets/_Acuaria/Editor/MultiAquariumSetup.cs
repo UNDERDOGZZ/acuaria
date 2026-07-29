@@ -10,6 +10,7 @@ using Acuaria.UI.WaterChemistry;
 using Acuaria.Fish;
 using Acuaria.UI.FishWelfare;
 using Acuaria.Simulation.Water;
+using Acuaria.Offline;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -148,6 +149,13 @@ namespace Acuaria.Editor
                 AssetDatabase.LoadAssetAtPath<WaterChemistryDefinition>("Assets/_Acuaria/Data/WaterChemistry/StarterAquariumChemistry.asset"),
                 bindings,journal,AssetDatabase.LoadAssetAtPath<Acuaria.Simulation.Filtration.FilterDefinition>(
                     "Assets/_Acuaria/Data/Filters/StarterInternalFilter.asset"));
+            if(!AssetDatabase.IsValidFolder("Assets/_Acuaria/Data/Settings"))
+                AssetDatabase.CreateFolder("Assets/_Acuaria/Data","Settings");
+            var offline=AssetDatabase.LoadAssetAtPath<OfflineSimulationDefinition>("Assets/_Acuaria/Data/Settings/OfflineSimulationDefinition.asset");
+            if(offline==null){offline=ScriptableObject.CreateInstance<OfflineSimulationDefinition>();
+                AssetDatabase.CreateAsset(offline,"Assets/_Acuaria/Data/Settings/OfflineSimulationDefinition.asset");}
+            var saveCoordinator=runtime.GetComponent<SaveCoordinator>();saveCoordinator.SetOfflineDefinition(offline);
+            CreateOfflineSummary(safe,saveCoordinator);
             EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);AssetDatabase.SaveAssets();
             Debug.Log("Sprint 13 multi-aquarium runtime and three slots configured.");
         }
@@ -171,6 +179,32 @@ namespace Acuaria.Editor
             foreach(var item in Resources.FindObjectsOfTypeAll<Transform>())
                 if(item!=null&&item.gameObject.scene.IsValid()&&item.name==name)return item;
             return null;
+        }
+        static void CreateOfflineSummary(Transform safe,SaveCoordinator coordinator)
+        {
+            var old=safe.Find("OfflineProgressSummary");if(old!=null)Object.DestroyImmediate(old.gameObject);
+            var root=new GameObject("OfflineProgressSummary",typeof(RectTransform),typeof(Image),typeof(CanvasGroup),typeof(OfflineProgressSummaryPanel));
+            root.transform.SetParent(safe,false);var rect=root.GetComponent<RectTransform>();
+            rect.anchorMin=new Vector2(.25f,.22f);rect.anchorMax=new Vector2(.75f,.78f);rect.offsetMin=rect.offsetMax=Vector2.zero;
+            root.GetComponent<Image>().color=new Color(.025f,.07f,.1f,.98f);
+            var title=CreateSummaryText(root.transform,"Title",new Vector2(.06f,.8f),new Vector2(.94f,.94f),26,TextAnchor.MiddleLeft);
+            var body=CreateSummaryText(root.transform,"Body",new Vector2(.06f,.2f),new Vector2(.94f,.8f),18,TextAnchor.UpperLeft);
+            var buttonGo=new GameObject("Close",typeof(RectTransform),typeof(Image),typeof(Button));
+            buttonGo.transform.SetParent(root.transform,false);var buttonRect=buttonGo.GetComponent<RectTransform>();
+            buttonRect.anchorMin=new Vector2(.68f,.05f);buttonRect.anchorMax=new Vector2(.94f,.17f);buttonRect.offsetMin=buttonRect.offsetMax=Vector2.zero;
+            buttonGo.GetComponent<Image>().color=new Color(.12f,.55f,.62f);
+            var closeLabel=CreateSummaryText(buttonGo.transform,"Label",Vector2.zero,Vector2.one,18,TextAnchor.MiddleCenter);closeLabel.text="Continuar";
+            var group=root.GetComponent<CanvasGroup>();group.alpha=0;group.interactable=false;group.blocksRaycasts=false;
+            root.GetComponent<OfflineProgressSummaryPanel>().Configure(coordinator,group,title,body,buttonGo.GetComponent<Button>());
+            root.transform.SetAsLastSibling();
+        }
+        static Text CreateSummaryText(Transform parent,string name,Vector2 anchorMin,Vector2 anchorMax,int size,TextAnchor alignment)
+        {
+            var go=new GameObject(name,typeof(RectTransform),typeof(Text));go.transform.SetParent(parent,false);
+            var rect=go.GetComponent<RectTransform>();rect.anchorMin=anchorMin;rect.anchorMax=anchorMax;rect.offsetMin=rect.offsetMax=Vector2.zero;
+            var text=go.GetComponent<Text>();text.font=Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");text.fontSize=size;
+            text.alignment=alignment;text.color=Color.white;text.horizontalOverflow=HorizontalWrapMode.Wrap;text.verticalOverflow=VerticalWrapMode.Truncate;
+            return text;
         }
         static AquariumDefinition LoadOrCreateAquarium(string path,string id,string label,float litres,float temperature,
             int capacity,Color color,AquariumDefinition template)

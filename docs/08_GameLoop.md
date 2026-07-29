@@ -28,3 +28,6 @@ Observar calidad → abrir Mantenimiento → elegir porcentaje → previsualizar
 Observar bienestar → revisar causas → alimentar o mantener el agua → observar recuperación gradual.
 Descubrir especie → estudiar ficha → comparar suitability → comprender límites del acuario, sin compra ni modificación de población.
 Desde el acuario enfocado, el jugador puede abrir Hábitat, editar una composición provisional y confirmarla para actualizar el perfil, o cancelarla sin consecuencias.
+# Retorno a la aplicación
+
+Antes de reanudar la interacción se valida el intervalo UTC, se aplica una única simulación offline acotada, se restaura el dominio y se guarda el marcador del intervalo.

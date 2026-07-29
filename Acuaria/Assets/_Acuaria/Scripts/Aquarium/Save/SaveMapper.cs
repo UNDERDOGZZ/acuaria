@@ -34,6 +34,15 @@ namespace Acuaria.Save
                 CreatedAtUtc = previous?.CreatedAtUtc ?? now,
                 UpdatedAtUtc = now,
                 LastSessionStartedAtUtc = previous?.LastSessionStartedAtUtc ?? now,
+                LastSessionEndedAtUtc = previous?.LastSessionEndedAtUtc,
+                LastSimulationAtUtc = previous?.LastSimulationAtUtc ?? previous?.UpdatedAtUtc ?? now,
+                LastApplicationPauseAtUtc = previous?.LastApplicationPauseAtUtc,
+                LastApplicationResumeAtUtc = previous?.LastApplicationResumeAtUtc,
+                LastAppliedOfflineIntervalStartUtc = previous?.LastAppliedOfflineIntervalStartUtc,
+                LastAppliedOfflineIntervalEndUtc = previous?.LastAppliedOfflineIntervalEndUtc,
+                LastOfflineExecutionKey = previous?.LastOfflineExecutionKey,
+                OfflineSimulationSequence = previous?.OfflineSimulationSequence ?? 0,
+                SimulationVersion = previous?.SimulationVersion ?? "1",
                 ActiveAquariumId = manager?.ActiveAquarium?.InstanceId,
                 AquariumSlots = slots != null ? new List<AquariumSlotSaveData>(slots) : new List<AquariumSlotSaveData>()
             };
@@ -107,7 +116,8 @@ namespace Acuaria.Save
                     FishInstanceId = fish.InstanceId, AquariumInstanceId = aquarium.InstanceId, SpeciesDefinitionId = fish.SpeciesId,
                     NormalizedPosition = new SerializableVector2(normalized.x, normalized.y),
                     FacingDirection = new SerializableVector2(fish.Direction.x, fish.Direction.y), RandomSeed = fish.RandomSeed,
-                    Satiety = Mathf.Clamp01(fish.Satiety), CreatedAtUtc = now, LastUpdatedAtUtc = now
+                    Satiety = Mathf.Clamp01(fish.Satiety), Hunger = fish.Hunger, Health = fish.Health,
+                    Stress = fish.Stress, Welfare = fish.Welfare, CreatedAtUtc = now, LastUpdatedAtUtc = now
                 });
             }
             foreach (var placement in aquarium.DecorationCollection.Placements)
@@ -153,7 +163,9 @@ namespace Acuaria.Save
                     if (string.IsNullOrWhiteSpace(value?.FishInstanceId) || string.IsNullOrWhiteSpace(value.SpeciesDefinitionId)) continue;
                     var position = Denormalize(value.NormalizedPosition, area);
                     var state = new FishRuntimeState(); state.Initialize(value.FishInstanceId, value.SpeciesDefinitionId, position, value.RandomSeed);
-                    state.Direction = SafeDirection(value.FacingDirection); state.Satiety = Mathf.Clamp01(value.Satiety); fish.Add(state);
+                    state.Direction = SafeDirection(value.FacingDirection);
+                    state.RestoreNeeds(value.Satiety, value.Hunger, value.Health, value.Stress, value.Welfare);
+                    fish.Add(state);
                 }
                 aquarium.FishCollection.Replace(fish); aquarium.RuntimeState.SetFishCount(fish.Count);
                 var placements = new List<DecorationPlacementData>();

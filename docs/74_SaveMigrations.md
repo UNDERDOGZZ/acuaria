@@ -7,3 +7,6 @@ registradas.
 
 Toda versión nueva debe añadir una migración determinista, tests con fixture antiguo y
 validación posterior. Nunca se migra ni sobrescribe una versión mayor que la soportada.
+# Migración 1 → 2
+
+La migración toma `UpdatedAtUtc` como línea base segura (o el fin de sesión como fallback), inicializa marcadores offline y preserva acuarios, peces, decoración, química y progresión. No simula desde la fecha de creación.

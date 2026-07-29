@@ -9,3 +9,6 @@ Después, `MultiAquariumRoomController` enlaza slots y vistas existentes; los bi
 sincronizan HUD, química, bienestar, peces, carrusel y cámara desde el contexto activo. Si no
 hay save válido, Room crea la partida segura definida por la escena. Una versión futura detiene
 la restauración y el autosave para evitar sobrescribirla.
+# Flujo v2
+
+Leer → verificar integridad → migrar → validar tiempo → simular DTOs → restaurar runtime → publicar resumen → guardar intervalo. Un intervalo ya aplicado termina sin mutaciones.

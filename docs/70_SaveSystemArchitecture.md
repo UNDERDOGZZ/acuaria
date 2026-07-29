@@ -11,3 +11,6 @@ preserva copias de archivos corruptos. El autosave está localizado en el coordi
 
 Límites del sprint: JSON legible sin cifrado o compresión, sin progreso offline, nube, cuentas,
 economía ni inventario comercial.
+# Integración offline
+
+`SaveService.Load` verifica integridad antes de migrar. `SaveCoordinator` ejecuta progreso offline sobre el save migrado y persiste de inmediato tanto migraciones como intervalos aplicados.

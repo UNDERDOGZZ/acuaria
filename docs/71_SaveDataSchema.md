@@ -13,3 +13,6 @@ pH, GH y KH permanecen en el DTO para compatibilidad futura, pero el modelo actu
 simula y por tanto no se presentan como estado restaurable real. Misiones, logros y progreso
 global tienen DTOs preparados; solo deben mapearse cuando sus controladores expongan una API
 de restauración idempotente.
+# Schema v2
+
+La raíz añade timestamps de simulación, pause/resume, intervalo aplicado, clave de ejecución, secuencia y versión de simulación. Peces persisten hambre, salud, estrés y bienestar; estadísticas persisten sesiones y segundos offline.

@@ -9,6 +9,7 @@ using Acuaria.Simulation.Water;
 using UnityEngine;
 using Acuaria.UI.Progression;
 using Acuaria.Simulation.Filtration;
+using Acuaria.Offline;
 
 namespace Acuaria.Room
 {
@@ -22,16 +23,21 @@ namespace Acuaria.Room
         [SerializeField] DecorationRegistry decorationRegistry;
         [SerializeField] WaterChemistryDefinition waterDefinition;
         [SerializeField] FilterDefinition filterDefinition;
+        [SerializeField] OfflineSimulationDefinition offlineDefinition;
         [SerializeField] AquariumViewBinding[] bindings = Array.Empty<AquariumViewBinding>();
         [SerializeField] AquaristJournalController journal;
         [SerializeField, Min(.5f)] float debounceSeconds = 2f;
         [SerializeField, Min(1f)] float minimumSaveInterval = 5f;
         SaveMapper mapper; SaveService service; AcuariaSaveData current;
+        OfflineSimulationService offlineService; bool applicationPaused, applicationFocused=true, backgroundIntervalOpen;
         float dirtyAt, lastSaveAt, nextFingerprintAt; int fingerprint; bool dirty, initialized;
         public SaveStatus Status { get; private set; } = SaveStatus.Idle;
         public string LastMessage { get; private set; }
         public string SavePath { get; private set; }
         public event Action<SaveStatus, string> StatusChanged;
+        public event Action<OfflineSimulationReport> OfflineProgressApplied;
+        public OfflineSimulationReport LastOfflineReport{get;private set;}
+        public void SetOfflineDefinition(OfflineSimulationDefinition value)=>offlineDefinition=value;
         public void Configure(AquariumManager source, AquariumDefinition[] definitions, DecorationRegistry registry,
             WaterChemistryDefinition chemistry, AquariumViewBinding[] viewBindings, AquaristJournalController journalController = null,
             FilterDefinition filter = null)
@@ -45,9 +51,11 @@ namespace Acuaria.Room
         {
             manager ??= AquariumManager.Instance;
             mapper = new SaveMapper(aquariumDefinitions, decorationRegistry, waterDefinition, filterDefinition);
+            offlineService=new OfflineSimulationService(new SystemOfflineTimeProvider());
             var storage = new SaveFileStorage(Application.persistentDataPath);
             SavePath = storage.MainPath;
-            service = new SaveService(new JsonUtilitySaveSerializer(), storage, new SaveValidator(), new SaveMigrationPipeline());
+            var migrations=new SaveMigrationPipeline();migrations.Register(new SaveMigrationV1ToV2());
+            service = new SaveService(new JsonUtilitySaveSerializer(), storage, new SaveValidator(), migrations);
             LoadOrCreate();
             initialized = true;
         }
@@ -61,7 +69,11 @@ namespace Acuaria.Room
         {
             SubscribeRuntime(); fingerprint = CalculateFingerprint();
             if (current != null && journal != null)
+            {
                 mapper.ApplyProgress(current, journal.Player, journal.Missions, journal.Codex, journal.Achievements);
+                ApplyOfflineProgression(LastOfflineReport);
+                if(LastOfflineReport?.Applied==true)PersistOfflineState();
+            }
         }
         void OnDisable()
         {
@@ -84,9 +96,22 @@ namespace Acuaria.Room
         {
             SetStatus(SaveStatus.Loading, "Loading local save.");
             var result = service.Load();
-            if (result.Success && mapper.Apply(result.Data, manager, AreaForSlot))
+            if (result.Success)
             {
                 current = result.Data;
+                var offline=offlineDefinition!=null&&!offlineDefinition.AllowColdStart
+                    ?new OfflineSimulationResult{Success=true,Data=current,Report=new OfflineSimulationReport()}
+                    :offlineService.Simulate(current,OfflineSimulationPolicy.From(offlineDefinition),true);
+                if(!offline.Success){SetStatus(SaveStatus.Failed,offline.Error??offline.Report?.Time?.Status.ToString());return;}
+                current=offline.Data;
+                if(!mapper.Apply(current, manager, AreaForSlot)){SetStatus(SaveStatus.Failed,"Runtime restoration failed.");return;}
+                if(offline.Report?.Applied==true)
+                {
+                    LastOfflineReport=offline.Report;
+                    if(offlineDefinition==null||offlineDefinition.ShowSummary)OfflineProgressApplied?.Invoke(offline.Report);
+                }
+                if(result.WasMigrated||offline.Report?.Applied==true)
+                    PersistOfflineState();
                 SetStatus(result.Source == SaveLoadSource.Backup ? SaveStatus.Recovered : SaveStatus.Loaded,
                     result.Source == SaveLoadSource.Backup ? "Recovered from backup." : "Loaded local save.");
                 return;
@@ -163,8 +188,54 @@ namespace Acuaria.Room
                 return value;
             }
         }
-        void OnApplicationPause(bool paused) { if (paused) SaveNow(); }
-        void OnApplicationFocus(bool focused) { if (!focused) SaveNow(); }
+        void OnApplicationPause(bool paused)
+        {
+            applicationPaused=paused;
+            if(paused)BeginBackgroundInterval();else TryResumeOffline();
+        }
+        void OnApplicationFocus(bool focused)
+        {
+            applicationFocused=focused;
+            if(!focused)BeginBackgroundInterval();else TryResumeOffline();
+        }
+        void BeginBackgroundInterval()
+        {
+            if(backgroundIntervalOpen)return;backgroundIntervalOpen=true;
+            if(current!=null)current.LastApplicationPauseAtUtc=DateTime.UtcNow.ToString("O");
+            SaveNow();
+        }
+        void TryResumeOffline()
+        {
+            if(!backgroundIntervalOpen||applicationPaused||!applicationFocused)return;
+            backgroundIntervalOpen=false;
+            if(current==null||(offlineDefinition!=null&&!offlineDefinition.AllowResume))return;
+            current.LastApplicationResumeAtUtc=DateTime.UtcNow.ToString("O");
+            var result=offlineService.Simulate(current,OfflineSimulationPolicy.From(offlineDefinition),false);
+            if(!result.Success)return;current=result.Data;
+            if(result.Report?.Applied==true)
+            {
+                mapper.Apply(current,manager,AreaForSlot);LastOfflineReport=result.Report;
+                ApplyOfflineProgression(result.Report);
+                if(offlineDefinition==null||offlineDefinition.ShowSummary)OfflineProgressApplied?.Invoke(result.Report);
+                PersistOfflineState();
+            }
+        }
+        void ApplyOfflineProgression(OfflineSimulationReport report)
+        {
+            if(report?.Applied!=true||journal==null)return;
+            journal.ApplyOfflineProgress((float)report.Time.Effective.TotalHours,report.AnyExcellentWater,report.AnyExcellentWelfare);
+            mapper.CaptureProgress(current,journal.Player,journal.Missions,journal.Codex,journal.Achievements);
+        }
+        void PersistOfflineState()
+        {
+            if(offlineDefinition!=null&&!offlineDefinition.SaveImmediately){MarkDirty();return;}
+            var saveResult=service.Save(current);
+            if(!saveResult.Success)
+            {
+                dirty=true;dirtyAt=Time.unscaledTime;
+                SetStatus(SaveStatus.Dirty,$"Offline progress is pending save: {saveResult.Message}");
+            }
+        }
         void OnApplicationQuit()
         {
             if (current != null) current.LastSessionEndedAtUtc = DateTime.UtcNow.ToString("O");

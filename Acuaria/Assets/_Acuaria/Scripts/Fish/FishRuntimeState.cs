@@ -18,6 +18,10 @@ namespace Acuaria.Fish
         public bool IsRecoveringFromBoundary { get; set; }
         public bool IsInitialized { get; private set; }
         public float Satiety { get; set; }
+        public float Hunger { get; private set; }
+        public float Health { get; private set; } = 1f;
+        public float Stress { get; private set; }
+        public float Welfare { get; private set; } = 1f;
 
         public void Initialize(string instanceId, string speciesId, Vector2 position, int seed)
         {
@@ -34,7 +38,18 @@ namespace Acuaria.Fish
             TimeSinceTargetChange = 0f;
             IsRecoveringFromBoundary = false;
             Satiety = 0.45f;
+            Hunger = 0.55f; Health = 1f; Stress = 0f; Welfare = 1f;
             IsInitialized = true;
         }
+
+        public void RestoreNeeds(float satiety, float hunger, float health, float stress, float welfare)
+        {
+            Satiety = Mathf.Clamp01(Safe(satiety, .45f));
+            Hunger = Mathf.Clamp01(Safe(hunger, 1f - Satiety));
+            Health = Mathf.Clamp01(Safe(health, 1f));
+            Stress = Mathf.Clamp01(Safe(stress, 0f));
+            Welfare = Mathf.Clamp01(Safe(welfare, 1f));
+        }
+        static float Safe(float value,float fallback)=>float.IsFinite(value)?value:fallback;
     }
 }

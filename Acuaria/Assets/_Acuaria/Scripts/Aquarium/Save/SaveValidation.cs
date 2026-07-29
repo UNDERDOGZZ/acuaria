@@ -99,4 +99,19 @@ namespace Acuaria.Save
             return data;
         }
     }
+    public sealed class SaveMigrationV1ToV2:ISaveMigration
+    {
+        public int FromVersion=>1;public int ToVersion=>2;
+        public AcuariaSaveData Migrate(AcuariaSaveData data)
+        {
+            if(data==null)return null;
+            var baseline=!string.IsNullOrWhiteSpace(data.UpdatedAtUtc)?data.UpdatedAtUtc:
+                !string.IsNullOrWhiteSpace(data.LastSessionEndedAtUtc)?data.LastSessionEndedAtUtc:DateTime.UtcNow.ToString("O");
+            data.LastSimulationAtUtc=baseline;data.SimulationVersion="1";
+            data.LastAppliedOfflineIntervalStartUtc=null;data.LastAppliedOfflineIntervalEndUtc=null;
+            data.LastOfflineExecutionKey=null;data.OfflineSimulationSequence=0;
+            data.GlobalStatistics??=new StatisticsSaveData();
+            return data;
+        }
+    }
 }

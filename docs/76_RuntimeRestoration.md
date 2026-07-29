@@ -9,3 +9,6 @@ Agua y nitrógeno recuperan valores y tiempo simulado sin avanzar tiempo offline
 se normaliza a estado estable. El hábitat se recalcula desde decoraciones, y bienestar y
 compatibilidad se recalculan por sus controladores al enlazar el acuario activo. Slots, HUD,
 carrusel y cámara consumen `AquariumContext`; no se persisten vistas ni transforms.
+# Restauración tras progreso offline
+
+`SaveMapper` restaura necesidades de cada pez y estados propios de cada acuario después de la simulación. No instancia peces adicionales ni altera el acuario activo, carrusel o cámara fuera del flujo existente.

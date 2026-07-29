@@ -6,7 +6,7 @@ namespace Acuaria.Save
     public static class SaveSystemDefinition
     {
         public const string FormatId = "ACUARIA_LOCAL_SAVE";
-        public const int CurrentSchemaVersion = 1;
+        public const int CurrentSchemaVersion = 2;
         public const string MainFileName = "acuaria_save.json";
         public const string BackupFileName = "acuaria_save.backup.json";
         public const string TemporaryFileName = "acuaria_save.tmp.json";
@@ -23,6 +23,10 @@ namespace Acuaria.Save
         public string SaveFormatId = SaveSystemDefinition.FormatId;
         public int SchemaVersion = SaveSystemDefinition.CurrentSchemaVersion;
         public string GameVersion, SaveId, CreatedAtUtc, UpdatedAtUtc, LastSessionStartedAtUtc, LastSessionEndedAtUtc;
+        public string LastSimulationAtUtc, LastApplicationPauseAtUtc, LastApplicationResumeAtUtc;
+        public string LastAppliedOfflineIntervalStartUtc, LastAppliedOfflineIntervalEndUtc, LastOfflineExecutionKey;
+        public int OfflineSimulationSequence;
+        public string SimulationVersion = "1";
         public string ActiveAquariumId;
         public PlayerProgressSaveData PlayerProgress = new();
         public List<AquariumSlotSaveData> AquariumSlots = new();
@@ -159,5 +163,7 @@ namespace Acuaria.Save
         public double TotalPlayTimeSeconds, SimulatedHours, ExcellentWaterHours, ExcellentWelfareHours;
         public int AquariumVisits, AquariumSwitches, FeedActions, MaintenanceActions, WaterChanges, FilterCleanings,
             DecorationsAdded, DecorationsMoved, FishAdded, MissionsCompleted, JournalEntriesUnlocked, SaveCount, LoadCount, RecoveryCount, XpEarned, WastedFood;
+        public int OfflineSessions, CappedOfflineSessions;
+        public double TotalOfflineTimeSeconds;
     }
 }
