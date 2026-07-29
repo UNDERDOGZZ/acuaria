@@ -5,6 +5,7 @@ using Acuaria.Simulation.Time;
 using Acuaria.Simulation.Waste;
 using Acuaria.Simulation.Water;
 using Acuaria.UI.Aquarium;
+using Acuaria.Aquarium.MultiAquarium;
 using UnityEngine;
 
 namespace Acuaria.UI.WaterChemistry
@@ -23,6 +24,7 @@ namespace Acuaria.UI.WaterChemistry
         private AquariumCycleStatus lastCycle;
         private WaterQualityStatus lastQuality;
         private float biologicalEfficiency = 1f;
+        private AquariumInstance boundAquarium;
 
         public event Action<WaterChemistryState> ChemistryChanged;
         public event Action<WaterQualityStatus> WaterQualityChanged;
@@ -31,6 +33,25 @@ namespace Acuaria.UI.WaterChemistry
         public WaterChemistryState Snapshot => state?.Snapshot();
         public WaterChemistryDefinition Definition => definition;
         public float AquariumVolumeLiters => aquariumVolumeLiters;
+        public AquariumInstance BoundAquarium => boundAquarium;
+
+        public void Bind(AquariumInstance aquarium)
+        {
+            if (aquarium == null || ReferenceEquals(boundAquarium, aquarium)) return;
+            boundAquarium = aquarium;
+            aquariumVolumeLiters = Mathf.Max(1f, aquarium.Definition.NominalVolumeLitres);
+            if (aquarium.WaterState == null || !aquarium.WaterState.IsInitialized)
+            {
+                var created = new WaterChemistryState();
+                if (definition != null) created.Initialize($"{aquarium.InstanceId}-water", definition);
+                aquarium.ReplaceWaterState(created);
+            }
+            state = aquarium.WaterState;
+            clock = definition == null ? null : new AquariumSimulationClock(definition.SimulationIntervalSeconds,
+                definition.TimeMultiplier, definition.MaximumTicksPerFrame);
+            processedExpiredFood.Clear();
+            Publish(true);
+        }
 
         public void Configure(WaterChemistryDefinition chemistryDefinition, AquariumInhabitantProvider provider,
             AquariumFoodController food, AquariumHUDController hudController, float volumeLiters)
@@ -75,10 +96,12 @@ namespace Acuaria.UI.WaterChemistry
         public void SimulateTick(float simulatedSeconds)
         {
             if (state == null || definition == null) return;
-            var fishWaste = AquariumWasteModel.FishWaste(inhabitants?.TotalCount ?? 0,
+            var fishCount=boundAquarium?.FishCollection.Count??inhabitants?.TotalCount??0;
+            var fishWaste = AquariumWasteModel.FishWaste(fishCount,
                 simulatedSeconds / 3600f, definition);
             AddWaste(fishWaste);
             state = nitrogenCycle.Step(state, definition, simulatedSeconds, biologicalEfficiency);
+            if (boundAquarium != null) boundAquarium.ReplaceWaterState(state);
             Publish(false);
         }
 

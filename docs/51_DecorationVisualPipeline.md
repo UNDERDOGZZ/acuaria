@@ -25,3 +25,4 @@ Como los assets iniciales no incluyen sprites ni prefabs artísticos, `Decoratio
 ## Regresión
 
 Verificar composición inicial, añadir/quitar/restablecer, reaperturas de paneles y reenfoques. Debe existir una vista por ID, todos los puntos deben quedar dentro de `AquariumDecorationArea2D`, los peces deben nadar y la Console permanecer sin errores. EditMode cubre validación de colocación, conversión del área y sincronización idempotente.
+En modo edición, el spawner sincroniza una lista provisional usando los mismos `InstanceId`. Confirmar entrega esa lista a `AquariumHabitatController`; cancelar vuelve a sincronizar el snapshot inicial. No se reinstancian peces ni se desactiva el mundo.

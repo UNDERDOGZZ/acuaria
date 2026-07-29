@@ -83,5 +83,31 @@ namespace Acuaria.Fish
             destination.Clear();
             destination.AddRange(spawnedSpecies);
         }
+
+        public void CopySpawnedStates(List<FishRuntimeState> destination)
+        {
+            if (destination == null) throw new ArgumentNullException(nameof(destination));
+            Spawn();
+            destination.Clear();
+            foreach (var movement in spawned)
+                if (movement?.State != null) destination.Add(movement.State);
+        }
+
+        public void BindStates(IReadOnlyList<FishRuntimeState> states)
+        {
+            if (states == null) return;
+            Spawn();
+            var visibleCount = Mathf.Min(states.Count, spawned.Count);
+            for (var i = 0; i < spawned.Count; i++)
+            {
+                var movement = spawned[i];
+                if (movement == null) continue;
+                var visible = i < visibleCount;
+                movement.gameObject.SetActive(visible);
+                if (visible && spawnedSpecies.Count > i)
+                    movement.GetComponent<FishView>()?.Initialize(swimArea, spawnedSpecies[i], states[i],
+                        spawned.ToArray(), movement.transform.localScale.x, foodController);
+            }
+        }
     }
 }

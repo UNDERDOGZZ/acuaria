@@ -50,3 +50,4 @@ La selección y recuperación de destinos se mantienen en la capa de movimiento.
 ## Decoraciones del mundo
 
 Las decoraciones pertenecen al mundo bajo `DecorationsRoot`, nunca a `SafeArea` ni a un `CanvasGroup`. Abrir Diario, Mantenimiento, Detalles, Hábitat o Alimentación no desactiva sus vistas ni solicita una nueva sincronización.
+El editor de hábitat es otro consumidor del bloqueo localizado de interacción. Redirige taps del tanque a `HabitatEditorInputController`, cancela FeedingMode y bloquea acciones incompatibles, pero no modifica `Time.timeScale`, `FishMovement2D` ni `DecorationsRoot`.

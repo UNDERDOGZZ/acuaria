@@ -21,6 +21,11 @@ namespace Acuaria.Aquarium.Decorations
         public Vector2 ToLocal(Vector2 normalized) => new(
             Mathf.Lerp(MinX, MaxX, Mathf.Clamp01(float.IsFinite(normalized.x) ? normalized.x : .5f)),
             Mathf.Lerp(MinY, MaxY, Mathf.Clamp01(float.IsFinite(normalized.y) ? normalized.y : .1f)));
+        public Vector2 ToNormalized(Vector2 local) => new(
+            Mathf.InverseLerp(MinX,MaxX,float.IsFinite(local.x)?local.x:center.x),
+            Mathf.InverseLerp(MinY,MaxY,float.IsFinite(local.y)?local.y:center.y));
+        public Vector2 WorldToNormalized(Vector2 world)=>ToNormalized(transform.InverseTransformPoint(world));
+        public Vector2 NormalizedToWorld(Vector2 normalized)=>transform.TransformPoint(ToLocal(normalized));
         public bool Contains(Vector2 point) => point.x >= MinX && point.x <= MaxX && point.y >= MinY && point.y <= MaxY;
         void OnDrawGizmosSelected()
         { if(!showGizmos)return;Gizmos.matrix=transform.localToWorldMatrix;Gizmos.color=Color.yellow;Gizmos.DrawWireCube(center,size); }

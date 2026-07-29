@@ -1,5 +1,28 @@
 # Acuaria
 
+## Sprint 13 — arquitectura multiacuario
+
+El dominio incorpora `AquariumInstance` como agregado independiente, creado exclusivamente por
+`AquariumFactory`, almacenado en `AquariumRepository` y coordinado por un único
+`AquariumManager`. `AquariumContext` publica el acuario activo sin convertirlo en estado global
+mutable. Cada instancia posee runtime, agua, mantenimiento, nitrógeno simplificado, peces,
+decoraciones, hábitat, diario y estadísticas propios.
+
+Los tres espacios de habitación se modelan mediante `AquariumSlot` (`Locked`, `Empty`,
+`Occupied`). La migración de los controladores visuales existentes al contexto activo es
+incremental para preservar el vertical slice y evitar que IDs `starter-*` vuelvan a convertirse
+en fuentes de verdad.
+
+Documentación: [arquitectura](docs/57_MultiAquariumArchitecture.md),
+[manager](docs/58_AquariumManager.md), [slots](docs/59_AquariumSlots.md) y
+[contexto](docs/60_AquariumContext.md).
+
+## Sprint 12 — editor visual de hábitat
+
+El panel Hábitat permite abrir un editor provisional, seleccionar y arrastrar decoraciones, añadirlas desde una bandeja, quitarlas, girarlas, voltearlas y deshacer. La sesión trabaja sobre una copia: `Confirmar` aplica y recalcula el hábitat; `Cancelar` restaura la composición. Los peces y el agua continúan activos y no se usa `Time.timeScale`.
+
+Documentación: [arquitectura](docs/52_HabitatEditorArchitecture.md), [validación](docs/53_DecorationPlacementValidation.md), [comandos](docs/54_HabitatEditCommands.md), [input](docs/55_HabitatEditorInput.md) y [UI](docs/56_HabitatEditorUI.md).
+
 ## Sprint 11 — hábitat funcional
 
 Acuaria dispone de decoraciones y plantas data-driven mediante `DecorationDefinition` y `DecorationRegistry`. La composición inicial vive en `AquariumDefinition`, se agrega en `AquariumHabitatProfile` y afecta al bienestar únicamente cuando una especie requiere plantas, escondites o espacio abierto. El panel Hábitat y el catálogo de decoraciones son educativos y de solo lectura; no existen tienda, monedas, inventario ni colocación manual.
@@ -59,3 +82,10 @@ Acuaria incorpora un Diario del Acuarista con XP educativa, niveles, misiones, c
 Los paneles modales bloquean únicamente input: peces, animación y búsqueda de alimento continúan en segundo plano. Consulta `docs/40_UIAndSimulationSeparation.md`.
 La navegación de peces selecciona destinos interiores en el lado opuesto, detecta clamps y recupera movimiento horizontal sin teletransporte. Consulta `docs/41_FishNavigationAndBoundaryRecovery.md`.
 Acuaria incorpora cinco especies reales mediante assets data-driven, un registro validado y presets de población, sin compra ni economía. Las recomendaciones están revisadas, no verificadas; consulta `docs/42_FishSpeciesContentPipeline.md` a `docs/47_SpeciesResearchSources.md`.
+# Hotfix Sprint 13
+
+La navegación multiacuario usa `AquariumContext` como única fuente del acuario activo. El acuario inicial migra sus peces visibles a `FishCollection`; tarjetas, HUD y presentación se enlazan al mismo agregado. Véanse `docs/57_MultiAquariumArchitecture.md` a `docs/65_LegacyAquariumMigration.md`.
+
+RoomOverview usa ahora un carrusel espacial: raíces reales por slot, preview lateral y transición ortográfica animada compartida por botones y swipe. Véanse `docs/66_AquariumCarouselLayout.md` a `docs/69_RoomOverviewComposition.md`.
+
+El escenario cubre todo el recorrido horizontal; los tanques conservan escala uniforme, foco propio y parámetros independientes. El HUD, las tarjetas y la población visual se sincronizan con el `AquariumInstance` activo.

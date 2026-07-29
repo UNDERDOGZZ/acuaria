@@ -11,6 +11,7 @@ using Acuaria.UI.Maintenance;
 using Acuaria.UI.WaterChemistry;
 using UnityEngine;
 using UnityEngine.UI;
+using Acuaria.Aquarium.MultiAquarium;
 namespace Acuaria.UI.Progression
 {
     public sealed class AquaristJournalController:MonoBehaviour
@@ -23,6 +24,9 @@ namespace Acuaria.UI.Progression
         readonly PlayerProgression player=new();MissionController missions;CodexController codex;AchievementController achievements;StatisticsController statistics;
         int lastExcellentWaterHour,lastExcellentWelfareHour;bool focused;
         Coroutine notificationRoutine;
+        AquariumInstance boundAquarium;
+        public AquariumInstance BoundAquarium=>boundAquarium;
+        public void Bind(AquariumInstance aquarium){if(aquarium==null)return;boundAquarium=aquarium;Refresh();}
         public PlayerProgression Player=>player;public MissionController Missions=>missions;public CodexController Codex=>codex;public AchievementController Achievements=>achievements;
         public void Configure(MissionDefinition[] missionList,CodexEntry[] entries,AchievementDefinition[] achievementList,AquariumFoodController foodController,
             AquariumSimulationController chemistry,AquariumMaintenanceController maintenanceController,FishWelfareController welfareController,AquariumHUDController hudController,
@@ -44,9 +48,9 @@ namespace Acuaria.UI.Progression
         public void SetAquariumFocused(bool value){focused=value;if(openButton!=null)openButton.gameObject.SetActive(value);if(!value)panel?.Close();}
         public void Open(){if(!focused||maintenance!=null&&maintenance.IsActive)return;feedingUi?.CancelFeedingMode();hud?.SetInteractionEnabled(false);panel?.Show();Refresh();}
         void Close()=>hud?.SetInteractionEnabled(true);
-        void OnFed(string id){statistics.Process(ProgressionEventType.FishFed);Process(ProgressionEventType.FishFed);Unlock("feeding-basics");}
-        void OnWaste(string id){statistics.Process(ProgressionEventType.FoodWasted);Process(ProgressionEventType.FoodWasted);}
-        void OnWaterChanged(int percent){statistics.Process(ProgressionEventType.WaterChanged);Process(ProgressionEventType.WaterChanged);Unlock("water-change");}
+        void OnFed(string id){boundAquarium?.JournalState.Record($"Alimentación: {id}");statistics.Process(ProgressionEventType.FishFed);Process(ProgressionEventType.FishFed);Unlock("feeding-basics");}
+        void OnWaste(string id){boundAquarium?.JournalState.Record($"Comida desperdiciada: {id}");statistics.Process(ProgressionEventType.FoodWasted);Process(ProgressionEventType.FoodWasted);}
+        void OnWaterChanged(int percent){boundAquarium?.JournalState.Record($"Cambio de agua: {percent}%");statistics.Process(ProgressionEventType.WaterChanged);Process(ProgressionEventType.WaterChanged);Unlock("water-change");}
         void OnFilter(FilterMaintenanceType type){statistics.Process(ProgressionEventType.FilterMaintained);Process(ProgressionEventType.FilterMaintained);Unlock("filter");Unlock("bacteria");}
         void OnDetails(){Process(ProgressionEventType.DetailsObserved);Unlock("ammonia");Unlock("nitrite");Unlock("nitrate");}
         void OnChemistry(WaterChemistryState state){var cycle=AquariumCycleEvaluator.Evaluate(state,simulation.Definition);var quality=WaterQualityEvaluator.Evaluate(state,simulation.Definition,cycle);
@@ -64,6 +68,6 @@ namespace Acuaria.UI.Progression
         string MissionText(){var b=new StringBuilder("OBJETIVOS\n");for(var i=0;i<missions.Definitions.Count;i++){var d=missions.Definitions[i];var s=missions.States[i];b.AppendLine($"{(s.Status==MissionStatus.Claimed?"✓":"•")} {d.Title}  {s.Progress}/{d.Target}  +{d.RewardXp} XP");}return b.ToString();}
         string CodexText(){var b=new StringBuilder("LIBRO DEL ACUARIO\n");for(var i=0;i<codex.Entries.Count;i++)b.AppendLine(codex.States[i].IsUnlocked?$"✓ {codex.Entries[i].Title} — {codex.Entries[i].Summary}":$"🔒 Concepto por descubrir");return b.ToString();}
         string AchievementText(){var b=new StringBuilder("LOGROS\n");for(var i=0;i<achievements.Definitions.Count;i++)b.AppendLine($"{(achievements.States[i].IsUnlocked?"✓":"•")} {achievements.Definitions[i].Title}");return b.ToString();}
-        string StatisticsText(){var s=player.Statistics;return $"ESTADÍSTICAS\nComidas: {s.MealsGiven} · Cambios de agua: {s.WaterChanges} · Filtro: {s.FilterCleanings}\nHoras simuladas: {s.SimulatedHours:0.0} · Comida desperdiciada: {s.WastedFood}\nXP obtenida: {s.XpEarned}";}
+        string StatisticsText(){var s=player.Statistics;var local=boundAquarium?.JournalState.Entries.Count??0;return $"ESTADÍSTICAS\nAcuario: {boundAquarium?.Name??"Sin asignar"} · Entradas locales: {local}\nComidas: {s.MealsGiven} · Cambios de agua: {s.WaterChanges} · Filtro: {s.FilterCleanings}\nHoras simuladas: {s.SimulatedHours:0.0} · Comida desperdiciada: {s.WastedFood}\nXP obtenida: {s.XpEarned}";}
     }
 }

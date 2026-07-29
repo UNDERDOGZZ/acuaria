@@ -1,7 +1,7 @@
 {
   "name": "Acuaria.Room.EditModeTests",
   "rootNamespace": "Acuaria.Room.Tests",
-  "references": ["Acuaria.Room"],
+  "references": ["Acuaria.Room", "Acuaria.Aquarium", "Acuaria.Simulation"],
   "includePlatforms": ["Editor"],
   "optionalUnityReferences": ["TestAssemblies"],
   "autoReferenced": false

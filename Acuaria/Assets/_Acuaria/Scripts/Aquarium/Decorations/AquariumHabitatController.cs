@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Acuaria.Fish.Care;
 using UnityEngine;
+using Acuaria.Aquarium.MultiAquarium;
 
 namespace Acuaria.Aquarium.Decorations
 {
@@ -20,6 +21,18 @@ namespace Acuaria.Aquarium.Decorations
         public event Action<AquariumHabitatProfile> Changed;
         public event Action<DecorationPlacementData> DecorationAdded, DecorationRemoved;
         public event Action DecorationsChanged;
+        public DecorationRegistry Registry=>registry;
+        public DecorationSpawner2D Spawner=>decorationSpawner;
+        public AquariumInstance BoundAquarium { get; private set; }
+
+        public void Bind(AquariumInstance aquarium)
+        {
+            if (aquarium == null || ReferenceEquals(BoundAquarium, aquarium)) return;
+            BoundAquarium = aquarium;
+            aquariumDefinition = aquarium.Definition;
+            ApplyPlacements(aquarium.DecorationCollection.Placements);
+            aquarium.SetHabitat(CurrentProfile);
+        }
 
         public void Configure(Acuaria.Aquarium.AquariumDefinition definition, DecorationRegistry source, Transform root = null)
         { aquariumDefinition = definition; registry = source; decorationRoot = root; decorationSpawner=root!=null?root.GetComponentInParent<DecorationSpawner2D>():null;ResetHabitat(); }
@@ -63,12 +76,23 @@ namespace Acuaria.Aquarium.Decorations
         void Recalculate()
         {
             CurrentProfile = AquariumHabitatCalculator.Calculate(installed);
+            if(BoundAquarium!=null)
+            {
+                BoundAquarium.DecorationCollection.Replace(placements);
+                BoundAquarium.SetHabitat(CurrentProfile);
+            }
             Changed?.Invoke(CurrentProfile);
             DecorationsChanged?.Invoke();
             SynchronizeViews();
         }
         void RebuildDefinitions(){installed.Clear();for(var i=0;i<placements.Count;i++)if(placements[i]?.Definition!=null)installed.Add(placements[i].Definition);}
         void SynchronizeViews()=>decorationSpawner?.SynchronizeInstalledDecorations(placements);
+        public void PreviewPlacements(IReadOnlyList<DecorationPlacementData> values)=>decorationSpawner?.SynchronizeInstalledDecorations(values);
+        public bool ApplyPlacements(IReadOnlyList<DecorationPlacementData> values)
+        {
+            if(values==null)return false;placements.Clear();for(var i=0;i<values.Count;i++)if(values[i]?.IsValid==true)placements.Add(values[i].Clone());
+            RebuildDefinitions();Recalculate();return true;
+        }
         DecorationPlacementData CreatePlacement(DecorationDefinition item,int index)
         {
             var category=item!=null?item.Category:DecorationCategory.Artificial;

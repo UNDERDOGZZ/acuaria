@@ -31,6 +31,15 @@ namespace Acuaria.Aquarium.Decorations
         public DecorationVisualLayer VisualLayer => visualLayer;
         public bool IsValid => !string.IsNullOrWhiteSpace(instanceId) && definition != null;
 
+        public DecorationPlacementData Clone() => new(instanceId, definition, normalizedPosition, localScale,
+            localRotation, flipX, sortingOrderOffset, visualLayer);
+        public DecorationPlacementData WithPosition(Vector2 value) => new(instanceId, definition, value, localScale,
+            localRotation, flipX, sortingOrderOffset, visualLayer);
+        public DecorationPlacementData WithRotation(float value) => new(instanceId, definition, normalizedPosition,
+            localScale, value, flipX, sortingOrderOffset, visualLayer);
+        public DecorationPlacementData WithFlip(bool value) => new(instanceId, definition, normalizedPosition,
+            localScale, localRotation, value, sortingOrderOffset, visualLayer);
+
         public DecorationPlacementData(string id, DecorationDefinition value, Vector2 position,
             Vector2 scale, float rotation = 0, bool flip = false, int order = 0,
             DecorationVisualLayer layer = DecorationVisualLayer.Midground)

@@ -12,6 +12,7 @@ namespace Acuaria.Aquarium.Decorations
         public DecorationDefinition Definition => definition;
         public string InstanceId => instanceId;
         public DecorationRenderStatus RenderStatus => renderStatus;
+        public SpriteRenderer Renderer => spriteRenderer;
         void OnEnable()
         {
             if(definition==null)return;
@@ -46,6 +47,8 @@ namespace Acuaria.Aquarium.Decorations
             transform.localScale=new(Mathf.Clamp(baseScale.x*local.x,.1f,5),Mathf.Clamp(baseScale.y*local.y,.1f,5),1);
             renderStatus=!placement.IsVisible?DecorationRenderStatus.HiddenByConfiguration:
                 definition.Sprite==null&&definition.Prefab==null?DecorationRenderStatus.MissingSprite:DecorationRenderStatus.Visible;
+            var collider=GetComponent<BoxCollider2D>();if(collider==null)collider=gameObject.AddComponent<BoxCollider2D>();
+            collider.isTrigger=true;collider.size=Vector2.one;
         }
         static int BaseOrder(DecorationVisualLayer layer)=>layer switch
         {DecorationVisualLayer.Background=>-3,DecorationVisualLayer.Substrate=>-2,DecorationVisualLayer.Foreground=>1,_=>-1};

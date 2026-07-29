@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9233e149cc72349b6a68406c9199fd, type: 3}
+  m_Name: Aquarium02
+  m_EditorClassIdentifier: Acuaria.Aquarium::Acuaria.Aquarium.AquariumDefinition
+  aquariumId: aquarium-definition-02
+  displayName: Acuario 2
+  nominalVolumeLitres: 80
+  targetTemperatureMin: 26
+  targetTemperatureMax: 28
+  initialTemperature: 27
+  recommendedFishCapacity: 5
+  description: Acuario independiente de 80 litros.
+  educationTip: "Cada acuario conserva par\xE1metros propios."
+  icon: {fileID: 0}
+  themeColor: {r: 0.16, g: 0.62, b: 0.72, a: 1}
+  installedDecorations:
+  - {fileID: 11400000, guid: 50b2e49c9a8f3d149abb8aeb6dd9d0ea, type: 2}
+  - {fileID: 11400000, guid: 3ee228c6606871048a1e345ba31e7c14, type: 2}
+  - {fileID: 11400000, guid: 3ee228c6606871048a1e345ba31e7c14, type: 2}
+  - {fileID: 11400000, guid: e10e3c9c23dfca645ac54562f3eb710b, type: 2}
+  - {fileID: 11400000, guid: a44826a6bce4d954da8e8264a3421ef6, type: 2}
+  - {fileID: 11400000, guid: 28bbfa5c1c7794748b1aad849fcea1e1, type: 2}
+  decorationPlacements:
+  - instanceId: starter-substrate
+    definition: {fileID: 11400000, guid: 50b2e49c9a8f3d149abb8aeb6dd9d0ea, type: 2}
+    normalizedPosition: {x: 0.5, y: 0.11}
+    localRotation: 0
+    localScale: {x: 5, y: 0.16}
+    flipX: 0
+    sortingOrderOffset: 0
+    isVisible: 1
+    isEnabled: 1
+    visualLayer: 1
+  - instanceId: starter-plant-left
+    definition: {fileID: 11400000, guid: 3ee228c6606871048a1e345ba31e7c14, type: 2}
+    normalizedPosition: {x: 0.18, y: 0.36}
+    localRotation: 0
+    localScale: {x: 0.42, y: 1.15}
+    flipX: 0
+    sortingOrderOffset: 0
+    isVisible: 1
+    isEnabled: 1
+    visualLayer: 2
+  - instanceId: starter-plant-right
+    definition: {fileID: 11400000, guid: 3ee228c6606871048a1e345ba31e7c14, type: 2}
+    normalizedPosition: {x: 0.82, y: 0.36}
+    localRotation: 0
+    localScale: {x: 0.42, y: 1.05}
+    flipX: 0
+    sortingOrderOffset: 0
+    isVisible: 1
+    isEnabled: 1
+    visualLayer: 2
+  - instanceId: starter-wood
+    definition: {fileID: 11400000, guid: e10e3c9c23dfca645ac54562f3eb710b, type: 2}
+    normalizedPosition: {x: 0.62, y: 0.24}
+    localRotation: 12
+    localScale: {x: 1.25, y: 0.3}
+    flipX: 0
+    sortingOrderOffset: 0
+    isVisible: 1
+    isEnabled: 1
+    visualLayer: 2
+  - instanceId: starter-rock
+    definition: {fileID: 11400000, guid: a44826a6bce4d954da8e8264a3421ef6, type: 2}
+    normalizedPosition: {x: 0.42, y: 0.22}
+    localRotation: 0
+    localScale: {x: 0.62, y: 0.42}
+    flipX: 0
+    sortingOrderOffset: 0
+    isVisible: 1
+    isEnabled: 1
+    visualLayer: 2
+  - instanceId: starter-cave
+    definition: {fileID: 11400000, guid: 28bbfa5c1c7794748b1aad849fcea1e1, type: 2}
+    normalizedPosition: {x: 0.72, y: 0.24}
+    localRotation: 0
+    localScale: {x: 0.82, y: 0.5}
+    flipX: 0
+    sortingOrderOffset: 0
+    isVisible: 1
+    isEnabled: 1
+    visualLayer: 2

@@ -7,6 +7,7 @@ using Acuaria.UI.Aquarium;
 using Acuaria.UI.WaterChemistry;
 using UnityEngine;
 using UnityEngine.UI;
+using Acuaria.Aquarium.MultiAquarium;
 
 namespace Acuaria.UI.Maintenance
 {
@@ -16,17 +17,24 @@ namespace Acuaria.UI.Maintenance
         [SerializeField] AquariumSimulationController simulation;[SerializeField] AquariumHUDController hud;
         [SerializeField] FeedingUIController feeding;[SerializeField] AquariumMaintenancePanel panel;
         [SerializeField] WaterChangeVisualController visuals;[SerializeField] Button openButton;[SerializeField] Button backButton;
-        readonly AquariumMaintenanceState state=new();readonly FilterRuntimeState filterState=new();
+        AquariumMaintenanceState state=new();readonly FilterRuntimeState filterState=new();
         readonly WaterChangeModel waterChange=new();readonly FilterSimulationModel filterSimulation=new();
         readonly FilterMaintenanceModel filterMaintenance=new();int selected=25;bool applied;Coroutine flow;bool focused;
         public event Action<AquariumMaintenancePhase> PhaseChanged;public event Action<int> WaterChangeCompleted;
         public event Action<FilterMaintenanceType> FilterMaintenanceCompleted;public bool IsActive=>state.IsActive;
         public AquariumMaintenanceState State=>state;public FilterRuntimeState FilterState=>filterState;
+        public AquariumInstance BoundAquarium { get; private set; }
+        public void Bind(AquariumInstance aquarium)
+        {
+            if(aquarium==null||ReferenceEquals(BoundAquarium,aquarium))return;
+            if(IsActive)Cancel();
+            BoundAquarium=aquarium;state=aquarium.MaintenanceState;Refresh();
+        }
         public void Configure(AquariumMaintenanceDefinition maintenance,FilterDefinition filter,AquariumSimulationController chemistry,
             AquariumHUDController hudController,FeedingUIController feedingController,AquariumMaintenancePanel maintenancePanel,
             WaterChangeVisualController visual,Button open,Button back)
         {definition=maintenance;filterDefinition=filter;simulation=chemistry;hud=hudController;feeding=feedingController;panel=maintenancePanel;visuals=visual;openButton=open;backButton=back;}
-        void Awake(){state.Initialize("starter-maintenance-state");if(filterDefinition!=null)filterState.Initialize("starter-filter-state",filterDefinition);selected=definition?.RecommendedPercentage??25;}
+        void Awake(){if(!state.IsInitialized)state.Initialize("starter-maintenance-state");if(filterDefinition!=null)filterState.Initialize("starter-filter-state",filterDefinition);selected=definition?.RecommendedPercentage??25;}
         void OnEnable(){openButton?.onClick.AddListener(Open);if(panel!=null){panel.PercentageSelected+=SelectIndex;panel.Confirmed+=Confirm;panel.Cancelled+=Cancel;
             panel.GentleRinseRequested+=GentleRinse;panel.DeepCleanRequested+=DeepClean;}simulation.ChemistryChanged+=OnChemistry;}
         void OnDisable(){openButton?.onClick.RemoveListener(Open);if(panel!=null){panel.PercentageSelected-=SelectIndex;panel.Confirmed-=Confirm;panel.Cancelled-=Cancel;

@@ -37,3 +37,4 @@ Implementado: química educativa básica, residuos de peces/comida, bacterias be
 Implementados cambio parcial de agua, confirmación y previsualización, animación, cooldown, filtro biológico, suciedad y mantenimiento educativo.
 Sprint 8 añade perfiles ficticios, bienestar ponderado, compatibilidad, stocking y feedback visual sutil.
 Sprint 10 migra el contenido a cinco especies reales revisadas, registro y población data-driven, sin economía ni persistencia.
+Sprint 12: editor visual provisional de decoraciones con selección, drag, validación, undo, confirmar y cancelar; tienda e inventario continúan fuera de alcance.

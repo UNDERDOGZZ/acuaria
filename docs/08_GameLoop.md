@@ -27,3 +27,4 @@ La química continúa avanzando durante RoomOverview, enfoque, Detalles y Feedin
 Observar calidad → abrir Mantenimiento → elegir porcentaje → previsualizar → confirmar → observar drenado/llenado → revisar resultado. El filtro añade decisiones entre limpieza mecánica y conservación bacteriana.
 Observar bienestar → revisar causas → alimentar o mantener el agua → observar recuperación gradual.
 Descubrir especie → estudiar ficha → comparar suitability → comprender límites del acuario, sin compra ni modificación de población.
+Desde el acuario enfocado, el jugador puede abrir Hábitat, editar una composición provisional y confirmarla para actualizar el perfil, o cancelarla sin consecuencias.

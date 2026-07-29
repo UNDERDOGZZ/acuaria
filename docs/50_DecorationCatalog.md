@@ -15,3 +15,4 @@ Contenido inicial:
 Consultar una ficha no instala, compra ni mueve el elemento. Las misiones educativas de hábitat utilizan eventos de progresión específicos para plantas, escondites, roca y tronco. Los logros cubren el primer hábitat natural, primer escondite y primer acuario plantado.
 
 Si una definición carece de arte final, su vista runtime usa un placeholder visible y conserva la ficha educativa.
+`AvailableDecorationProvider` expone temporalmente las definiciones del registro a la bandeja del editor. Este contrato podrá sustituirse por inventario sin introducir tienda, monedas o persistencia en este sprint.

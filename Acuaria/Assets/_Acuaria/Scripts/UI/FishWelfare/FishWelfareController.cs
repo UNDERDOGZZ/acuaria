@@ -23,11 +23,19 @@ namespace Acuaria.UI.FishWelfare
         readonly List<FishSpeciesDefinition> uniqueSpecies=new();readonly FishWelfareEvaluator evaluator=new();
         readonly FishWelfareSimulationModel evolution=new();readonly AquariumStockingModel stocking=new();
         readonly AquariumHabitatProfile fallbackHabitat=new();float accumulator;
+        readonly List<FishMovement2D> activeFish=new();
         public event Action<AquariumWelfareResult> AquariumWelfareChanged;public event Action<string,FishWelfareState> FishWelfareChanged;
         public AquariumWelfareResult Current{get;private set;}public IReadOnlyList<FishWelfareState> States=>orderedStates;
         public void Configure(FishWelfareDefinition settings,FishSpawner2D fishSpawner,AquariumInhabitantProvider provider,
             AquariumSimulationController chemistry,AquariumHUDController hudController,float volume)
         {definition=settings;spawner=fishSpawner;inhabitants=provider;simulation=chemistry;hud=hudController;aquariumVolume=Mathf.Max(1,volume);}
+        public void Bind(Acuaria.Aquarium.MultiAquarium.AquariumInstance aquarium,FishSpawner2D fishSpawner)
+        {
+            if(aquarium==null)return;
+            if(fishSpawner!=null)spawner=fishSpawner;
+            aquariumVolume=Mathf.Max(1,aquarium.Definition.NominalVolumeLitres);
+            Rebuild();
+        }
         void OnEnable(){if(inhabitants!=null)inhabitants.PopulationChanged+=Rebuild;if(simulation!=null)simulation.ChemistryChanged+=OnChemistry;Rebuild();}
         void OnDisable(){if(inhabitants!=null)inhabitants.PopulationChanged-=Rebuild;if(simulation!=null)simulation.ChemistryChanged-=OnChemistry;}
         void Update(){accumulator+=Time.unscaledDeltaTime;if(accumulator<1f)return;var elapsed=accumulator;accumulator=0;Evaluate(elapsed/3600f);}
@@ -35,7 +43,14 @@ namespace Acuaria.UI.FishWelfare
         void Rebuild(){stateById.Clear();orderedStates.Clear();Evaluate(0);}
         public void Evaluate(float hours)
         {
-            if(definition==null||spawner==null||simulation?.Snapshot==null)return;var fish=spawner.SpawnedFish;uniqueSpecies.Clear();
+            if(definition==null||spawner==null||simulation?.Snapshot==null)return;
+            var sourceFish=spawner.SpawnedFish;activeFish.Clear();
+            var logicalCount=hud?.BoundAquarium?.FishCollection.Count??sourceFish.Count;
+            for(var i=0;i<sourceFish.Count&&activeFish.Count<logicalCount;i++)
+                if(sourceFish[i]?.State!=null)activeFish.Add(sourceFish[i]);
+            IReadOnlyList<FishMovement2D> fish=activeFish;
+            aquariumVolume=hud?.BoundAquarium?.Definition.NominalVolumeLitres??aquariumVolume;
+            uniqueSpecies.Clear();
             for(var i=0;i<fish.Count;i++)if(fish[i]?.Species!=null&&!uniqueSpecies.Contains(fish[i].Species))uniqueSpecies.Add(fish[i].Species);
             var stock=stocking.Evaluate(GetAllSpecies(fish),aquariumVolume);var report=new AquariumCompatibilityReport(uniqueSpecies,aquariumVolume);
             orderedStates.Clear();for(var i=0;i<fish.Count;i++){var movement=fish[i];if(movement?.State==null||movement.Species==null)continue;

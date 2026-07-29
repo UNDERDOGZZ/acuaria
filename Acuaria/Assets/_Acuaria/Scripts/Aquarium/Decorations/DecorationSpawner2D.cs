@@ -12,6 +12,7 @@ namespace Acuaria.Aquarium.Decorations
         [SerializeField] Acuaria.Aquarium.AquariumDefinition aquariumDefinition;
         readonly Dictionary<string, DecorationView> views = new();
         public IReadOnlyDictionary<string, DecorationView> Views => views;
+        public AquariumDecorationArea2D Area => area;
         public event Action<DecorationView> ViewCreated, ViewRemoved;
         public event Action ViewsSynchronized;
 
@@ -39,12 +40,18 @@ namespace Acuaria.Aquarium.Decorations
                 view.Apply(placement,area);
             }
             var removed=new List<string>();foreach(var pair in views)if(!desired.Contains(pair.Key))removed.Add(pair.Key);
-            foreach(var id in removed){var view=views[id];views.Remove(id);ViewRemoved?.Invoke(view);if(view!=null)Destroy(view.gameObject);}
+            foreach(var id in removed){var view=views[id];views.Remove(id);ViewRemoved?.Invoke(view);DestroyView(view);}
             ViewsSynchronized?.Invoke();
         }
         public void Clear()
-        { foreach(var view in views.Values)if(view!=null)Destroy(view.gameObject);views.Clear(); }
+        { foreach(var view in views.Values)DestroyView(view);views.Clear(); }
         void OnDestroy()=>Clear();
+        static void DestroyView(DecorationView view)
+        {
+            if(view==null)return;
+            if(Application.isPlaying)Destroy(view.gameObject);
+            else DestroyImmediate(view.gameObject);
+        }
         void IndexExisting()
         {
             views.Clear();if(decorationsRoot==null)return;

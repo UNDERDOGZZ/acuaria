@@ -12,11 +12,15 @@ namespace Acuaria.UI.Habitat
         [SerializeField] CanvasGroup group;
         [SerializeField] Text summary, explanation;
         [SerializeField] Button closeButton;
+        [SerializeField] Button editButton;
+        [SerializeField] HabitatEditorPanel editorPanel;
         public bool IsOpen { get; private set; }
         public void Configure(AquariumHabitatController source, CanvasGroup canvas, Text values, Text reasons, Button close)
         { habitat=source;group=canvas;summary=values;explanation=reasons;closeButton=close; }
-        void OnEnable(){if(habitat!=null)habitat.Changed+=Render;closeButton?.onClick.AddListener(Close);Render(habitat?.CurrentProfile);}
-        void OnDisable(){if(habitat!=null)habitat.Changed-=Render;closeButton?.onClick.RemoveListener(Close);}
+        public void ConfigureEditor(Button button,HabitatEditorPanel panel){editButton=button;editorPanel=panel;}
+        void OnEnable(){if(habitat!=null)habitat.Changed+=Render;closeButton?.onClick.AddListener(Close);editButton?.onClick.AddListener(OpenEditor);Render(habitat?.CurrentProfile);}
+        void OnDisable(){if(habitat!=null)habitat.Changed-=Render;closeButton?.onClick.RemoveListener(Close);editButton?.onClick.RemoveListener(OpenEditor);}
+        void OpenEditor(){Close();editorPanel?.Open(habitat);}
         public void Open(){gameObject.SetActive(true);IsOpen=true;SetCanvas(true);Render(habitat?.CurrentProfile);}
         public void Close(){IsOpen=false;SetCanvas(false);gameObject.SetActive(false);}
         void SetCanvas(bool visible){if(group==null)return;group.alpha=visible?1:0;group.interactable=visible;group.blocksRaycasts=visible;}

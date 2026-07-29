@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Acuaria.Aquarium;
 using Acuaria.Aquarium.Decorations;
 using Acuaria.Fish;
@@ -54,6 +55,16 @@ namespace Acuaria.Editor
             ConfigureScene(aquarium,registry);
         }
         public static void ConfigureFromCommandLine()=>Configure();
+        [MenuItem("Acuaria/Setup/Sprint 12 Habitat Editor")]
+        public static void ConfigureEditor()
+        {
+            Configure();
+            EnsureFolder("Assets/_Acuaria/Data","HabitatEditor");
+            var settings=LoadOrCreate<HabitatEditorDefinition>("Assets/_Acuaria/Data/HabitatEditor/StarterHabitatEditorSettings.asset");
+            settings.Configure("starter-habitat-editor",.05f,.55f,20);EditorUtility.SetDirty(settings);AssetDatabase.SaveAssets();
+            ConfigureEditorScene(settings);
+        }
+        public static void ConfigureEditorFromCommandLine()=>ConfigureEditor();
 
         static DecorationDefinition Create(string id,string label,string description,DecorationCategory category,HabitatContribution contribution,string education,params FishSpeciesDefinition[] favoured)
         {var asset=LoadOrCreate<DecorationDefinition>($"{Root}/{id.Replace('.','-')}.asset");asset.Configure(id,label,description,category,Vector2.one,.1f,contribution,education,favoured);
@@ -104,6 +115,50 @@ namespace Acuaria.Editor
             LinkProgressionContent();
             EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);AssetDatabase.SaveAssets();
             Debug.Log("Sprint 11 habitat and decoration system configured.");
+        }
+        static void ConfigureEditorScene(HabitatEditorDefinition settings)
+        {
+            var scene=EditorSceneManager.OpenScene("Assets/_Acuaria/Scenes/Room.unity",OpenSceneMode.Single);
+            var safeArea=FindTransform("SafeArea")??FindTransform("UIRoot");
+            var habitat=FindComponent<AquariumHabitatController>();var spawner=FindComponent<DecorationSpawner2D>();var area=FindComponent<AquariumDecorationArea2D>();
+            var habitatPanels=Resources.FindObjectsOfTypeAll<AquariumHabitatPanel>()
+                .Where(candidate=>candidate!=null&&candidate.gameObject.scene==scene).ToArray();
+            if(safeArea==null||habitatPanels.Length==0||habitat==null||spawner==null||area==null){Debug.LogError("Sprint 12: faltan referencias del Sprint 11.");return;}
+            var old=safeArea.Find("HabitatEditorPanel");if(old!=null)UnityEngine.Object.DestroyImmediate(old.gameObject);
+            var panel=new GameObject("HabitatEditorPanel",typeof(RectTransform),typeof(Image),typeof(CanvasGroup),typeof(HabitatEditorPanel),typeof(HabitatEditorController),typeof(HabitatEditorInputController));
+            panel.transform.SetParent(safeArea,false);Rect(panel.GetComponent<RectTransform>(),new Vector2(.03f,.01f),new Vector2(.97f,.26f));panel.GetComponent<Image>().color=new Color(.015f,.05f,.075f,.97f);
+            var title=Text(panel.transform,"Title","EDITAR HÁBITAT",24,TextAnchor.MiddleLeft);Rect(title.rectTransform,new Vector2(.025f,.72f),new Vector2(.23f,.98f));
+            var help=Text(panel.transform,"Instruction","Toca una decoración y arrastra.",17,TextAnchor.MiddleLeft);Rect(help.rectTransform,new Vector2(.24f,.72f),new Vector2(.67f,.98f));
+            var state=Text(panel.transform,"Status","",15,TextAnchor.MiddleLeft);Rect(state.rectTransform,new Vector2(.68f,.68f),new Vector2(.97f,.98f));
+            var confirm=Button(panel.transform,"Confirm","Confirmar",new Vector2(.79f,.05f),new Vector2(.97f,.3f));
+            var cancel=Button(panel.transform,"Cancel","Cancelar",new Vector2(.61f,.05f),new Vector2(.785f,.3f));
+            var undo=Button(panel.transform,"Undo","Deshacer",new Vector2(.44f,.05f),new Vector2(.605f,.3f));
+            var flip=Button(panel.transform,"Flip","Voltear",new Vector2(.44f,.35f),new Vector2(.57f,.62f));
+            var rotate=Button(panel.transform,"Rotate","Rotar",new Vector2(.575f,.35f),new Vector2(.705f,.62f));
+            var remove=Button(panel.transform,"Remove","Quitar",new Vector2(.71f,.35f),new Vector2(.84f,.62f));
+            var editor=panel.GetComponent<HabitatEditorController>();var feeding=FindComponent<Acuaria.Food.FeedingUIController>();
+            editor.Configure(settings,habitat,spawner,area);
+            var visualGo=new GameObject("DecorationSelectionVisual",typeof(DecorationSelectionVisual));visualGo.transform.SetParent(spawner.transform,false);
+            var visual=visualGo.GetComponent<DecorationSelectionVisual>();visual.Configure();
+            panel.GetComponent<HabitatEditorInputController>().Configure(editor,Camera.main,visual);
+            var registry=habitat.Registry;var editorPanel=panel.GetComponent<HabitatEditorPanel>();
+            editorPanel.Configure(editor,registry,feeding,panel.GetComponent<CanvasGroup>(),help,state,confirm,cancel,undo,flip,rotate,remove);
+            var available=registry?.Decorations;var trayCount=available?.Count??0;var trayWidth=.42f/Mathf.Max(1,trayCount);
+            for(var i=0;i<trayCount;i++){var item=available[i];if(item==null||item.Category==DecorationCategory.Substrate)continue;
+                var b=Button(panel.transform,$"Tray_{i}",item.DisplayName,new Vector2(.015f+i*trayWidth,.05f),new Vector2(.01f+(i+1)*trayWidth,.62f));
+                UnityEventTools.AddStringPersistentListener(b.onClick,editorPanel.AddById,item.DecorationId);}
+            foreach(var habitatPanel in habitatPanels)
+            {
+                var previous=habitatPanel.transform.Find("EditHabitat");
+                if(previous!=null)UnityEngine.Object.DestroyImmediate(previous.gameObject);
+                // Keep this below the global aquarium status strip, which is rendered
+                // above modal content in the current HUD canvas.
+                var edit=Button(habitatPanel.transform,"EditHabitat","Editar hábitat",new Vector2(.76f,.72f),new Vector2(.94f,.82f));
+                habitatPanel.ConfigureEditor(edit,editorPanel);
+            }
+            panel.SetActive(false);
+            EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);AssetDatabase.SaveAssets();
+            Debug.Log("Sprint 12 habitat editor configured.");
         }
 
         static void CreateProgression()

@@ -6,6 +6,7 @@ using Acuaria.UI.Maintenance;
 using Acuaria.Fish.Welfare;
 using System;
 using Acuaria.UI.Progression;
+using Acuaria.Aquarium.MultiAquarium;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,11 +30,13 @@ namespace Acuaria.UI.Aquarium
         [SerializeField] private TMP_Text fishCountText;
         [SerializeField] private TMP_Text statusText;
         [SerializeField] private Image statusBadge;
-        private readonly AquariumRuntimeState runtimeState = new();
+        private AquariumRuntimeState runtimeState = new();
+        private AquariumInstance boundAquarium;
         private bool focused;
         private WaterChemistryViewModel waterChemistry;
         private string welfareCompact;
         private string welfareDetails;
+        private readonly List<AquariumInhabitant> boundInhabitants = new(4);
         [SerializeField] private AquariumMaintenanceController maintenance;
         [SerializeField] private AquaristJournalController journal;
 
@@ -46,6 +49,24 @@ namespace Acuaria.UI.Aquarium
         public TMP_Text FishCountText => fishCountText;
         public TMP_Text StatusText => statusText;
         public event Action DetailsOpened;
+        public AquariumInstance BoundAquarium => boundAquarium;
+
+        public void Bind(AquariumInstance aquarium)
+        {
+            if (aquarium == null || ReferenceEquals(boundAquarium, aquarium)) return;
+            if (runtimeState != null) runtimeState.Changed -= Refresh;
+            if (boundAquarium != null) boundAquarium.FishCollection.Changed -= HandleBoundPopulationChanged;
+            boundAquarium = aquarium;
+            definition = aquarium.Definition;
+            runtimeState = aquarium.RuntimeState;
+            runtimeState.SetFishCount(aquarium.FishCollection.Count);
+            runtimeState.Changed += Refresh;
+            aquarium.FishCollection.Changed += HandleBoundPopulationChanged;
+            waterChemistry = null;
+            welfareCompact = null;
+            welfareDetails = null;
+            Refresh();
+        }
 
         public void Configure(AquariumDefinition aquariumDefinition, AquariumInhabitantProvider provider,
             FeedingUIController feeding, AquariumDetailsPanel details, AquariumHUDResponsiveLayout responsive,
@@ -102,6 +123,7 @@ namespace Acuaria.UI.Aquarium
             detailsButton?.onClick.RemoveListener(OpenDetails);
             if (inhabitants != null) inhabitants.PopulationChanged -= HandlePopulationChanged;
             runtimeState.Changed -= Refresh;
+            if (boundAquarium != null) boundAquarium.FishCollection.Changed -= HandleBoundPopulationChanged;
             detailsPanel?.CloseImmediate();
         }
 
@@ -165,8 +187,10 @@ namespace Acuaria.UI.Aquarium
             if (hasWelfare) return welfareLabel;
             return fallback ?? string.Empty;
         }
+        public static int ResolveFishCount(AquariumInstance aquarium,int legacyCount)=>
+            aquarium?.FishCollection.Count??Mathf.Max(0,legacyCount);
 
-        public void SetTemperature(float value) => runtimeState.SetTemperature(value);
+        public void SetTemperature(float value) => runtimeState?.SetTemperature(value);
 
         public void CollectReferenceIssues(List<string> issues)
         {
@@ -190,18 +214,58 @@ namespace Acuaria.UI.Aquarium
 
         private void HandlePopulationChanged()
         {
-            if (runtimeState.IsInitialized) runtimeState.SetFishCount(inhabitants.TotalCount);
+            if (boundAquarium != null)
+            {
+                HandleBoundPopulationChanged();
+                return;
+            }
+            if (runtimeState.IsInitialized) runtimeState.SetFishCount(ResolveFishCount(null,inhabitants?.TotalCount??0));
+            Refresh();
+        }
+
+        private void HandleBoundPopulationChanged()
+        {
+            if (boundAquarium == null) return;
+            runtimeState.SetFishCount(boundAquarium.FishCollection.Count);
             Refresh();
         }
 
         private AquariumViewModel BuildViewModel() =>
-            new(definition, runtimeState, inhabitants != null ? inhabitants.Inhabitants : null);
+            new(definition, runtimeState, boundAquarium != null ? BuildBoundInhabitants() :
+                inhabitants != null ? inhabitants.Inhabitants : null);
+
+        private IReadOnlyList<AquariumInhabitant> BuildBoundInhabitants()
+        {
+            boundInhabitants.Clear();
+            var fish = boundAquarium.FishCollection.Fish;
+            for (var index = 0; index < fish.Count; index++)
+            {
+                var state = fish[index];
+                if (state == null) continue;
+                var existing = boundInhabitants.FindIndex(item => item.SpeciesId == state.SpeciesId);
+                if (existing >= 0)
+                {
+                    var current = boundInhabitants[existing];
+                    boundInhabitants[existing] = new AquariumInhabitant(current.SpeciesId,current.DisplayName,
+                        current.SwimmingZone,current.Count+1);
+                }
+                else
+                {
+                    var label = string.IsNullOrWhiteSpace(state.SpeciesId) || state.SpeciesId == "unknown"
+                        ? "Pez" : state.SpeciesId;
+                    boundInhabitants.Add(new AquariumInhabitant(state.SpeciesId,label,"Zona asignada",1));
+                }
+            }
+            return boundInhabitants;
+        }
 
         private void Refresh()
         {
             if (!runtimeState.IsInitialized || definition == null) return;
+            if (boundAquarium != null && runtimeState.CurrentFishCount != boundAquarium.FishCollection.Count)
+                runtimeState.SetFishCount(boundAquarium.FishCollection.Count);
             var model = BuildViewModel();
-            aquariumNameText.text = model.DisplayName;
+            aquariumNameText.text = boundAquarium?.Name ?? model.DisplayName;
             volumeText.text = model.VolumeText;
             temperatureText.text = model.TemperatureText;
             fishCountText.text = model.FishCountText;

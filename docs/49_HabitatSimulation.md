@@ -18,3 +18,4 @@ Las decoraciones no cambian compatibilidad, pH, oxígeno, CO₂ ni fórmulas qu�
 La calificación del panel usa cuatro estados educativos: Excellent, Good, Attention y Poor, acompañados por las carencias detectadas.
 
 El mismo cambio que recalcula el perfil emite `DecorationsChanged` y sincroniza las vistas. La presentación consume las mismas instancias y no calcula contribuciones.
+Durante edición, las contribuciones se muestran como preview. El perfil confirmado y el bienestar solo se recalculan una vez al confirmar; cancelar conserva el perfil anterior.

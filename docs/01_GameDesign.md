@@ -28,3 +28,4 @@ Al enfocar el tanque, el jugador puede reconocer su nombre, volumen, temperatura
 El jugador reduce contaminantes mediante cambios parciales y cuida el filtro sin economía ni castigos permanentes. La comparación antes/después refuerza el aprendizaje.
 El bienestar convierte temperatura, espacio, convivencia, alimentación y calidad del agua en recomendaciones comprensibles, sin castigos permanentes.
 El catálogo enseña que una especie disponible no es automáticamente adecuada para el acuario actual y no permite comprar ni alterar su población.
+El Sprint 12 incorpora reorganización provisional del hábitat como actividad de observación y diseño: no introduce economía, inventario ni persistencia.

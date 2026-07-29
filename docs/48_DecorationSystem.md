@@ -11,3 +11,4 @@ Las categorías soportadas son plantas, rocas, madera, cuevas, sustrato, element
 Los controles debug permiten añadir o quitar plantas y rocas, añadir cuevas y restablecer la composición inicial.
 
 Una definición describe un tipo; `DecorationPlacementData` describe cada instancia instalada con ID estable, posición normalizada, rotación, escala, flip, orden y visibilidad. `DecorationSpawner2D` sincroniza esas instancias dentro del mundo.
+Sprint 12 añade una composición provisional basada en copias de `DecorationPlacementData`. `DecorationView` sigue siendo presentación: nunca escribe en el runtime ni recalcula bienestar.
